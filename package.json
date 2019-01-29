@@ -1,0 +1,54 @@
+{
+  "name": "auth-web-form",
+  "version": "0.1.0",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "check-size": "CHECK_SIZE=true vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lint:style": "vue-cli-service lint:style",
+    "test": "vue-cli-service test:unit",
+    "test:dev": "vue-cli-service test:unit --watchAll",
+    "coverage": "vue-cli-service test:unit --coverage --coverageReporters=lcov",
+    "coverage:publish": "npm run coverage && codecov"
+  },
+  "dependencies": {
+    "@sentry/browser": "^4.5.2",
+    "axios": "^0.18.0",
+    "centrifuge": "^2.0.0",
+    "codecov": "^3.1.0",
+    "lodash-es": "^4.17.11",
+    "simple-assert": "^1.0.0",
+    "vue": "^2.5.17",
+    "vue-i18n": "^8.0.0",
+    "vue-the-mask": "^0.11.1",
+    "vuelidate": "^0.7.4",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.0",
+    "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@vue/cli-plugin-babel": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.1.1",
+    "@vue/cli-plugin-unit-jest": "^3.1.1",
+    "@vue/cli-service": "^3.1.1",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.28",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "node-sass": "^4.9.0",
+    "pre-commit": "^1.2.2",
+    "sass-loader": "^7.0.1",
+    "stylelint-config-standard": "^18.2.0",
+    "vue-cli-plugin-i18n": "^0.5.1",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-bundle-analyzer": "^3.0.3"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ]
+}

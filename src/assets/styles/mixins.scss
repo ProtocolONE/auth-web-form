@@ -1,0 +1,33 @@
+@mixin onBreakpoint($breakpointName) {
+  $width: 0;
+
+  @if ($breakpointName == 'xl') {
+    $width: 1690px;
+  }
+
+  @if ($breakpointName == 'l') {
+    $width: 1280px;
+  }
+
+  @if ($breakpointName == 'm') {
+    $width: 980px;
+  }
+
+  @if ($breakpointName == 's') {
+    $width: 736px;
+  }
+
+  @if ($breakpointName == 'xs') {
+    $width: 480px;
+  }
+
+  @media all and (max-width: $width) {
+    body:not(.inside-iframe) & {
+      @content;
+    }
+  }
+
+  body.size-#{$breakpointName} & {
+    @content;
+  }
+}
