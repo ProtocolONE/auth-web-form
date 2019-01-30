@@ -1,5 +1,5 @@
 import axios from 'axios';
-import functionalUrls from '../functionalUrls';
+import { apiLoginUrl } from '../functionalUrls';
 
 export default {
   namespaced: true,
@@ -29,7 +29,7 @@ export default {
   actions: {
     async authoriseWithLogin({ commit }, { clientID, username, password }) {
       try {
-        const { data } = await axios.post(functionalUrls.apiLoginUrl, {
+        const { data } = await axios.post(apiLoginUrl, {
           client_id: clientID,
           connection: 'password',
           email: username,

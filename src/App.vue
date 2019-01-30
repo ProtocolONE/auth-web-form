@@ -4,6 +4,7 @@ import AuthForm from './components/AuthForm.vue';
 import RegisterForm from './components/RegisterForm.vue';
 import UserinfoView from './components/UserinfoView.vue';
 import LocaleChanger from './components/LocaleChanger.vue';
+import SocialProviderAuth from './components/SocialProviderAuth.vue';
 import { postMessage } from './postMessage';
 
 export default {
@@ -13,6 +14,7 @@ export default {
     AuthForm,
     RegisterForm,
     UserinfoView,
+    SocialProviderAuth,
   },
 
   data() {
@@ -71,11 +73,7 @@ export default {
     </div>
 
     <UserinfoView v-if="isAuthorised || isRegistered" />
-
     <div class="app__footer">
-      <a v-if="!goRegister && !isAuthorised" href="#" @click.prevent="goRegister = true">
-        Нет учётной записи? Зарегистрируйтесь!
-      </a>
       <a
         v-if="goRegister && !isRegistered"
         href="#"
@@ -83,7 +81,13 @@ export default {
       >
         У меня уже есть учётная запись
       </a>
+      <a v-if="!goRegister && !isAuthorised" href="#" @click.prevent="goRegister = true">
+        Нет учётной записи? Зарегистрируйтесь!
+      </a>
     </div>
+
+    <SocialProviderAuth />
+
   </div>
 </template>
 

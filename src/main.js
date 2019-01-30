@@ -43,12 +43,8 @@ function getLanguage() {
  * @param {Object} options
  */
 async function mountApp(formData = {}, options = {}) {
-  // if (isPageInsideIframe && process.env.NODE_ENV === 'development') {
-  //   assert(formData, 'The initial data supposed to be recieved through postMessage is not defined');
-  // } else {
-  //   assert(formData, 'Define "window.P1PAYONE_FORM_DATA" property to set initial data');
-  // }
   assert(document.querySelector('#auth-form'), 'Define "#p1payone-form" element in the document');
+  assert(formData);
 
   if (isPageInsideIframe) {
     document.body.classList.add('inside-iframe');

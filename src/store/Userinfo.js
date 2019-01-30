@@ -1,5 +1,5 @@
 import axios from 'axios';
-import functionalUrls from '../functionalUrls';
+import { apiUserinfoUrl } from '@/functionalUrls';
 
 export default {
   namespaced: true,
@@ -16,7 +16,7 @@ export default {
 
   actions: {
     async initState({ commit }, { clientID, token }) {
-      const userinfoResult = await axios.get(functionalUrls.apiUserinfoUrl, {
+      const userinfoResult = await axios.get(apiUserinfoUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
           'X-CLIENT-ID': clientID,

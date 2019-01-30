@@ -1,5 +1,5 @@
 import axios from 'axios';
-import functionalUrls from '../functionalUrls';
+import { apiRegisterUrl } from '../functionalUrls';
 
 export default {
   namespaced: true,
@@ -25,7 +25,7 @@ export default {
   actions: {
     async registerWithEmail({ commit }, { clientID, username, password }) {
       try {
-        const { data } = await axios.post(functionalUrls.apiRegisterUrl, {
+        const { data } = await axios.post(apiRegisterUrl, {
           client_id: clientID,
           connection: 'password',
           email: username,

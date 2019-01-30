@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'vuex';
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, sameAs } from 'vuelidate/lib/validators';
 
 export default {
   name: 'RegisterForm',
@@ -9,6 +9,7 @@ export default {
     return {
       username: '',
       password: '',
+      repeatPassword: '',
     };
   },
 
@@ -29,6 +30,11 @@ export default {
 
     password: {
       required,
+    },
+
+    repeatPassword: {
+      required,
+      sameAs: sameAs('password'),
     },
   },
 
@@ -95,6 +101,15 @@ export default {
         />
       </div>
       <div class="register-form__row">
+        <BaseTextField
+          type="password"
+          v-model="repeatPassword"
+          :placeholder="$t('fieldRepeatPasswordLabel')"
+          :hasError="$isFieldInvalid('repeatPassword')"
+          :errors="$getFieldErrorMessages('repeatPassword')"
+        />
+      </div>
+      <div class="register-form__row">
         <base-error-text v-if="registerError">Ошибка регистрации {{registerError}}</base-error-text>
       </div>
       <div class="register-form__controls">
@@ -128,13 +143,15 @@ export default {
 <i18n>
 {
   "ru": {
-    "fieldUsernameLabel": "Имя пользователя",
+    "fieldUsernameLabel": "Email",
     "fieldPasswordLabel": "Пароль",
+    "fieldRepeatPasswordLabel": "Пароль ещё раз",
     "submitButtonText": "Зарегистрироваться"
   },
   "en": {
-    "fieldUsernameLabel": "Username",
+    "fieldUsernameLabel": "Email",
     "fieldPasswordLabel": "Password",
+    "fieldRepeatPasswordLabel": "Repeat password",
     "submitButtonText": "Sign up"
   }
 }

@@ -1,8 +1,14 @@
-const apiUrl = window.AUTH_API_URL || 'https://auth1.eu.gamenet.ru';
+export const apiUrl = window.AUTH_API_URL || 'https://auth1.eu.gamenet.ru';
+
+export const apiLoginUrl = `${apiUrl}/login`;
+export const apiUserinfoUrl = `${apiUrl}/userinfo`;
+export const apiRegisterUrl = `${apiUrl}/signup`;
+export const apiSocialAuthUrl = `${apiUrl}/authorize`;
 
 export default {
   apiUrl,
-  apiLoginUrl: `${apiUrl}/login`,
-  apiUserinfoUrl: `${apiUrl}/userinfo`,
-  apiRegisterUrl: `${apiUrl}/signup`,
+  apiLoginUrl,
+  apiUserinfoUrl,
+  apiRegisterUrl,
+  apiSocialAuthUrl,
 };
