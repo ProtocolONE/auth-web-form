@@ -86,7 +86,7 @@ export default {
       </a>
     </div>
 
-    <SocialProviderAuth />
+    <SocialProviderAuth v-if="!goRegister && !isAuthorised" />
 
   </div>
 </template>
