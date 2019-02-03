@@ -90,7 +90,10 @@ if (isPageInsideIframe) {
         if (process.env.NODE_ENV === 'development') {
           mountApp(formData, options);
         } else {
-          mountApp(window.AUTH_FORM_DATA, options);
+          mountApp({
+            clientID: window.AUTH_FORM_DATA.client_id,
+            redirectUri: window.AUTH_FORM_DATA.redirect_uri,
+          }, options);
         }
       },
     },
