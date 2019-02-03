@@ -13,12 +13,20 @@ export default {
   },
 
   computed: {
-    ...mapState(['clientID']),
     ...mapState('AuthForm', [
       'authError',
       'isAuthorised',
       'token',
     ]),
+  },
+
+  watch: {
+    username() {
+      this.$emit('requestAppResize');
+    },
+    password() {
+      this.$emit('requestAppResize');
+    },
   },
 
   validations: {
@@ -32,16 +40,13 @@ export default {
     },
   },
 
-  mounted() {
-    this.reportFormResize();
-  },
-
   methods: {
-    ...mapActions(['reportResize', 'setAuthorised', 'setToken', 'setLoading']),
+    ...mapActions(['setAuthorised', 'setToken', 'setLoading']),
     ...mapActions('AuthForm', ['authoriseWithLogin']),
 
     async submitAuthForm() {
       this.$v.$touch();
+      this.$emit('requestAppResize');
 
       if (this.$v.$invalid) {
         return;
@@ -49,7 +54,6 @@ export default {
 
       this.setLoading(true);
       await this.authoriseWithLogin({
-        clientID: this.clientID,
         username: this.username,
         password: this.password,
       });
@@ -57,16 +61,6 @@ export default {
       this.setToken(this.token);
       this.setAuthorised(this.isAuthorised);
       this.setLoading(false);
-    },
-
-    reportFormResize() {
-      setTimeout(() => {
-        const newFormSize = {
-          height: this.$el.offsetHeight,
-          width: this.$el.offsetWidth,
-        };
-        this.reportResize(newFormSize);
-      }, 0);
     },
   },
 };

@@ -2,7 +2,6 @@
 import { mapState, mapActions } from 'vuex';
 import AuthForm from './components/AuthForm.vue';
 import RegisterForm from './components/RegisterForm.vue';
-import UserinfoView from './components/UserinfoView.vue';
 import LocaleChanger from './components/LocaleChanger.vue';
 import SocialProviderAuth from './components/SocialProviderAuth.vue';
 import { postMessage } from './postMessage';
@@ -13,7 +12,6 @@ export default {
     LocaleChanger,
     AuthForm,
     RegisterForm,
-    UserinfoView,
     SocialProviderAuth,
   },
 
@@ -25,12 +23,24 @@ export default {
 
   computed: {
     ...mapState([
+      'isModal',
       'isLoading',
       'isAuthorised',
       'isRegistered',
     ]),
   },
 
+  watch: {
+    goRegister() {
+      this.reportAppResize();
+    },
+    isAuthorised() {
+      this.reportAppResize();
+    },
+    isRegistered() {
+      this.reportAppResize();
+    },
+  },
 
   mounted() {
     this.reportAppResize();
@@ -38,7 +48,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['reportResize']),
+    ...mapActions(['reportResize', 'logout']),
 
     reportAppResize() {
       setTimeout(() => {
@@ -63,16 +73,28 @@ export default {
       <IconLoadingAnimated/>
     </div>
     <div class="app-head">
-      <LocaleChanger class="app-head__locale-changer" />
+      <LocaleChanger
+        class="app-head__locale-changer"
+        :class="{_modal: isModal}"
+        />
     </div>
-    <AuthForm v-if="!goRegister && !isAuthorised" />
-    <RegisterForm v-if="goRegister && !isRegistered" />
+    <AuthForm
+      v-if="!goRegister && !isAuthorised"
+      @requestAppResize="reportAppResize"
+     />
+    <RegisterForm
+      v-if="goRegister && !isRegistered"
+      @requestAppResize="reportAppResize"
+     />
 
     <div class="app__message" v-if="isRegistered">
-      <h3>Вы успешно зарегистрированы</h3>
+      <base-header level="3">Вы успешно зарегистрированы</base-header>
     </div>
 
-    <UserinfoView v-if="isAuthorised || isRegistered" />
+    <div class="app__message" v-if="isAuthorised || isRegistered">
+      <base-header level="3">Вы авторизированы</base-header>
+    </div>
+
     <div class="app__footer">
       <a
         v-if="goRegister && !isRegistered"
@@ -85,6 +107,8 @@ export default {
         Нет учётной записи? Зарегистрируйтесь!
       </a>
     </div>
+
+    <!-- <button @click="logout">Logout</button> -->
 
     <SocialProviderAuth v-if="!goRegister && !isAuthorised" />
 
@@ -145,6 +169,7 @@ export default {
 
     &._modal {
       right: 60px;
+      top: 18px;
     }
   }
 }

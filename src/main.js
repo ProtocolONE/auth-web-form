@@ -44,7 +44,7 @@ function getLanguage() {
  */
 async function mountApp(formData = {}, options = {}) {
   assert(document.querySelector('#auth-form'), 'Define "#p1payone-form" element in the document');
-  assert(formData);
+  assert(formData.clientID, 'clientID in required');
 
   if (isPageInsideIframe) {
     document.body.classList.add('inside-iframe');
@@ -56,13 +56,13 @@ async function mountApp(formData = {}, options = {}) {
     });
   }
 
-  // await store.dispatch('AuthForm/initState', {
-  //   formData,
-  //   options: {
-  //     ...options,
-  //     isPageInsideIframe,
-  //   },
-  // });
+  await store.dispatch('initState', {
+    formData,
+    options: {
+      ...options,
+      isPageInsideIframe,
+    },
+  });
 
   const language = getLanguage();
   const VueApp = Vue.extend(App);
@@ -75,20 +75,26 @@ async function mountApp(formData = {}, options = {}) {
 postMessage('INITED');
 
 if (isPageInsideIframe) {
-  receiveMessages(window, {
-    REQUEST_INIT_FORM(data = {}) {
-      const { formData, options } = data;
-
-      /**
-       * Outside formData inserting is restricted in production mode
-       */
-      if (process.env.NODE_ENV === 'development') {
-        mountApp(formData, options);
-      } else {
-        mountApp(window.P1PAYONE_FORM_DATA, options);
-      }
+  receiveMessages(
+    'P1_AUTH_WEB_SDK',
+    {
+      REQUEST_INIT_FORM: 'requestInitForm',
     },
-  });
+    {
+      REQUEST_INIT_FORM(data = {}) {
+        const { formData, options } = data;
+
+        /**
+         * Outside formData inserting is restricted in production mode
+         */
+        if (process.env.NODE_ENV === 'development') {
+          mountApp(formData, options);
+        } else {
+          mountApp(window.AUTH_FORM_DATA, options);
+        }
+      },
+    },
+  );
 } else {
   // Case where the form is opened by as actual page inside browser, not inside iframe
   mountApp(window.P1PAYONE_FORM_DATA);

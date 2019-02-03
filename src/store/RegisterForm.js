@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { apiRegisterUrl } from '../functionalUrls';
 
 export default {
   namespaced: true,
@@ -23,10 +22,10 @@ export default {
   },
 
   actions: {
-    async registerWithEmail({ commit }, { clientID, username, password }) {
+    async registerWithEmail({ commit, rootState, rootGetters }, { username, password }) {
       try {
-        const { data } = await axios.post(apiRegisterUrl, {
-          client_id: clientID,
+        const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
+          client_id: rootState.clientID,
           connection: 'password',
           email: username,
           password,
@@ -35,7 +34,9 @@ export default {
         commit('isRegistered', true);
         commit('registerError', '');
       } catch (error) {
-        commit('registerError', error.response.data.error);
+        if (error.response) {
+          commit('authError', error.response.data.error);
+        }
       }
     },
   },

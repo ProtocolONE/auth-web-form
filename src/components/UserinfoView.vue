@@ -12,17 +12,15 @@ export default {
   },
 
   computed: {
-    ...mapState(['token', 'clientID']),
     ...mapState('Userinfo', [
       'userinfo',
     ]),
   },
 
-  created() {
-    this.initState({
-      clientID: this.clientID,
-      token: this.token,
-    });
+  async created() {
+    await this.initState();
+
+    this.$emit('requestAppResize');
   },
 
   methods: {

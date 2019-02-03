@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { apiLoginUrl } from '../functionalUrls';
 
 export default {
   namespaced: true,
@@ -27,20 +26,25 @@ export default {
   },
 
   actions: {
-    async authoriseWithLogin({ commit }, { clientID, username, password }) {
+    async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password }) {
       try {
-        const { data } = await axios.post(apiLoginUrl, {
-          client_id: clientID,
+        const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
+          client_id: rootState.clientID,
           connection: 'password',
           email: username,
           password,
+          redirect_uri: rootState.redirectUri,
         });
 
-        commit('token', data.access_token);
+        if (data.access_token) {
+          commit('token', data.access_token);
+        }
         commit('isAuthorised', true);
         commit('authError', '');
       } catch (error) {
-        commit('authError', error.response.data.error);
+        if (error.response) {
+          commit('authError', error.response.data.error);
+        }
       }
     },
   },

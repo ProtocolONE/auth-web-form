@@ -14,12 +14,23 @@ export default {
   },
 
   computed: {
-    ...mapState(['clientID']),
     ...mapState('RegisterForm', [
       'token',
       'registerError',
       'isRegistered',
     ]),
+  },
+
+  watch: {
+    username() {
+      this.$emit('requestAppResize');
+    },
+    password() {
+      this.$emit('requestAppResize');
+    },
+    repeatPassword() {
+      this.$emit('requestAppResize');
+    },
   },
 
   validations: {
@@ -38,16 +49,13 @@ export default {
     },
   },
 
-  mounted() {
-    this.reportFormResize();
-  },
-
   methods: {
-    ...mapActions(['reportResize', 'setRegistered', 'setToken', 'setLoading']),
+    ...mapActions(['setRegistered', 'setToken', 'setLoading']),
     ...mapActions('RegisterForm', ['registerWithEmail']),
 
     async submitRegisterForm() {
       this.$v.$touch();
+      this.$emit('requestAppResize');
 
       if (this.$v.$invalid) {
         return;
@@ -56,7 +64,6 @@ export default {
       this.setLoading(true);
 
       await this.registerWithEmail({
-        clientID: this.clientID,
         username: this.username,
         password: this.password,
       });
@@ -64,16 +71,6 @@ export default {
       this.setToken(this.token);
       this.setRegistered(this.isRegistered);
       this.setLoading(false);
-    },
-
-    reportFormResize() {
-      setTimeout(() => {
-        const newFormSize = {
-          height: this.$el.offsetHeight,
-          width: this.$el.offsetWidth,
-        };
-        this.reportResize(newFormSize);
-      }, 0);
     },
   },
 };

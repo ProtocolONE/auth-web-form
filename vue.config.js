@@ -64,7 +64,7 @@ module.exports = {
     // watchOptions: {
     //   poll: true,
     // },
-    // port: 3040,
+    port: 4040,
     // disableHostCheck: true,
   },
 };

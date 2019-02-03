@@ -1,12 +1,40 @@
 <script>
-import { apiSocialAuthUrl } from '@/functionalUrls';
+import { mapGetters } from 'vuex';
 import qs from 'qs';
+import { receiveMessages } from '@/postMessage';
 
 export default {
   name: 'SocialProviderAuth',
 
+  data() {
+    return {
+      openedWindow: null,
+    };
+  },
+
   computed: {
-    facebookUrl() {
+    ...mapGetters(['urls']),
+  },
+
+  mounted() {
+    receiveMessages(
+      'P1_AUTH_BACKEND',
+      {
+        SUCCESS: 'success',
+        ERROR: 'error',
+        LINK: 'link',
+      },
+      {
+        SUCCESS: (data = {}) => {
+          this.openedWindow.close();
+          window.location.href = data.url;
+        },
+      },
+    );
+  },
+
+  methods: {
+    openFacebookAuth() {
       const params = qs.stringify({
         client_id: '5c221cde5ffa56fdd05257df',
         connection: 'facebook',
@@ -14,7 +42,7 @@ export default {
         state: '',
       });
 
-      return `${apiSocialAuthUrl}?${params}`;
+      this.openedWindow = window.open(`${this.urls.apiSocialAuthUrl}?${params}`, '_blank');
     },
   },
 };
@@ -23,7 +51,7 @@ export default {
 <template>
   <div class="social-provider-auth">
     <base-header level="3">Авторизироваться через соцсети</base-header>
-    <a :href="facebookUrl">Facebook</a>
+    <a href="#" @click="openFacebookAuth">Facebook</a>
   </div>
 </template>
 
