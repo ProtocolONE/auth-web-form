@@ -13,7 +13,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['urls']),
+    ...mapGetters(['urls', 'redirectUri']),
   },
 
   mounted() {
@@ -26,6 +26,9 @@ export default {
       },
       {
         SUCCESS: (data = {}) => {
+          if (!this.openedWindow) {
+            return;
+          }
           this.openedWindow.close();
           window.location.href = data.url;
         },
@@ -38,7 +41,7 @@ export default {
       const params = qs.stringify({
         client_id: '5c221cde5ffa56fdd05257df',
         connection: 'facebook',
-        redirect_uri: 'http://localhost:8080/?auth=success',
+        redirect_uri: this.redirectUri,
         state: '',
       });
 
