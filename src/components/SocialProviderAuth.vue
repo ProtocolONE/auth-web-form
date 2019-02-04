@@ -9,6 +9,26 @@ export default {
   data() {
     return {
       openedWindow: null,
+      authErrorMessage: '',
+
+      items: [
+        {
+          text: 'Facebook',
+          connection: 'facebook',
+        },
+        {
+          text: 'Google',
+          connection: 'google',
+        },
+        {
+          text: 'Twitch',
+          connection: 'twitch',
+        },
+        {
+          text: 'VK',
+          connection: 'vk',
+        },
+      ],
     };
   },
 
@@ -25,6 +45,9 @@ export default {
         LINK: 'link',
       },
       {
+        ERROR: (data = {}) => {
+          this.authErrorMessage = data.message;
+        },
         SUCCESS: (data = {}) => {
           if (!this.openedWindow) {
             return;
@@ -37,10 +60,11 @@ export default {
   },
 
   methods: {
-    openFacebookAuth() {
+    beginAuth({ connection }) {
+      this.authErrorMessage = '';
       const params = qs.stringify({
+        connection,
         client_id: '5c221cde5ffa56fdd05257df',
-        connection: 'facebook',
         redirect_uri: this.redirectUri,
         state: '',
       });
@@ -54,7 +78,12 @@ export default {
 <template>
   <div class="social-provider-auth">
     <base-header level="3">Авторизироваться через соцсети</base-header>
-    <a href="#" @click="openFacebookAuth">Facebook</a>
+    <div v-for="item in items" :key="item.value">
+      <a href="#" @click="beginAuth(item)">{{item.text}}</a>
+    </div>
+    <base-error-text v-if="authErrorMessage">
+      Ошибка авторизации: {{authErrorMessage}}
+    </base-error-text>
   </div>
 </template>
 
