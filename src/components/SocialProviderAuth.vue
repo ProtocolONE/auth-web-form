@@ -1,7 +1,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import qs from 'qs';
-import { receiveMessages } from '@/postMessage';
+import { postMessage, receiveMessages } from '@/postMessage';
 
 export default {
   name: 'SocialProviderAuth',
@@ -30,7 +30,7 @@ export default {
             return;
           }
           this.openedWindow.close();
-          window.location.href = data.url;
+          postMessage('REDIRECT_REQUESTED', data.url);
         },
       },
     );

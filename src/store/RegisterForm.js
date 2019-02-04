@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postMessage } from '@/postMessage';
 
 export default {
   namespaced: true,
@@ -34,7 +35,7 @@ export default {
           commit('token', data.access_token);
         }
         if (data.url) {
-          window.location.href = data.url;
+          postMessage('REDIRECT_REQUESTED', data.url);
         }
         commit('isRegistered', true);
         commit('registerError', '');

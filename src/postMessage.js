@@ -6,6 +6,7 @@ export const sendingMessagesNames = {
   LOADED: 'loaded',
   FORM_RESIZE: 'formResize',
   TOKEN_RECEIVED: 'tokenReceived',
+  REDIRECT_REQUESTED: 'redirectRequested',
 };
 
 export function postMessage(nameID, data = {}) {
