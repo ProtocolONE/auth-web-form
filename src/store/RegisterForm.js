@@ -30,7 +30,12 @@ export default {
           email: username,
           password,
         });
-        commit('token', data.access_token);
+        if (data.access_token) {
+          commit('token', data.access_token);
+        }
+        if (data.url) {
+          window.location.href = data.url;
+        }
         commit('isRegistered', true);
         commit('registerError', '');
       } catch (error) {

@@ -39,6 +39,10 @@ export default {
         if (data.access_token) {
           commit('token', data.access_token);
         }
+
+        if (data.url) {
+          window.location.href = data.url;
+        }
         commit('isAuthorised', true);
         commit('authError', '');
       } catch (error) {
