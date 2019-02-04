@@ -63,10 +63,10 @@ export default new Vuex.Store({
   },
   actions: {
     initState({ commit }, { formData, options }) {
-      const clientID = formData.clientID || window.AUTH_FORM_DATA.client_id;
-      assert(clientID, 'clientID is undefined');
+      const { clientID } = formData;
+      assert(clientID, 'clientID is undefined at RootStore');
       commit('clientID', clientID);
-      commit('redirectUri', formData.redirectUri || window.AUTH_FORM_DATA.redirect_uri);
+      commit('redirectUri', formData.redirectUri);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl || window.AUTH_API_URL);
     },

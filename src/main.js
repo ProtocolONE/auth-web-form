@@ -44,7 +44,7 @@ function getLanguage() {
  */
 async function mountApp(formData = {}, options = {}) {
   assert(document.querySelector('#auth-form'), 'Define "#p1payone-form" element in the document');
-  assert(formData.clientID, 'clientID in required');
+  assert(formData.clientID, 'clientID in required at mountApp');
 
   if (isPageInsideIframe) {
     document.body.classList.add('inside-iframe');
