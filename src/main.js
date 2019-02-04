@@ -61,6 +61,7 @@ async function mountApp(formData = {}, options = {}) {
     options: {
       ...options,
       isPageInsideIframe,
+      apiUrl: options.apiUrl || window.AUTH_API_URL,
     },
   });
 
@@ -90,15 +91,26 @@ if (isPageInsideIframe) {
         if (process.env.NODE_ENV === 'development') {
           mountApp(formData, options);
         } else {
-          mountApp({
-            clientID: window.AUTH_FORM_DATA.client_id,
-            redirectUri: window.AUTH_FORM_DATA.redirect_uri,
-          }, options);
+          mountApp(
+            {
+              clientID: window.AUTH_FORM_DATA.client_id,
+              redirectUri: window.AUTH_FORM_DATA.redirect_uri,
+            },
+            options,
+          );
         }
       },
     },
   );
 } else {
   // Case where the form is opened by as actual page inside browser, not inside iframe
-  mountApp(window.P1PAYONE_FORM_DATA);
+  mountApp(
+    {
+      clientID: window.AUTH_FORM_DATA.client_id,
+      redirectUri: window.AUTH_FORM_DATA.redirect_uri,
+    },
+    {
+      isModal: false,
+    },
+  );
 }

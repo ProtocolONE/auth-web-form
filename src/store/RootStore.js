@@ -68,7 +68,7 @@ export default new Vuex.Store({
       commit('clientID', clientID);
       commit('redirectUri', formData.redirectUri);
       commit('isModal', options.isModal);
-      commit('apiUrl', options.apiUrl || window.AUTH_API_URL);
+      commit('apiUrl', options.apiUrl);
     },
 
     async logout({ state, getters }) {
