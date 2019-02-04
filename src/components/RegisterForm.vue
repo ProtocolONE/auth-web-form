@@ -31,6 +31,9 @@ export default {
     repeatPassword() {
       this.$emit('requestAppResize');
     },
+    registerError() {
+      this.$emit('requestAppResize');
+    },
   },
 
   validations: {

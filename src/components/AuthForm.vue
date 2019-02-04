@@ -27,6 +27,9 @@ export default {
     password() {
       this.$emit('requestAppResize');
     },
+    authError() {
+      this.$emit('requestAppResize');
+    },
   },
 
   validations: {
