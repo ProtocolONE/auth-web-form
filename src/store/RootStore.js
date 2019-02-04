@@ -103,7 +103,10 @@ export default new Vuex.Store({
       commit('isRegistered', value);
     },
 
-    setToken({ commit }, value) {
+    setToken({ state, commit }, value) {
+      if (state.token === value) {
+        return;
+      }
       commit('token', value);
     },
 
