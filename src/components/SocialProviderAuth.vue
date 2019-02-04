@@ -47,6 +47,7 @@ export default {
       {
         ERROR: (data = {}) => {
           this.authErrorMessage = data.message;
+          this.openedWindow.close();
         },
         SUCCESS: (data = {}) => {
           if (!this.openedWindow) {
