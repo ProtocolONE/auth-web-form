@@ -30,6 +30,7 @@ export default {
           connection: 'password',
           email: username,
           password,
+          redirect_uri: rootState.redirectUri,
         });
         if (data.access_token) {
           commit('token', data.access_token);
