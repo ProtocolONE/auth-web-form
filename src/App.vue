@@ -17,7 +17,11 @@ export default {
 
   data() {
     return {
-      goRegister: false,
+      isAuthorised: false,
+      isRegistered: false,
+      isLoginAuthFormVisible: true,
+      isRegisterFormVisible: false,
+      isSocialAuthFormVisible: true,
     };
   },
 
@@ -25,19 +29,23 @@ export default {
     ...mapState([
       'isModal',
       'isLoading',
-      'isAuthorised',
-      'isRegistered',
     ]),
   },
 
   watch: {
-    goRegister() {
-      this.reportAppResize();
-    },
     isAuthorised() {
       this.reportAppResize();
     },
     isRegistered() {
+      this.reportAppResize();
+    },
+    isLoginAuthFormVisible() {
+      this.reportAppResize();
+    },
+    isRegisterFormVisible() {
+      this.reportAppResize();
+    },
+    isSocialAuthFormVisible() {
       this.reportAppResize();
     },
   },
@@ -48,7 +56,9 @@ export default {
   },
 
   methods: {
-    ...mapActions(['reportResize', 'logout']),
+    ...mapActions([
+      'setToken', 'setLoading', 'reportResize', 'logout',
+    ]),
 
     reportAppResize() {
       setTimeout(() => {
@@ -62,6 +72,38 @@ export default {
 
     recreateOrder() {
       postMessage('ORDER_RECREATE_STARTED');
+    },
+
+    goAuth() {
+      this.isLoginAuthFormVisible = true;
+      this.isSocialAuthFormVisible = true;
+      this.isRegisterFormVisible = false;
+    },
+
+    goRegister() {
+      this.isLoginAuthFormVisible = false;
+      this.isSocialAuthFormVisible = false;
+      this.isRegisterFormVisible = true;
+    },
+
+    handleAuthOrRegisterResult({ isRegistered, isAuthorised, token }) {
+      this.setToken(token);
+      if (isAuthorised) {
+        this.isAuthorised = true;
+      }
+      if (isRegistered) {
+        this.isRegistered = true;
+      }
+
+      if (isAuthorised || isRegistered) {
+        this.isLoginAuthFormVisible = false;
+        this.isRegisterFormVisible = false;
+        this.isSocialAuthFormVisible = false;
+      }
+    },
+
+    handleRequestLinking() {
+      this.isLoginAuthFormVisible = false;
     },
   },
 };
@@ -79,38 +121,51 @@ export default {
         />
     </div>
     <AuthForm
-      v-if="!goRegister && !isAuthorised"
+      v-if="isLoginAuthFormVisible"
       @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @authResult="handleAuthOrRegisterResult"
      />
     <RegisterForm
-      v-if="goRegister && !isRegistered"
+      v-if="isRegisterFormVisible"
       @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @registerResult="handleAuthOrRegisterResult"
      />
 
     <div class="app__message" v-if="isRegistered">
       <base-header level="3">Вы успешно зарегистрированы</base-header>
     </div>
 
-    <div class="app__message" v-if="isAuthorised || isRegistered">
+    <div class="app__message" v-if="isAuthorised">
       <base-header level="3">Вы авторизированы</base-header>
     </div>
 
+    <SocialProviderAuth
+      v-if="isSocialAuthFormVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @requestLinking="handleRequestLinking"
+      @success="handleAuthOrRegisterResult"
+    />
+
     <div class="app__footer">
       <a
-        v-if="goRegister && !isRegistered"
+        v-if="isRegisterFormVisible"
         href="#"
-        @click.prevent="goRegister = false"
+        @click.prevent="goAuth"
       >
         У меня уже есть учётная запись
       </a>
-      <a v-if="!goRegister && !isAuthorised" href="#" @click.prevent="goRegister = true">
+      <a v-if="isLoginAuthFormVisible" href="#" @click.prevent="goRegister">
         Нет учётной записи? Зарегистрируйтесь!
       </a>
     </div>
 
     <!-- <button @click="logout">Logout</button> -->
-
-    <SocialProviderAuth v-if="!goRegister && !isAuthorised" />
 
   </div>
 </template>

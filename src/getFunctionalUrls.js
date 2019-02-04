@@ -5,6 +5,7 @@ export default function getFunctionalUrls(apiUrl = 'https://auth1.eu.gamenet.ru'
     apiUserinfoUrl: `${apiUrl}/userinfo`,
     apiRegisterUrl: `${apiUrl}/signup`,
     apiSocialAuthUrl: `${apiUrl}/authorize`,
+    apiSocialAuthLinkUrl: `${apiUrl}/authorize/link`,
     apiLogoutUrl: `${apiUrl}/logout`,
   };
 }

@@ -50,7 +50,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setRegistered', 'setToken', 'setLoading']),
     ...mapActions('RegisterForm', ['registerWithEmail']),
 
     async submitRegisterForm() {
@@ -61,16 +60,19 @@ export default {
         return;
       }
 
-      this.setLoading(true);
+      this.$emit('loadingStart');
 
       await this.registerWithEmail({
         username: this.username,
         password: this.password,
       });
 
-      this.setToken(this.token);
-      this.setRegistered(this.isRegistered);
-      this.setLoading(false);
+      this.$emit('registerResult', {
+        token: this.token,
+        isRegistered: this.isRegistered,
+        isAuthorised: this.isRegistered,
+      });
+      this.$emit('loadingEnd');
     },
   },
 };

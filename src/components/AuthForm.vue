@@ -41,7 +41,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setAuthorised', 'setToken', 'setLoading']),
     ...mapActions('AuthForm', ['authoriseWithLogin']),
 
     async submitAuthForm() {
@@ -52,15 +51,17 @@ export default {
         return;
       }
 
-      this.setLoading(true);
+      this.$emit('loadingStart');
       await this.authoriseWithLogin({
         username: this.username,
         password: this.password,
       });
 
-      this.setToken(this.token);
-      this.setAuthorised(this.isAuthorised);
-      this.setLoading(false);
+      this.$emit('authResult', {
+        token: this.token,
+        isAuthorised: this.isAuthorised,
+      });
+      this.$emit('loadingEnd');
     },
   },
 };

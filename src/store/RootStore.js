@@ -6,6 +6,7 @@ import qs from 'qs';
 import AuthForm from './AuthForm';
 import RegisterForm from './RegisterForm';
 import Userinfo from './Userinfo';
+import SocialAuth from './SocialAuth';
 import { postMessage } from '@/postMessage';
 import getFunctionalUrls from '@/getFunctionalUrls';
 
@@ -21,8 +22,6 @@ export default new Vuex.Store({
     redirectUri: '',
     token: '',
     isLoading: false,
-    isAuthorised: false,
-    isRegistered: false,
     isModal: false,
     apiUrl: undefined,
   },
@@ -47,12 +46,6 @@ export default new Vuex.Store({
     },
     isLoading(state, value) {
       state.isLoading = value;
-    },
-    isAuthorised(state, value) {
-      state.isAuthorised = value;
-    },
-    isRegistered(state, value) {
-      state.isRegistered = value;
     },
     isModal(state, value) {
       state.isModal = value;
@@ -95,14 +88,6 @@ export default new Vuex.Store({
       commit('lastSize', newSize);
     },
 
-    setAuthorised({ commit }, value) {
-      commit('isAuthorised', value);
-    },
-
-    setRegistered({ commit }, value) {
-      commit('isRegistered', value);
-    },
-
     setToken({ state, commit }, value) {
       if (state.token === value) {
         return;
@@ -119,5 +104,6 @@ export default new Vuex.Store({
     AuthForm,
     RegisterForm,
     Userinfo,
+    SocialAuth,
   },
 });

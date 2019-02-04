@@ -1,16 +1,11 @@
 <script>
-import { mapGetters } from 'vuex';
-import qs from 'qs';
-import { postMessage, receiveMessages } from '@/postMessage';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'SocialProviderAuth',
 
   data() {
     return {
-      openedWindow: null,
-      authErrorMessage: '',
-
       items: [
         {
           text: 'Facebook',
@@ -29,68 +24,98 @@ export default {
           connection: 'vk',
         },
       ],
+      profilesLinkingPassword: '',
+      profilesLinkingAction: 'link',
     };
   },
 
   computed: {
-    ...mapGetters(['urls', 'redirectUri']),
+    ...mapState('SocialAuth', ['stage', 'token', 'email', 'errorMessage']),
+  },
+
+  watch: {
+    errorMessage() {
+      this.$emit('requestAppResize');
+    },
+    stage(value) {
+      this.$emit('requestAppResize');
+
+      if (value === 'requestLinking') {
+        this.$emit('requestLinking');
+      }
+
+      if (value === 'success') {
+        this.$emit('success', {
+          token: this.token,
+          isAuthorised: true,
+        });
+      }
+    },
   },
 
   mounted() {
-    receiveMessages(
-      'P1_AUTH_BACKEND',
-      {
-        SUCCESS: 'success',
-        ERROR: 'error',
-        LINK: 'link',
-      },
-      {
-        ERROR: (data = {}) => {
-          this.authErrorMessage = data.message;
-          this.openedWindow.close();
-        },
-        SUCCESS: (data = {}) => {
-          if (!this.openedWindow) {
-            return;
-          }
-          this.openedWindow.close();
-          postMessage('REDIRECT_REQUESTED', data.url);
-        },
-      },
-    );
+    this.initState();
   },
 
   methods: {
-    beginAuth({ connection }) {
-      this.authErrorMessage = '';
-      const params = qs.stringify({
-        connection,
-        client_id: '5c221cde5ffa56fdd05257df',
-        redirect_uri: this.redirectUri,
-        state: '',
-      });
-
-      this.openedWindow = window.open(`${this.urls.apiSocialAuthUrl}?${params}`, '_blank');
-    },
+    ...mapActions('SocialAuth', ['initState', 'beginSocialAuth', 'linkProfiles']),
   },
 };
 </script>
 
 <template>
   <div class="social-provider-auth">
-    <base-header level="3">Авторизироваться через соцсети</base-header>
-    <div v-for="item in items" :key="item.value">
-      <a href="#" @click="beginAuth(item)">{{item.text}}</a>
+    <div v-if="stage === 'initial'">
+      <base-header level="3">Авторизироваться через соцсети</base-header>
+      <div v-for="item in items" :key="item.value">
+        <a href="#" @click="beginSocialAuth(item)">{{item.text}}</a>
+      </div>
     </div>
-    <base-error-text v-if="authErrorMessage">
-      Ошибка авторизации: {{authErrorMessage}}
+
+    <div v-if="stage === 'requestLinking'">
+      <base-header level="3">А мы ваш профиль нашли</base-header>
+      <p>
+        В системе уже есть профиль для <b>{{email}}</b>,
+        который сопадает с вашим email из соцсети.
+      </p>
+      <p>Хотите их объединить?</p>
+      <div>
+        <label>
+          <input type="radio" value="link" v-model="profilesLinkingAction">
+          Да, объединить
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" value="new" v-model="profilesLinkingAction">
+          Нет, просто авторизировать через соцсеть
+        </label>
+      </div>
+
+      <BaseTextField
+        v-if="profilesLinkingAction === 'link'"
+        v-model="profilesLinkingPassword"
+        type="password"
+        placeholder="Ваш пароль в нашей системе" />
+
+      <base-button
+        @click="linkProfiles({action: profilesLinkingAction, password: profilesLinkingPassword})"
+      >
+        Продолжить
+      </base-button>
+
+    </div>
+
+    <base-error-text v-if="errorMessage">
+      Ошибка: {{errorMessage}}
     </base-error-text>
+
   </div>
 </template>
 
 <style lang="scss">
 .social-provider-auth {
-  margin: 20px;
+  margin: 0 20px 20px;
   border: 1px solid #ccc;
   padding: 20px;
 }
