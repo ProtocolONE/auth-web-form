@@ -42,7 +42,7 @@ export default {
         commit('registerError', '');
       } catch (error) {
         if (error.response) {
-          commit('authError', error.response.data.error);
+          commit('registerError', error.response.data.error);
         }
       }
     },
