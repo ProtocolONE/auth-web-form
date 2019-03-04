@@ -1,9 +1,9 @@
-export default function getFunctionalUrls(apiUrl = 'https://auth1.eu.gamenet.ru') {
+export default function getFunctionalUrls(apiUrl = 'https://auth1.tst.protocol.one') {
   return {
     apiUrl,
-    apiLoginUrl: `${apiUrl}/login`,
+    apiLoginUrl: `${apiUrl}/oauth2/login`,
     apiUserinfoUrl: `${apiUrl}/userinfo`,
-    apiRegisterUrl: `${apiUrl}/signup`,
+    apiRegisterUrl: `${apiUrl}/oauth2/signup`,
     apiSocialAuthUrl: `${apiUrl}/authorize`,
     apiSocialAuthLinkUrl: `${apiUrl}/authorize/link`,
     apiLogoutUrl: `${apiUrl}/logout`,

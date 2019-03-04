@@ -5,21 +5,13 @@ export default {
   namespaced: true,
 
   state: {
-    token: '',
     authError: false,
-    userinfo: null,
     isAuthorised: false,
   },
 
   mutations: {
-    token(state, value) {
-      state.token = value;
-    },
     authError(state, value) {
       state.authError = value;
-    },
-    userinfo(state, value) {
-      state.userinfo = value;
     },
     isAuthorised(state, value) {
       state.isAuthorised = value;
@@ -30,24 +22,21 @@ export default {
     async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
-          client_id: rootState.clientID,
+          challenge: rootState.challenge,
           connection: 'password',
           email: username,
           password,
-          redirect_uri: rootState.redirectUri,
+          csrf: rootState.csrf,
         });
-
-        if (data.access_token) {
-          commit('token', data.access_token);
-        }
-        if (data.url) {
+        if (rootState.isPageInsideIframe) {
           postMessage('REDIRECT_REQUESTED', data.url);
+        } else {
+          window.location.href = data.url;
         }
-        commit('isAuthorised', true);
         commit('authError', '');
       } catch (error) {
         if (error.response) {
-          commit('authError', error.response.data.error);
+          commit('authError', error.response.data.error_message);
         }
       }
     },

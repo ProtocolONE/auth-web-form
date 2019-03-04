@@ -11,9 +11,6 @@ export default {
   },
 
   mutations: {
-    token(state, value) {
-      state.token = value;
-    },
     registerError(state, value) {
       state.registerError = value;
     },
@@ -26,23 +23,21 @@ export default {
     async registerWithEmail({ commit, rootState, rootGetters }, { username, password }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
-          client_id: rootState.clientID,
+          challenge: rootState.challenge,
           connection: 'password',
           email: username,
           password,
-          redirect_uri: rootState.redirectUri,
+          csrf: rootState.csrf,
         });
-        if (data.access_token) {
-          commit('token', data.access_token);
-        }
-        if (data.url) {
+        if (rootState.isPageInsideIframe) {
           postMessage('REDIRECT_REQUESTED', data.url);
+        } else {
+          window.location.href = data.url;
         }
-        commit('isRegistered', true);
         commit('registerError', '');
       } catch (error) {
         if (error.response) {
-          commit('registerError', error.response.data.error);
+          commit('registerError', error.response.data.error_message);
         }
       }
     },
