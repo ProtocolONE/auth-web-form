@@ -43,7 +43,7 @@ function getLanguage() {
  * @param {Object} options
  */
 async function mountApp(formData = {}, options = {}) {
-  assert(document.querySelector('#auth-form'), 'Define "#p1payone-form" element in the document');
+  assert(document.querySelector('#auth-form'), 'Define "#auth-form" element in the document');
   assert(formData.challenge, 'Login challenge in required at mountApp');
 
   if (isPageInsideIframe) {

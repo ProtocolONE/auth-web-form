@@ -10,6 +10,7 @@ export default {
       username: '',
       password: '',
       repeatPassword: '',
+      remember: '',
     };
   },
 
@@ -46,6 +47,8 @@ export default {
       required,
     },
 
+    remember: {},
+
     repeatPassword: {
       required,
       sameAs: sameAs('password'),
@@ -68,6 +71,7 @@ export default {
       await this.registerWithEmail({
         username: this.username,
         password: this.password,
+        remember: this.remember,
       });
 
       this.$emit('registerResult', {
@@ -109,6 +113,12 @@ export default {
           :placeholder="$t('fieldRepeatPasswordLabel')"
           :hasError="$isFieldInvalid('repeatPassword')"
           :errors="$getFieldErrorMessages('repeatPassword')"
+        />
+      </div>
+      <div class="auth-form__row">
+        <BaseCheckbox
+                type="checkbox"
+                v-model="remember"
         />
       </div>
       <div class="register-form__row">

@@ -9,6 +9,7 @@ export default {
     return {
       username: 'test@test.com',
       password: 'Qweqwe1@',
+      remember: '',
     };
   },
 
@@ -25,6 +26,9 @@ export default {
       this.$emit('requestAppResize');
     },
     password() {
+      this.$emit('requestAppResize');
+    },
+    remember() {
       this.$emit('requestAppResize');
     },
     authError() {
@@ -58,6 +62,7 @@ export default {
       await this.authoriseWithLogin({
         username: this.username,
         password: this.password,
+        remember: this.remember,
       });
 
       this.$emit('authResult', {
@@ -89,6 +94,12 @@ export default {
           :placeholder="$t('fieldPasswordLabel')"
           :hasError="$isFieldInvalid('password')"
           :errors="$getFieldErrorMessages('password')"
+        />
+      </div>
+      <div class="auth-form__row">
+        <BaseCheckbox
+          type="checkbox"
+          v-model="remember"
         />
       </div>
       <div class="auth-form__row">
@@ -127,11 +138,13 @@ export default {
   "ru": {
     "fieldUsernameLabel": "Имя пользователя",
     "fieldPasswordLabel": "Пароль",
+    "fieldRememberLabel": "Запомнить меня",
     "submitButtonText": "Войти"
   },
   "en": {
     "fieldUsernameLabel": "Username",
     "fieldPasswordLabel": "Password",
+    "fieldRememberLabel": "Remember me",
     "submitButtonText": "Sign in"
   }
 }

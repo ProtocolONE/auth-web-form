@@ -20,13 +20,14 @@ export default {
   },
 
   actions: {
-    async registerWithEmail({ commit, rootState, rootGetters }, { username, password }) {
+    async registerWithEmail({ commit, rootState, rootGetters }, { username, password, remember }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
           connection: 'password',
           email: username,
           password,
+          remember,
           csrf: rootState.csrf,
         });
         if (rootState.isPageInsideIframe) {
