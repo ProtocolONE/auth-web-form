@@ -43,8 +43,8 @@ function getLanguage() {
  * @param {Object} options
  */
 async function mountApp(formData = {}, options = {}) {
-  assert(document.querySelector('#auth-form'), 'Define "#p1payone-form" element in the document');
-  assert(formData.clientID, 'clientID in required at mountApp');
+  assert(document.querySelector('#auth-form'), 'Define "#auth-form" element in the document');
+  assert(formData.challenge, 'Login challenge in required at mountApp');
 
   if (isPageInsideIframe) {
     document.body.classList.add('inside-iframe');
@@ -93,8 +93,8 @@ if (isPageInsideIframe) {
         } else {
           mountApp(
             {
-              clientID: window.AUTH_FORM_DATA.client_id,
-              redirectUri: window.AUTH_FORM_DATA.redirect_uri,
+              challenge: window.AUTH_FORM_DATA.challenge,
+              csrf: window.AUTH_FORM_DATA.csrf,
             },
             options,
           );
@@ -106,8 +106,8 @@ if (isPageInsideIframe) {
   // Case where the form is opened by as actual page inside browser, not inside iframe
   mountApp(
     {
-      clientID: window.AUTH_FORM_DATA.client_id,
-      redirectUri: window.AUTH_FORM_DATA.redirect_uri,
+      challenge: window.AUTH_FORM_DATA.challenge,
+      csrf: window.AUTH_FORM_DATA.csrf,
     },
     {
       isModal: false,

@@ -18,7 +18,7 @@ export default new Vuex.Store({
       width: 0,
       height: 0,
     },
-    clientID: '',
+    challenge: '',
     redirectUri: '',
     token: '',
     isLoading: false,
@@ -34,8 +34,11 @@ export default new Vuex.Store({
     lastSize(state, value) {
       state.lastSize = value;
     },
-    clientID(state, value) {
-      state.clientID = value;
+    challenge(state, value) {
+      state.challenge = value;
+    },
+    csrf(state, value) {
+      state.csrf = value;
     },
     redirectUri(state, value) {
       state.redirectUri = value;
@@ -56,9 +59,10 @@ export default new Vuex.Store({
   },
   actions: {
     initState({ commit }, { formData, options }) {
-      const { clientID } = formData;
-      assert(clientID, 'clientID is undefined at RootStore');
-      commit('clientID', clientID);
+      const { challenge } = formData;
+      assert(challenge, 'challenge is undefined at RootStore');
+      commit('challenge', challenge);
+      commit('csrf', formData.csrf);
       commit('redirectUri', formData.redirectUri);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl);
