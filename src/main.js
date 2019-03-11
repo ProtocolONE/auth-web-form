@@ -44,7 +44,9 @@ function getLanguage() {
  */
 async function mountApp(formData = {}, options = {}) {
   assert(document.querySelector('#auth-form'), 'Define "#auth-form" element in the document');
-  assert(formData.challenge, 'Login challenge in required at mountApp');
+  if (formData.success === undefined) {
+    assert(formData.challenge, 'Login challenge in required at mountApp');
+  }
 
   if (isPageInsideIframe) {
     document.body.classList.add('inside-iframe');
@@ -55,7 +57,10 @@ async function mountApp(formData = {}, options = {}) {
       document.body.classList.add(`size-${item}`);
     });
   }
-
+  if (formData.success !== undefined) {
+    postMessage('TOKEN_RECEIVED', formData);
+    return;
+  }
   await store.dispatch('initState', {
     formData,
     options: {
@@ -84,18 +89,15 @@ if (isPageInsideIframe) {
     {
       REQUEST_INIT_FORM(data = {}) {
         const { formData, options } = data;
-
         /**
          * Outside formData inserting is restricted in production mode
          */
         if (process.env.NODE_ENV === 'development') {
           mountApp(formData, options);
         } else {
+          const initData = window.AUTH_CALLBACK_PAYLOAD || window.AUTH_FORM_DATA;
           mountApp(
-            {
-              challenge: window.AUTH_FORM_DATA.challenge,
-              csrf: window.AUTH_FORM_DATA.csrf,
-            },
+            initData,
             options,
           );
         }
@@ -105,10 +107,7 @@ if (isPageInsideIframe) {
 } else {
   // Case where the form is opened by as actual page inside browser, not inside iframe
   mountApp(
-    {
-      challenge: window.AUTH_FORM_DATA.challenge,
-      csrf: window.AUTH_FORM_DATA.csrf,
-    },
+    window.AUTH_FORM_DATA,
     {
       isModal: false,
     },

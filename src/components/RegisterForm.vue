@@ -16,9 +16,7 @@ export default {
 
   computed: {
     ...mapState('RegisterForm', [
-      'token',
       'registerError',
-      'isRegistered',
     ]),
   },
 
@@ -72,12 +70,6 @@ export default {
         username: this.username,
         password: this.password,
         remember: this.remember,
-      });
-
-      this.$emit('registerResult', {
-        token: this.token,
-        isRegistered: this.isRegistered,
-        isAuthorised: this.isRegistered,
       });
       this.$emit('loadingEnd');
     },
