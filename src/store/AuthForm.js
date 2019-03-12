@@ -1,20 +1,15 @@
 import axios from 'axios';
-import { postMessage } from '@/postMessage';
 
 export default {
   namespaced: true,
 
   state: {
     authError: false,
-    isAuthorised: false,
   },
 
   mutations: {
     authError(state, value) {
       state.authError = value;
-    },
-    isAuthorised(state, value) {
-      state.isAuthorised = value;
     },
   },
 
@@ -28,14 +23,10 @@ export default {
           password,
           remember: (remember === true),
           csrf:
-            rootState.csrf,
+          rootState.csrf,
         });
-        if (rootState.isPageInsideIframe) {
-          postMessage('REDIRECT_REQUESTED', data.url);
-        } else {
-          window.location.href = data.url;
-        }
         commit('authError', '');
+        window.location.href = data.url;
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);

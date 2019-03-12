@@ -16,8 +16,6 @@ export default {
   computed: {
     ...mapState('AuthForm', [
       'authError',
-      'isAuthorised',
-      'token',
     ]),
   },
 
@@ -63,11 +61,6 @@ export default {
         username: this.username,
         password: this.password,
         remember: this.remember,
-      });
-
-      this.$emit('authResult', {
-        token: this.token,
-        isAuthorised: this.isAuthorised,
       });
       this.$emit('loadingEnd');
     },

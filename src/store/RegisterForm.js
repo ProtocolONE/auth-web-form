@@ -1,13 +1,10 @@
 import axios from 'axios';
-import { postMessage } from '@/postMessage';
 
 export default {
   namespaced: true,
 
   state: {
-    token: '',
     registerError: '',
-    isRegistered: false,
   },
 
   mutations: {
@@ -30,12 +27,8 @@ export default {
           remember,
           csrf: rootState.csrf,
         });
-        if (rootState.isPageInsideIframe) {
-          postMessage('REDIRECT_REQUESTED', data.url);
-        } else {
-          window.location.href = data.url;
-        }
         commit('registerError', '');
+        window.location.href = data.url;
       } catch (error) {
         if (error.response) {
           commit('registerError', error.response.data.error_message);

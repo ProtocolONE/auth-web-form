@@ -11,7 +11,7 @@ export const sendingMessagesNames = {
 
 export function postMessage(nameID, data = {}) {
   const name = sendingMessagesNames[nameID];
-  assert(name, `Undefiend postMessage nameID: ${nameID}`);
+  assert(name, `Undefined postMessage nameID: ${nameID}`);
   window.parent.postMessage({
     source: 'P1_AUTH_FORM',
     name,

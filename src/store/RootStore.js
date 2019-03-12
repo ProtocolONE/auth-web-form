@@ -19,7 +19,6 @@ export default new Vuex.Store({
       height: 0,
     },
     challenge: '',
-    redirectUri: '',
     token: '',
     isLoading: false,
     isModal: false,
@@ -40,9 +39,6 @@ export default new Vuex.Store({
     csrf(state, value) {
       state.csrf = value;
     },
-    redirectUri(state, value) {
-      state.redirectUri = value;
-    },
     token(state, value) {
       state.token = value;
       postMessage('TOKEN_RECEIVED', value);
@@ -59,11 +55,12 @@ export default new Vuex.Store({
   },
   actions: {
     initState({ commit }, { formData, options }) {
-      const { challenge } = formData;
-      assert(challenge, 'challenge is undefined at RootStore');
-      commit('challenge', challenge);
+      if (formData.success === undefined) {
+        const { challenge } = formData;
+        assert(challenge, 'challenge is undefined at RootStore');
+      }
+      commit('challenge', formData.challenge);
       commit('csrf', formData.csrf);
-      commit('redirectUri', formData.redirectUri);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl);
     },
