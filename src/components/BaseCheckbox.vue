@@ -1,55 +1,55 @@
 <script>
-  export default {
-    model: {
-      prop: 'value',
-      event: 'input',
+export default {
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
+
+  props: {
+    value: {
+      type: String,
+      default: '0',
     },
 
-    props: {
-      value: {
-        type: String,
-        default: '0',
-      },
-
-      color: {
-        default: 'yellow',
-        type: String,
-      },
-
-      size: {
-        default: 'default',
-        type: String,
-      },
-
-      type: {
-        default: 'checkbox',
-        type: String,
-      },
+    color: {
+      default: 'yellow',
+      type: String,
     },
 
-    watch: {
-      value(value) {
-        this.innerValue = value;
-      },
+    size: {
+      default: 'default',
+      type: String,
     },
 
-    data() {
-      return {
-        innerValue: this.value,
-      };
+    type: {
+      default: 'checkbox',
+      type: String,
     },
+  },
 
-    methods: {
-      onChange(event) {
-        console.log(event.target);
-        this.$emit('input', event.target.checked);
-      },
-      focus() {
-        this.$el.querySelector('checkbox')
-          .focus();
-      },
+  watch: {
+    value(value) {
+      this.innerValue = value;
     },
-  };
+  },
+
+  data() {
+    return {
+      innerValue: this.value,
+    };
+  },
+
+  methods: {
+    onChange(event) {
+      console.log(event.target);
+      this.$emit('input', event.target.checked);
+    },
+    focus() {
+      this.$el.querySelector('checkbox')
+        .focus();
+    },
+  },
+};
 </script>
 
 <template>

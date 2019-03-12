@@ -22,15 +22,14 @@ export default {
     async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password, remember }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
-            challenge: rootState.challenge,
-            connection: 'password',
-            email: username,
-            password,
-            remember: (remember === true),
-            csrf:
+          challenge: rootState.challenge,
+          connection: 'password',
+          email: username,
+          password,
+          remember: (remember === true),
+          csrf:
             rootState.csrf,
-          })
-        ;
+        });
         if (rootState.isPageInsideIframe) {
           postMessage('REDIRECT_REQUESTED', data.url);
         } else {
