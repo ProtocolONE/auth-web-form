@@ -78,38 +78,39 @@ async function mountApp(formData = {}, options = {}) {
   }).$mount('#auth-form');
 }
 
+let selfInitTimeout;
+receiveMessages(
+  'P1_AUTH_WEB_SDK',
+  {
+    REQUEST_INIT_FORM: 'requestInitForm',
+  },
+  {
+    REQUEST_INIT_FORM(data = {}) {
+      const { formData, options } = data;
+      /**
+       * Outside formData inserting is restricted in production mode
+       */
+      if (process.env.NODE_ENV === 'development') {
+        mountApp(formData, options);
+      } else {
+        const initData = window.AUTH_CALLBACK_PAYLOAD || window.AUTH_FORM_DATA;
+        mountApp(
+          initData,
+          options,
+        );
+      }
+
+      clearTimeout(selfInitTimeout);
+    },
+  },
+);
 postMessage('INITED');
 
-if (isPageInsideIframe) {
-  receiveMessages(
-    'P1_AUTH_WEB_SDK',
-    {
-      REQUEST_INIT_FORM: 'requestInitForm',
-    },
-    {
-      REQUEST_INIT_FORM(data = {}) {
-        const { formData, options } = data;
-        /**
-         * Outside formData inserting is restricted in production mode
-         */
-        if (process.env.NODE_ENV === 'development') {
-          mountApp(formData, options);
-        } else {
-          const initData = window.AUTH_CALLBACK_PAYLOAD || window.AUTH_FORM_DATA;
-          mountApp(
-            initData,
-            options,
-          );
-        }
-      },
-    },
-  );
-} else {
-  // Case where the form is opened by as actual page inside browser, not inside iframe
+selfInitTimeout = setTimeout(() => {
   mountApp(
     window.AUTH_FORM_DATA,
     {
       isModal: false,
     },
   );
-}
+}, 100);
