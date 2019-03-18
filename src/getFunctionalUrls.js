@@ -6,6 +6,6 @@ export default function getFunctionalUrls(apiUrl = 'https://auth1.tst.protocol.o
     apiRegisterUrl: `${apiUrl}/oauth2/signup`,
     apiSocialAuthUrl: `${apiUrl}/authorize`,
     apiSocialAuthLinkUrl: `${apiUrl}/authorize/link`,
-    apiLogoutUrl: `${apiUrl}/logout`,
+    apiLogoutUrl: `${apiUrl}/oauth2/logout`,
   };
 }

@@ -7,6 +7,7 @@ export const sendingMessagesNames = {
   FORM_RESIZE: 'formResize',
   TOKEN_RECEIVED: 'tokenReceived',
   REDIRECT_REQUESTED: 'redirectRequested',
+  IS_LOGOUT: 'isLogout',
 };
 
 export function postMessage(nameID, data = {}) {

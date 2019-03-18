@@ -57,10 +57,6 @@ async function mountApp(formData = {}, options = {}) {
       document.body.classList.add(`size-${item}`);
     });
   }
-  if (formData.success !== undefined) {
-    postMessage('TOKEN_RECEIVED', formData);
-    return;
-  }
   await store.dispatch('initState', {
     formData,
     options: {
@@ -87,6 +83,14 @@ receiveMessages(
   {
     REQUEST_INIT_FORM(data = {}) {
       const { formData, options } = data;
+      if (window.AUTH_LOGOUT !== undefined) {
+        postMessage('IS_LOGOUT', window.AUTH_LOGOUT);
+        return;
+      }
+      if (window.AUTH_CALLBACK_PAYLOAD !== undefined) {
+        postMessage('TOKEN_RECEIVED', window.AUTH_CALLBACK_PAYLOAD);
+        return;
+      }
       /**
        * Outside formData inserting is restricted in production mode
        */
