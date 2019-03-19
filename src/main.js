@@ -84,7 +84,7 @@ receiveMessages(
     REQUEST_INIT_FORM(data = {}) {
       const { formData, options } = data;
       if (window.AUTH_LOGOUT !== undefined) {
-        postMessage('IS_LOGOUT', window.AUTH_LOGOUT);
+        postMessage('LOGOUT_PROCESSED', window.AUTH_LOGOUT);
         return;
       }
       if (window.AUTH_CALLBACK_PAYLOAD !== undefined) {
