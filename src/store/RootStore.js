@@ -65,10 +65,9 @@ export default new Vuex.Store({
       commit('apiUrl', options.apiUrl);
     },
 
-    async logout({ state, getters }) {
+    async logout({ getters }) {
       try {
         const query = {
-          client_id: state.clientID,
           redirect_uri: 'http://localhost:8080/?logout=success',
         };
         await axios.get(
