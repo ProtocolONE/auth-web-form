@@ -7,8 +7,8 @@ export default {
 
   data() {
     return {
-      username: 'test@test.com',
-      password: 'Qweqwe1@',
+      username: '',
+      password: '',
       remember: '',
     };
   },
