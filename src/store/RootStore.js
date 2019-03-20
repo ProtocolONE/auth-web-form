@@ -5,6 +5,7 @@ import axios from 'axios';
 import qs from 'qs';
 import AuthForm from './AuthForm';
 import RegisterForm from './RegisterForm';
+import AutoLoginForm from './AutoLoginForm';
 import Userinfo from './Userinfo';
 import SocialAuth from './SocialAuth';
 import { postMessage } from '@/postMessage';
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     isLoading: false,
     isModal: false,
     apiUrl: undefined,
+    previousLogin: '',
   },
   getters: {
     urls(state) {
@@ -38,6 +40,9 @@ export default new Vuex.Store({
     },
     csrf(state, value) {
       state.csrf = value;
+    },
+    previousLogin(state, value) {
+      state.previousLogin = value;
     },
     token(state, value) {
       state.token = value;
@@ -56,11 +61,13 @@ export default new Vuex.Store({
   actions: {
     initState({ commit }, { formData, options }) {
       if (formData.success === undefined) {
-        const { challenge } = formData;
+        const { challenge, csrf } = formData;
         assert(challenge, 'challenge is undefined at RootStore');
+        assert(csrf, 'csrf is undefined at RootStore');
       }
       commit('challenge', formData.challenge);
       commit('csrf', formData.csrf);
+      commit('previousLogin', formData.previousLogin);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl);
     },
@@ -103,6 +110,7 @@ export default new Vuex.Store({
   modules: {
     AuthForm,
     RegisterForm,
+    AutoLoginForm,
     Userinfo,
     SocialAuth,
   },

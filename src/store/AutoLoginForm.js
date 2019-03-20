@@ -14,16 +14,12 @@ export default {
   },
 
   actions: {
-    async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password, remember }) {
+    async autoLogin({ commit, rootState, rootGetters }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
-          connection: 'password',
-          email: username,
-          password,
-          remember: (remember === '1'),
-          csrf:
-          rootState.csrf,
+          csrf: rootState.csrf,
+          previousLogin: rootState.previousLogin,
         });
         commit('authError', '');
         window.location.href = data.url;

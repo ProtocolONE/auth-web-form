@@ -24,7 +24,7 @@ export default {
           connection: 'password',
           email: username,
           password,
-          remember,
+          remember: (remember === '1'),
           csrf: rootState.csrf,
         });
         commit('registerError', '');
