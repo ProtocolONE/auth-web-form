@@ -21,7 +21,6 @@ export default {
       try {
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
-          connection: 'password',
           email: username,
           password,
           remember,
