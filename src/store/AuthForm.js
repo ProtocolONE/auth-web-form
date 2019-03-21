@@ -22,13 +22,13 @@ export default {
           email: username,
           password,
           remember: (remember === true),
-          csrf:
-          rootState.csrf,
+          csrf: rootState.csrf,
         });
         commit('authError', '');
         window.location.href = data.url;
       } catch (error) {
         if (error.response) {
+          rootState.csrf = error.response.data.csrf;
           commit('authError', error.response.data.error_message);
         }
       }
