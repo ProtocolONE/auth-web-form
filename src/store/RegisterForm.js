@@ -21,7 +21,6 @@ export default {
       try {
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
-          connection: 'password',
           email: username,
           password,
           remember: (remember === '1'),
@@ -31,6 +30,7 @@ export default {
         window.location.href = data.url;
       } catch (error) {
         if (error.response) {
+          rootState.csrf = error.response.data.csrf;
           commit('registerError', error.response.data.error_message);
         }
       }
