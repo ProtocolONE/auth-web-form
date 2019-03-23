@@ -41,8 +41,7 @@ export default {
 
   methods: {
     onChange(event) {
-      console.log(event.target);
-      this.$emit('input', event.target.checked);
+      this.$emit('input', event.target.checked.toString());
     },
     focus() {
       this.$el.querySelector('checkbox')

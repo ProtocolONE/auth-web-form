@@ -23,7 +23,7 @@ export default {
           challenge: rootState.challenge,
           email: username,
           password,
-          remember: (remember === true),
+          remember: (remember === '1'),
           csrf: rootState.csrf,
         });
         commit('registerError', '');
