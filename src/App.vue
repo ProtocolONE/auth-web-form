@@ -89,8 +89,8 @@ export default {
     goRegister() {
       this.isLoginAuthFormVisible = false;
       this.isSocialAuthFormVisible = false;
-      this.isRegisterFormVisible = false;
-      this.isAutoLoginFormVisible = true;
+      this.isRegisterFormVisible = true;
+      this.isAutoLoginFormVisible = false;
     },
 
     handleAuthOrRegisterResult({ isRegistered, isAuthorised, token }) {
