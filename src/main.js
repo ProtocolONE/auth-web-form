@@ -43,9 +43,13 @@ function getLanguage() {
  * @param {Object} options
  */
 async function mountApp(formData = {}, options = {}) {
+  let mode = 'login';
   assert(document.querySelector('#auth-form'), 'Define "#auth-form" element in the document');
-  if (formData.success === undefined) {
+  if (formData.success === undefined && options.action !== 'change_password') {
     assert(formData.challenge, 'Login challenge in required at mountApp');
+  }
+  if (options.action === 'change_password') {
+    assert(formData.clientId, 'Client ID in required at mountApp');
   }
 
   if (isPageInsideIframe) {
@@ -57,12 +61,17 @@ async function mountApp(formData = {}, options = {}) {
       document.body.classList.add(`size-${item}`);
     });
   }
+
+  if (window.AUTH_CHANGE_PASSWORD !== undefined) {
+    mode = 'change_password';
+  }
   await store.dispatch('initState', {
     formData,
     options: {
       ...options,
       isPageInsideIframe,
       apiUrl: options.apiUrl || window.AUTH_API_URL,
+      mode,
     },
   });
 
@@ -97,7 +106,7 @@ receiveMessages(
       if (process.env.NODE_ENV === 'development') {
         mountApp(formData, options);
       } else {
-        const initData = window.AUTH_CALLBACK_PAYLOAD || window.AUTH_FORM_DATA;
+        const initData = window.AUTH_CHANGE_PASSWORD || window.AUTH_FORM_DATA;
         mountApp(
           initData,
           options,

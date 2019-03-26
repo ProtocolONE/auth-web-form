@@ -5,6 +5,7 @@ import RegisterForm from './components/RegisterForm.vue';
 import AutoLoginForm from './components/AutoLoginForm.vue';
 import LocaleChanger from './components/LocaleChanger.vue';
 import SocialProviderAuth from './components/SocialProviderAuth.vue';
+import ChangePassword from './components/ChangePassword.vue';
 import { postMessage } from './postMessage';
 
 export default {
@@ -15,6 +16,7 @@ export default {
     AutoLoginForm,
     RegisterForm,
     SocialProviderAuth,
+    ChangePassword,
   },
 
   data() {
@@ -25,6 +27,7 @@ export default {
       isAutoLoginFormVisible: false,
       isRegisterFormVisible: false,
       isSocialAuthFormVisible: true,
+      isChangePasswordVisible: false,
     };
   },
 
@@ -33,6 +36,7 @@ export default {
       'isModal',
       'isLoading',
       'previousLogin',
+      'mode',
     ]),
   },
 
@@ -52,15 +56,24 @@ export default {
     isSocialAuthFormVisible() {
       this.reportAppResize();
     },
+    isChangePasswordVisible() {
+      this.reportAppResize();
+    },
   },
 
   mounted() {
     this.reportAppResize();
     postMessage('LOADED');
-    if (this.previousLogin !== '') {
+
+    if (this.previousLogin !== '' && this.previousLogin !== undefined) {
       this.isLoginAuthFormVisible = false;
       this.isSocialAuthFormVisible = false;
       this.isAutoLoginFormVisible = true;
+    }
+    if (this.mode === 'change_password') {
+      this.isLoginAuthFormVisible = false;
+      this.isSocialAuthFormVisible = false;
+      this.isChangePasswordVisible = true;
     }
   },
 
@@ -148,6 +161,12 @@ export default {
                 @loadingStart="setLoading(true)"
                 @loadingEnd="setLoading(false)"
                 @authResult="handleAuthOrRegisterResult"
+        />
+        <ChangePassword
+                v-if="isChangePasswordVisible"
+                @requestAppResize="reportAppResize"
+                @loadingStart="setLoading(true)"
+                @loadingEnd="setLoading(false)"
         />
         <div class="app__message" v-if="isRegistered">
             <base-header level="3">Вы успешно зарегистрированы</base-header>

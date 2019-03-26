@@ -19,7 +19,7 @@ export default {
         const userinfoResult = await axios.get(rootGetters.urls.apiUserinfoUrl, {
           headers: {
             Authorization: `Bearer ${rootState.token}`,
-            'X-CLIENT-ID': rootState.clientID,
+            'X-CLIENT-ID': rootState.clientId,
           },
         });
         commit('userinfo', userinfoResult.data);

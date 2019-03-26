@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { includes } from 'lodash-es';
 import assert from 'simple-assert';
-import { postMessage, receiveMessages } from '@/postMessage';
+import { receiveMessages } from '@/postMessage';
 import qs from 'qs';
 
 const ALLOWED_STAGES = ['initial', 'requestLinking', 'success'];
@@ -39,7 +39,9 @@ export default {
     },
   },
   actions: {
-    initState({ state, commit }) {
+    initState({
+      rootGetters, rootState, state, commit,
+    }) {
       receiveMessages(
         'P1_AUTH_BACKEND',
         {
@@ -58,22 +60,16 @@ export default {
             commit('errorMessage', message);
             state.openedWindow.close();
           },
-          SUCCESS({ token, url } = {}) {
+          SUCCESS({ token } = {}) {
             if (!state.openedWindow) {
               return;
             }
-
-
-            if (token) {
-              commit('token', token);
-            }
-            commit('stage', 'success');
-
-            if (url) {
-              postMessage('REDIRECT_REQUESTED', url);
-            }
-
             state.openedWindow.close();
+            axios.post(rootGetters.urls.apiLoginUrl, {
+              challenge: rootState.challenge,
+              csrf: rootState.csrf,
+              token,
+            }).then((response) => { window.location.href = response.data.url; });
           },
         },
       );
@@ -86,7 +82,7 @@ export default {
 
       const params = qs.stringify({
         connection,
-        client_id: '5c221cde5ffa56fdd05257df',
+        client_id: rootState.clientId,
         redirect_uri: rootState.redirectUri,
       });
 
@@ -99,7 +95,8 @@ export default {
     }, { action, password }) {
       try {
         const query = {
-          client_id: rootState.clientID,
+          challenge: rootState.challenge,
+          client_id: rootState.clientId,
           code: state.token,
           action,
           password: action === 'link' ? password : '',
@@ -108,12 +105,8 @@ export default {
         const { data } = await axios.get(
           `${rootGetters.urls.apiSocialAuthLinkUrl}?${qs.stringify(query)}`,
         );
-
-        if (data.access_token) {
-          commit('token', data.access_token);
-        }
         if (data.url) {
-          postMessage('REDIRECT_REQUESTED', data.url);
+          window.location.href = data.url;
         }
         commit('stage', 'success');
         commit('errorMessage', '');
