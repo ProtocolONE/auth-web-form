@@ -8,6 +8,7 @@ import RegisterForm from './RegisterForm';
 import AutoLoginForm from './AutoLoginForm';
 import Userinfo from './Userinfo';
 import SocialAuth from './SocialAuth';
+import ChangePassword from './ChangePassword';
 import { postMessage } from '@/postMessage';
 import getFunctionalUrls from '@/getFunctionalUrls';
 
@@ -21,10 +22,12 @@ export default new Vuex.Store({
     },
     challenge: '',
     token: '',
+    clientId: '',
     isLoading: false,
     isModal: false,
     apiUrl: undefined,
     previousLogin: '',
+    mode: 'login',
   },
   getters: {
     urls(state) {
@@ -38,11 +41,14 @@ export default new Vuex.Store({
     challenge(state, value) {
       state.challenge = value;
     },
-    csrf(state, value) {
-      state.csrf = value;
+    clientId(state, value) {
+      state.clientId = value;
     },
     previousLogin(state, value) {
       state.previousLogin = value;
+    },
+    mode(state, value) {
+      state.mode = value;
     },
     token(state, value) {
       state.token = value;
@@ -60,16 +66,20 @@ export default new Vuex.Store({
   },
   actions: {
     initState({ commit }, { formData, options }) {
-      if (formData.success === undefined) {
-        const { challenge, csrf } = formData;
+      if (formData.success === undefined && options.mode === 'login') {
+        const { challenge } = formData;
         assert(challenge, 'challenge is undefined at RootStore');
-        assert(csrf, 'csrf is undefined at RootStore');
+      }
+      if (options.mode === 'changePassword') {
+        const { clientId } = formData;
+        assert(clientId, 'clientId is undefined at RootStore');
       }
       commit('challenge', formData.challenge);
-      commit('csrf', formData.csrf);
+      commit('clientId', formData.clientId);
       commit('previousLogin', formData.previousLogin);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl);
+      commit('mode', options.mode);
     },
 
     async logout({ getters }) {
@@ -113,5 +123,6 @@ export default new Vuex.Store({
     AutoLoginForm,
     Userinfo,
     SocialAuth,
+    ChangePassword,
   },
 });

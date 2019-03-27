@@ -109,8 +109,8 @@ export default {
       </div>
       <div class="auth-form__row">
         <BaseCheckbox
-                type="checkbox"
-                v-model="remember"
+          type="checkbox"
+          v-model="remember"
         />
       </div>
       <div class="register-form__row">
@@ -127,36 +127,36 @@ export default {
 </template>
 
 <style lang="scss">
-.register-form {
-  padding: 20px;
-  position: relative;
+  .register-form {
+    padding: 20px;
+    position: relative;
 
-  form {
-    margin: 0;
-  }
+    form {
+      margin: 0;
+    }
 
-  &__row {
-    margin-bottom: 12px;
-  }
+    &__row {
+      margin-bottom: 12px;
+    }
 
-  &__controls {
+    &__controls {
+    }
   }
-}
 </style>
 
 <i18n>
-{
+  {
   "ru": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "Пароль",
-    "fieldRepeatPasswordLabel": "Пароль ещё раз",
-    "submitButtonText": "Зарегистрироваться"
+  "fieldUsernameLabel": "Email",
+  "fieldPasswordLabel": "Пароль",
+  "fieldRepeatPasswordLabel": "Пароль ещё раз",
+  "submitButtonText": "Зарегистрироваться"
   },
   "en": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "Password",
-    "fieldRepeatPasswordLabel": "Repeat password",
-    "submitButtonText": "Sign up"
+  "fieldUsernameLabel": "Email",
+  "fieldPasswordLabel": "Password",
+  "fieldRepeatPasswordLabel": "Repeat password",
+  "submitButtonText": "Sign up"
   }
-}
+  }
 </i18n>

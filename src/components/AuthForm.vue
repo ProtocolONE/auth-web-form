@@ -109,36 +109,36 @@ export default {
 </template>
 
 <style lang="scss">
-.auth-form {
-  padding: 20px;
-  position: relative;
+  .auth-form {
+    padding: 20px;
+    position: relative;
 
-  form {
-    margin: 0;
-  }
+    form {
+      margin: 0;
+    }
 
-  &__row {
-    margin-bottom: 12px;
-  }
+    &__row {
+      margin-bottom: 12px;
+    }
 
-  &__controls {
+    &__controls {
+    }
   }
-}
 </style>
 
 <i18n>
-{
+  {
   "ru": {
-    "fieldUsernameLabel": "Имя пользователя",
-    "fieldPasswordLabel": "Пароль",
-    "fieldRememberLabel": "Запомнить меня",
-    "submitButtonText": "Войти"
+  "fieldUsernameLabel": "Имя пользователя",
+  "fieldPasswordLabel": "Пароль",
+  "fieldRememberLabel": "Запомнить меня",
+  "submitButtonText": "Войти"
   },
   "en": {
-    "fieldUsernameLabel": "Username",
-    "fieldPasswordLabel": "Password",
-    "fieldRememberLabel": "Remember me",
-    "submitButtonText": "Sign in"
+  "fieldUsernameLabel": "Username",
+  "fieldPasswordLabel": "Password",
+  "fieldRememberLabel": "Remember me",
+  "submitButtonText": "Sign in"
   }
-}
+  }
 </i18n>

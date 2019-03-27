@@ -96,7 +96,7 @@ export default {
         v-if="profilesLinkingAction === 'link'"
         v-model="profilesLinkingPassword"
         type="password"
-        placeholder="Ваш пароль в нашей системе" />
+        placeholder="Ваш пароль в нашей системе"/>
 
       <base-button
         @click="linkProfiles({action: profilesLinkingAction, password: profilesLinkingPassword})"
@@ -114,9 +114,9 @@ export default {
 </template>
 
 <style lang="scss">
-.social-provider-auth {
-  margin: 0 20px 20px;
-  border: 1px solid #ccc;
-  padding: 20px;
-}
+  .social-provider-auth {
+    margin: 0 20px 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
 </style>

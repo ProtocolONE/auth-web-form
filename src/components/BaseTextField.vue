@@ -4,7 +4,7 @@ import { TheMask } from 'vue-the-mask';
 export default {
   components: {
     // eslint-disable-next-line
-    TheMask,
+      TheMask,
   },
 
   model: {
@@ -49,17 +49,27 @@ export default {
         '#': { pattern: /\d/ },
         X: { pattern: /[0-9a-zA-Z]/ },
         S: { pattern: /[a-zA-Z]/ },
-        A: { pattern: /[a-zA-Z]/, transform: v => v.toLocaleUpperCase() },
-        a: { pattern: /[a-zA-Z]/, transform: v => v.toLocaleLowerCase() },
+        A: {
+          pattern: /[a-zA-Z]/,
+          transform: v => v.toLocaleUpperCase(),
+        },
+        a: {
+          pattern: /[a-zA-Z]/,
+          transform: v => v.toLocaleLowerCase(),
+        },
         '!': { escape: true },
-        U: { pattern: /[a-zA-Z\s]/, transform: v => v.toLocaleUpperCase() },
+        U: {
+          pattern: /[a-zA-Z\s]/,
+          transform: v => v.toLocaleUpperCase(),
+        },
       },
     };
   },
 
   methods: {
     focus() {
-      this.$el.querySelector('input').focus();
+      this.$el.querySelector('input')
+        .focus();
     },
   },
 };
@@ -67,7 +77,7 @@ export default {
 
 <template>
   <div class="base-text-field"
-    :class="{'base-text-field_error': hasError}">
+       :class="{'base-text-field_error': hasError}">
 
     <TheMask
       class="base-text-field__input"
@@ -79,7 +89,7 @@ export default {
       :tokens="maskTokens"
       @input="$emit('input', innerValue)"
       @focus="$emit('focus', $event), hasFocus = true"
-      @blur="$emit('blur', $event), hasFocus = false" />
+      @blur="$emit('blur', $event), hasFocus = false"/>
 
     <input
       class="base-text-field__input"
@@ -90,53 +100,53 @@ export default {
       :mask="mask"
       @input="$emit('input', innerValue)"
       @focus="$emit('focus', $event), hasFocus = true"
-      @blur="$emit('blur', $event), hasFocus = false" />
+      @blur="$emit('blur', $event), hasFocus = false"/>
 
-    <BaseErrorText v-if="hasError" :value="errors" />
+    <BaseErrorText v-if="hasError" :value="errors"/>
 
   </div>
 </template>
 
 <style lang="scss">
-.base-text-field {
-  width: 100%;
-
-  &_error {
-    color: #ff3737;
-  }
-
-  &__label {
-    display: block;
-  }
-
-  &__input {
-    background: $ui-color-white;
+  .base-text-field {
     width: 100%;
-    height: 34px;
-    color: $ui-color-grey13;
-    font-size: 15px;
-    line-height: 18px;
-    padding: 0 12px;
-    border: 1px solid $ui-color-grey72;
-    transition: border-color 0.1s ease;
 
-    &::placeholder {
-      color: $ui-color-grey72;
+    &_error {
+      color: #ff3737;
     }
 
-    .base-text-field_error & {
-      border-color: #ff3737;
+    &__label {
+      display: block;
     }
 
-    &:focus {
-      outline: none;
-      border-color: #0b99ff;
-    }
+    &__input {
+      background: $ui-color-white;
+      width: 100%;
+      height: 34px;
+      color: $ui-color-grey13;
+      font-size: 15px;
+      line-height: 18px;
+      padding: 0 12px;
+      border: 1px solid $ui-color-grey72;
+      transition: border-color 0.1s ease;
 
-    &:disabled {
-      border-color: transparent;
-      color: #888;
+      &::placeholder {
+        color: $ui-color-grey72;
+      }
+
+      .base-text-field_error & {
+        border-color: #ff3737;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #0b99ff;
+      }
+
+      &:disabled {
+        border-color: transparent;
+        color: #888;
+      }
     }
   }
-}
 </style>

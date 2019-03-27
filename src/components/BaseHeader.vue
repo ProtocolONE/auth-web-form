@@ -19,9 +19,9 @@ export default {
 
   computed: {
     /**
-     * Формирует тег для заголовка
-     * @return {string}
-     */
+       * Формирует тег для заголовка
+       * @return {string}
+       */
     tag() {
       return `h${this.level}`;
     },
@@ -34,40 +34,40 @@ export default {
     class="base-header"
     :class="{'_has-margin': hasMargin}"
   >
-    <component :is="tag" >
+    <component :is="tag">
       <slot></slot>
     </component>
   </div>
 </template>
 
 <style lang="scss" scoped>
-%ui-kit-title {
-  padding: 0;
-  margin: 0;
-  font-weight: 400;
-}
-
-.base-header {
-  h1 {
-    font-size: 54px;
-    line-height: 60px;
-    @extend %ui-kit-title;
+  %ui-kit-title {
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
   }
 
-  h2 {
-    font-size: 48px;
-    line-height: 54px;
-    @extend %ui-kit-title;
-  }
+  .base-header {
+    h1 {
+      font-size: 54px;
+      line-height: 60px;
+      @extend %ui-kit-title;
+    }
 
-  h2 {
-    font-size: 24px;
-    line-height: 30px;
-    @extend %ui-kit-title;
-  }
+    h2 {
+      font-size: 48px;
+      line-height: 54px;
+      @extend %ui-kit-title;
+    }
 
-  &._has-margin {
-    margin-bottom: 12px;
+    h2 {
+      font-size: 24px;
+      line-height: 30px;
+      @extend %ui-kit-title;
+    }
+
+    &._has-margin {
+      margin-bottom: 12px;
+    }
   }
-}
 </style>

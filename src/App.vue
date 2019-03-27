@@ -5,6 +5,7 @@ import RegisterForm from './components/RegisterForm.vue';
 import AutoLoginForm from './components/AutoLoginForm.vue';
 import LocaleChanger from './components/LocaleChanger.vue';
 import SocialProviderAuth from './components/SocialProviderAuth.vue';
+import ChangePassword from './components/ChangePassword.vue';
 import { postMessage } from './postMessage';
 
 export default {
@@ -15,6 +16,7 @@ export default {
     AutoLoginForm,
     RegisterForm,
     SocialProviderAuth,
+    ChangePassword,
   },
 
   data() {
@@ -25,6 +27,7 @@ export default {
       isAutoLoginFormVisible: false,
       isRegisterFormVisible: false,
       isSocialAuthFormVisible: true,
+      isChangePasswordVisible: false,
     };
   },
 
@@ -33,6 +36,7 @@ export default {
       'isModal',
       'isLoading',
       'previousLogin',
+      'mode',
     ]),
   },
 
@@ -52,15 +56,24 @@ export default {
     isSocialAuthFormVisible() {
       this.reportAppResize();
     },
+    isChangePasswordVisible() {
+      this.reportAppResize();
+    },
   },
 
   mounted() {
     this.reportAppResize();
     postMessage('LOADED');
-    if (this.previousLogin !== '') {
+
+    if (this.previousLogin !== '' && this.previousLogin !== undefined) {
       this.isLoginAuthFormVisible = false;
       this.isSocialAuthFormVisible = false;
       this.isAutoLoginFormVisible = true;
+    }
+    if (this.mode === 'changePassword') {
+      this.isLoginAuthFormVisible = false;
+      this.isSocialAuthFormVisible = false;
+      this.isChangePasswordVisible = true;
     }
   },
 
@@ -118,161 +131,167 @@ export default {
 </script>
 
 <template>
-    <div class="app">
-        <div class="app__loading" v-if="isLoading">
-            <IconLoadingAnimated/>
-        </div>
-        <div class="app-head">
-            <LocaleChanger
-                    class="app-head__locale-changer"
-                    :class="{_modal: isModal}"
-            />
-        </div>
-        <AuthForm
-                v-if="isLoginAuthFormVisible"
-                @requestAppResize="reportAppResize"
-                @loadingStart="setLoading(true)"
-                @loadingEnd="setLoading(false)"
-                @authResult="handleAuthOrRegisterResult"
-        />
-        <RegisterForm
-                v-if="isRegisterFormVisible"
-                @requestAppResize="reportAppResize"
-                @loadingStart="setLoading(true)"
-                @loadingEnd="setLoading(false)"
-                @registerResult="handleAuthOrRegisterResult"
-        />
-        <AutoLoginForm
-                v-if="isAutoLoginFormVisible"
-                @requestAppResize="reportAppResize"
-                @loadingStart="setLoading(true)"
-                @loadingEnd="setLoading(false)"
-                @authResult="handleAuthOrRegisterResult"
-        />
-        <div class="app__message" v-if="isRegistered">
-            <base-header level="3">Вы успешно зарегистрированы</base-header>
-        </div>
-
-        <div class="app__message" v-if="isAuthorised">
-            <base-header level="3">Вы авторизированы</base-header>
-        </div>
-
-        <SocialProviderAuth
-                v-if="isSocialAuthFormVisible"
-                @requestAppResize="reportAppResize"
-                @loadingStart="setLoading(true)"
-                @loadingEnd="setLoading(false)"
-                @requestLinking="handleRequestLinking"
-                @success="handleAuthOrRegisterResult"
-        />
-
-        <div class="app__footer">
-            <a v-if="isAutoLoginFormVisible" href="#" @click.prevent="goAuth">
-                Использовать другую учетную запись
-            </a>
-            <a v-if="isRegisterFormVisible" href="#" @click.prevent="goAuth">
-                У меня уже есть учётная запись
-            </a>
-            <a v-if="isLoginAuthFormVisible" href="#" @click.prevent="goRegister">
-                Нет учётной записи? Зарегистрируйтесь!
-            </a>
-        </div>
-
-        <!-- <button @click="logout">Logout</button> -->
-
+  <div class="app">
+    <div class="app__loading" v-if="isLoading">
+      <IconLoadingAnimated/>
     </div>
+    <div class="app-head">
+      <LocaleChanger
+        class="app-head__locale-changer"
+        :class="{_modal: isModal}"
+      />
+    </div>
+    <AuthForm
+      v-if="isLoginAuthFormVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @authResult="handleAuthOrRegisterResult"
+    />
+    <RegisterForm
+      v-if="isRegisterFormVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @registerResult="handleAuthOrRegisterResult"
+    />
+    <AutoLoginForm
+      v-if="isAutoLoginFormVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @authResult="handleAuthOrRegisterResult"
+    />
+    <ChangePassword
+      v-if="isChangePasswordVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+    />
+    <div class="app__message" v-if="isRegistered">
+      <base-header level="3">Вы успешно зарегистрированы</base-header>
+    </div>
+
+    <div class="app__message" v-if="isAuthorised">
+      <base-header level="3">Вы авторизированы</base-header>
+    </div>
+
+    <SocialProviderAuth
+      v-if="isSocialAuthFormVisible"
+      @requestAppResize="reportAppResize"
+      @loadingStart="setLoading(true)"
+      @loadingEnd="setLoading(false)"
+      @requestLinking="handleRequestLinking"
+      @success="handleAuthOrRegisterResult"
+    />
+
+    <div class="app__footer">
+      <a v-if="isAutoLoginFormVisible" href="#" @click.prevent="goAuth">
+        Использовать другую учетную запись
+      </a>
+      <a v-if="isRegisterFormVisible" href="#" @click.prevent="goAuth">
+        У меня уже есть учётная запись
+      </a>
+      <a v-if="isLoginAuthFormVisible" href="#" @click.prevent="goRegister">
+        Нет учётной записи? Зарегистрируйтесь!
+      </a>
+    </div>
+
+    <!-- <button @click="logout">Logout</button> -->
+
+  </div>
 </template>
 
 <style lang="scss">
-    .app {
-        width: 360px;
-        margin: 0 auto;
-        position: relative;
-        background: $ui-color-white;
-        border: 1px solid $ui-color-grey87;
-        box-sizing: border-box;
-        color: $ui-color-grey13;
-        font-family: $ui-font-family-common;
-        font-size: 13px;
-        line-height: 16px;
+  .app {
+    width: 360px;
+    margin: 0 auto;
+    position: relative;
+    background: $ui-color-white;
+    border: 1px solid $ui-color-grey87;
+    box-sizing: border-box;
+    color: $ui-color-grey13;
+    font-family: $ui-font-family-common;
+    font-size: 13px;
+    line-height: 16px;
 
-        // @include onBreakpoint("s") {
-        //   width: 320px;
-        // }
+    // @include onBreakpoint("s") {
+    //   width: 320px;
+    // }
 
-        &__loading {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: rgba(255, 255, 255, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        &__message {
-            padding: 20px;
-
-            p {
-                margin: 10px 0;
-            }
-        }
-
-        &__footer {
-            padding: 0 20px 20px;
-        }
+    &__loading {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255, 255, 255, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
     }
 
-    .app-head {
-        height: 30px;
-        position: relative;
+    &__message {
+      padding: 20px;
 
-        &__locale-changer {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-
-            &._modal {
-                right: 60px;
-                top: 18px;
-            }
-        }
+      p {
+        margin: 10px 0;
+      }
     }
+
+    &__footer {
+      padding: 0 20px 20px;
+    }
+  }
+
+  .app-head {
+    height: 30px;
+    position: relative;
+
+    &__locale-changer {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+
+      &._modal {
+        right: 60px;
+        top: 18px;
+      }
+    }
+  }
 </style>
 
 
 <style lang="scss">
-    body {
-        margin: 0;
+  body {
+    margin: 0;
 
-        &.inside-iframe {
-            overflow: hidden;
-        }
+    &.inside-iframe {
+      overflow: hidden;
     }
+  }
 
-    * {
-        box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h5 {
-        margin: 0;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h5 {
+    margin: 0;
+  }
 
-    p {
-        margin: 0;
-    }
+  p {
+    margin: 0;
+  }
 
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>

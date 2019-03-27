@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 510 510" >
+  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 510 510">
     <g id="check-circle-outline">
       <path d="M150.45,206.55l-35.7,35.7L229.5,357l255-255l-35.7-35.7L229.5,285.6L150.45,206.55z
       M459,255c0,112.2-91.8,204-204,204

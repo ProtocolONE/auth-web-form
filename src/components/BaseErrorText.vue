@@ -28,10 +28,10 @@ export default {
 </template>
 
 <style lang="scss">
-.base-error-text {
-  font-size: 12px;
-  line-height: 13px;
-  color: $ui-color-red;
-  margin-top: 5px;
-}
+  .base-error-text {
+    font-size: 12px;
+    line-height: 13px;
+    color: $ui-color-red;
+    margin-top: 5px;
+  }
 </style>

@@ -37,20 +37,20 @@ export default {
 </template>
 
 <style lang="scss">
-.userinfo-view {
-  padding: 20px;
+  .userinfo-view {
+    padding: 20px;
 
-  p {
-    margin: 10px 0;
+    p {
+      margin: 10px 0;
+    }
   }
-}
 </style>
 
 <i18n>
-{
+  {
   "ru": {
   },
   "en": {
   }
-}
+  }
 </i18n>

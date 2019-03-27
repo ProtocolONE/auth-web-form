@@ -41,48 +41,48 @@ export default {
 </script>
 
 <template>
-    <div class="auth-form">
-        <base-header level="3">Войти используя аккаунт</base-header>
-        <p>{{previousLogin}}</p>
-        <form @submit.prevent="submitAutoLoginForm">
-            <div class="auth-form__row">
-                <base-error-text v-if="authError">Ошибка авторизации {{authError}}</base-error-text>
-            </div>
-            <div class="auth-form__controls">
-                <base-button type="submit">
-                    {{ $t('submitButtonText') }}
-                </base-button>
-            </div>
+  <div class="auth-form">
+    <base-header level="3">Войти используя аккаунт</base-header>
+    <p>{{previousLogin}}</p>
+    <form @submit.prevent="submitAutoLoginForm">
+      <div class="auth-form__row">
+        <base-error-text v-if="authError">Ошибка авторизации {{authError}}</base-error-text>
+      </div>
+      <div class="auth-form__controls">
+        <base-button type="submit">
+          {{ $t('submitButtonText') }}
+        </base-button>
+      </div>
 
-        </form>
-    </div>
+    </form>
+  </div>
 </template>
 
 <style lang="scss">
-    .auth-form {
-        padding: 20px;
-        position: relative;
+  .auth-form {
+    padding: 20px;
+    position: relative;
 
-        form {
-            margin: 0;
-        }
-
-        &__row {
-            margin-bottom: 12px;
-        }
-
-        &__controls {
-        }
+    form {
+      margin: 0;
     }
+
+    &__row {
+      margin-bottom: 12px;
+    }
+
+    &__controls {
+    }
+  }
 </style>
 
 <i18n>
-    {
-    "ru": {
-    "submitButtonText": "Войти"
-    },
-    "en": {
-    "submitButtonText": "Sign in"
-    }
-    }
+  {
+  "ru": {
+  "submitButtonText": "Войти"
+  },
+  "en": {
+  "submitButtonText": "Sign in"
+  }
+  }
 </i18n>

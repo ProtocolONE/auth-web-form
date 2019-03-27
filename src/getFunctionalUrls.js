@@ -7,5 +7,7 @@ export default function getFunctionalUrls(apiUrl = 'https://auth1.tst.protocol.o
     apiSocialAuthUrl: `${apiUrl}/authorize`,
     apiSocialAuthLinkUrl: `${apiUrl}/authorize/link`,
     apiLogoutUrl: `${apiUrl}/oauth2/logout`,
+    apiChangePasswordStart: `${apiUrl}/dbconnections/change_password`,
+    apiChangePasswordVerify: `${apiUrl}/dbconnections/change_password/verify`,
   };
 }
