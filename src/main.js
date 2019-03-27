@@ -45,10 +45,10 @@ function getLanguage() {
 async function mountApp(formData = {}, options = {}) {
   let mode = 'login';
   assert(document.querySelector('#auth-form'), 'Define "#auth-form" element in the document');
-  if (formData.success === undefined && options.action !== 'change_password') {
+  if (formData.success === undefined && options.action !== 'changePassword') {
     assert(formData.challenge, 'Login challenge in required at mountApp');
   }
-  if (options.action === 'change_password') {
+  if (options.action === 'changePassword') {
     assert(formData.clientId, 'Client ID in required at mountApp');
   }
 
@@ -63,7 +63,7 @@ async function mountApp(formData = {}, options = {}) {
   }
 
   if (window.AUTH_CHANGE_PASSWORD !== undefined) {
-    mode = 'change_password';
+    mode = 'changePassword';
   }
   await store.dispatch('initState', {
     formData,

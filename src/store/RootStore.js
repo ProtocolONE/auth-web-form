@@ -74,7 +74,7 @@ export default new Vuex.Store({
         assert(challenge, 'challenge is undefined at RootStore');
         assert(csrf, 'csrf is undefined at RootStore');
       }
-      if (options.mode === 'change_password') {
+      if (options.mode === 'changePassword') {
         const { clientId } = formData;
         assert(clientId, 'clientId is undefined at RootStore');
       }
