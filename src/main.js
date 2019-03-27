@@ -6,12 +6,18 @@
 import Vue from 'vue';
 import assert from 'assert';
 import './plugins/vuelidate';
+import axios from 'axios';
 import App from './App.vue';
 import store from './store/RootStore';
 import i18n from './i18n';
 import { postMessage, receiveMessages } from './postMessage';
 import './globalComponents';
 import './vueExtentions';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = '_csrf';
+axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+
 
 // if (process.env.NODE_ENV === 'production') {
 //   Sentry.init({
