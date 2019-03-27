@@ -41,9 +41,6 @@ export default new Vuex.Store({
     challenge(state, value) {
       state.challenge = value;
     },
-    csrf(state, value) {
-      state.csrf = value;
-    },
     clientId(state, value) {
       state.clientId = value;
     },
@@ -70,16 +67,14 @@ export default new Vuex.Store({
   actions: {
     initState({ commit }, { formData, options }) {
       if (formData.success === undefined && options.mode === 'login') {
-        const { challenge, csrf } = formData;
+        const { challenge } = formData;
         assert(challenge, 'challenge is undefined at RootStore');
-        assert(csrf, 'csrf is undefined at RootStore');
       }
       if (options.mode === 'changePassword') {
         const { clientId } = formData;
         assert(clientId, 'clientId is undefined at RootStore');
       }
       commit('challenge', formData.challenge);
-      commit('csrf', formData.csrf);
       commit('clientId', formData.clientId);
       commit('previousLogin', formData.previousLogin);
       commit('isModal', options.isModal);

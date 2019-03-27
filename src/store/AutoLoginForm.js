@@ -18,7 +18,6 @@ export default {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
-          csrf: rootState.csrf,
           previousLogin: rootState.previousLogin,
         });
         commit('authError', '');

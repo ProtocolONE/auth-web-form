@@ -67,7 +67,6 @@ export default {
             state.openedWindow.close();
             axios.post(rootGetters.urls.apiLoginUrl, {
               challenge: rootState.challenge,
-              csrf: rootState.csrf,
               token,
             }).then((response) => { window.location.href = response.data.url; });
           },

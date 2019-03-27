@@ -24,13 +24,11 @@ export default {
           email: username,
           password,
           remember: (remember === '1'),
-          csrf: rootState.csrf,
         });
         commit('registerError', '');
         window.location.href = data.url;
       } catch (error) {
         if (error.response) {
-          rootState.csrf = error.response.data.csrf;
           commit('registerError', error.response.data.error_message);
         }
       }
