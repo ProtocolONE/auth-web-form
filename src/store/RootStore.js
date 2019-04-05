@@ -27,6 +27,7 @@ export default new Vuex.Store({
     isModal: false,
     apiUrl: undefined,
     previousLogin: '',
+    socialProviders: [],
     mode: 'login',
   },
   getters: {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     previousLogin(state, value) {
       state.previousLogin = value;
+    },
+    socialProviders(state, value) {
+      state.socialProviders = value;
     },
     mode(state, value) {
       state.mode = value;
@@ -77,6 +81,7 @@ export default new Vuex.Store({
       commit('challenge', formData.challenge);
       commit('clientId', formData.clientId);
       commit('previousLogin', formData.previousLogin);
+      commit('socialProviders', formData.socialProviders);
       commit('isModal', options.isModal);
       commit('apiUrl', options.apiUrl);
       commit('mode', options.mode);

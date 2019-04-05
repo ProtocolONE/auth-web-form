@@ -4,33 +4,8 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'SocialProviderAuth',
 
-  data() {
-    return {
-      items: [
-        {
-          text: 'Facebook',
-          connection: 'facebook',
-        },
-        {
-          text: 'Google',
-          connection: 'google',
-        },
-        {
-          text: 'Twitch',
-          connection: 'twitch',
-        },
-        {
-          text: 'VK',
-          connection: 'vk',
-        },
-      ],
-      profilesLinkingPassword: '',
-      profilesLinkingAction: 'link',
-    };
-  },
-
   computed: {
-    ...mapState('SocialAuth', ['stage', 'token', 'email', 'errorMessage']),
+    ...mapState('SocialAuth', ['stage', 'token', 'email', 'errorMessage', 'socialProviders']),
   },
 
   watch: {
@@ -67,8 +42,8 @@ export default {
   <div class="social-provider-auth">
     <div v-if="stage === 'initial'">
       <base-header level="3">Авторизироваться через соцсети</base-header>
-      <div v-for="item in items" :key="item.value">
-        <a href="#" @click="beginSocialAuth(item)">{{item.text}}</a>
+      <div v-for="item in socialProviders" :key="item.key">
+        <a href="#" @click="beginSocialAuth(item)">{{item.name}}</a>
       </div>
     </div>
 

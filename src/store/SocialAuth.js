@@ -15,6 +15,7 @@ export default {
     email: '',
     errorMessage: false,
     openedWindow: null,
+    socialProviders: [],
   },
 
   mutations: {
@@ -37,11 +38,15 @@ export default {
     openedWindow(state, value) {
       state.openedWindow = value;
     },
+    socialProviders(state, value) {
+      state.socialProviders = value;
+    },
   },
   actions: {
     initState({
       rootGetters, rootState, state, commit,
     }) {
+      commit('socialProviders', rootState.socialProviders);
       receiveMessages(
         'P1_AUTH_BACKEND',
         {
@@ -76,11 +81,11 @@ export default {
 
     beginSocialAuth({
       commit, rootState, rootGetters,
-    }, { connection }) {
+    }, { key }) {
       commit('errorMessage', '');
 
       const params = qs.stringify({
-        connection,
+        key,
         client_id: rootState.clientId,
         redirect_uri: rootState.redirectUri,
       });

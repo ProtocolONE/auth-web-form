@@ -26,7 +26,7 @@ export default {
       isLoginAuthFormVisible: true,
       isAutoLoginFormVisible: false,
       isRegisterFormVisible: false,
-      isSocialAuthFormVisible: true,
+      isSocialAuthFormVisible: false,
       isChangePasswordVisible: false,
     };
   },
@@ -37,6 +37,7 @@ export default {
       'isLoading',
       'previousLogin',
       'mode',
+      'socialProviders',
     ]),
   },
 
@@ -69,11 +70,12 @@ export default {
       this.isLoginAuthFormVisible = false;
       this.isSocialAuthFormVisible = false;
       this.isAutoLoginFormVisible = true;
-    }
-    if (this.mode === 'changePassword') {
+    } else if (this.mode === 'changePassword') {
       this.isLoginAuthFormVisible = false;
       this.isSocialAuthFormVisible = false;
       this.isChangePasswordVisible = true;
+    } else {
+      this.isSocialAuthFormVisible = this.socialProviders.length > 0;
     }
   },
 
@@ -94,7 +96,7 @@ export default {
 
     goAuth() {
       this.isLoginAuthFormVisible = true;
-      this.isSocialAuthFormVisible = true;
+      this.isSocialAuthFormVisible = this.socialProviders.length > 0;
       this.isRegisterFormVisible = false;
       this.isAutoLoginFormVisible = false;
     },
