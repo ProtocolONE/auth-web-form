@@ -85,7 +85,7 @@ export default {
       commit('errorMessage', '');
 
       const params = qs.stringify({
-        key,
+        connection: key,
         client_id: rootState.clientId,
         redirect_uri: rootState.redirectUri,
       });
