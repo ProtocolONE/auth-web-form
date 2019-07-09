@@ -1,25 +1,15 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
-  extends: [
-    'plugin:vue/essential',
-    '@vue/airbnb',
-  ],
-  settings: {
-    webpack: {
-      config: require.resolve('@vue/cli-service/webpack.config.js'),
-    },
-  },
+  extends: ['plugin:vue/essential', '@vue/standard'],
   rules: {
+    'brace-style': ['error', 'stroustrup'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-param-reassign': ['error', { ignorePropertyModificationsFor: ['state'] }],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
-    allowImportExportEverywhere: true,
-  },
-};
+    parser: 'babel-eslint'
+  }
+}

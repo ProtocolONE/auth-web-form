@@ -1,0 +1,20 @@
+.text-sm
+  font-size: 1.2rem
+
+.text-center
+  text-align: center
+
+.text-lower
+  text-transform: lowercase
+
+.text-field .input:focus ~ .label, .input:not(:focus):not(._empty) ~ .label,
+.text-field .error
+  font-size: 1.2rem !important
+
+.text-field .error
+  padding: 5px
+  color: $white !important
+  line-height: 1.4em
+  background-color: $negative
+  border_solid(1px, '', $negative)
+  border_radius(3px)

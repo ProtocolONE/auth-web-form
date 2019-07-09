@@ -1,36 +1,39 @@
-# ProtocolONE Auth Web Form
+# auth-web-form
 
-## Usage
-### Library URLs
-#### Hub with 
-https://static.protocol.one/minio/auth/
+## Project setup
+```
+yarn install
+```
 
-#### Dev version
-https://static.protocol.one/auth/form/dev/auth-web-form.js
-Updates automatically with `master` branch updates
-
-## Development
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
-### Compiles and minifies into single js-file
+### Compiles and minifies for production
 ```
-npm run build
-```
-
-### Like `run build` but with dist file size analysis
-```
-npm run check-size
+yarn build
 ```
 
-### Run tests
+### Run your tests
 ```
-npm run test
+yarn test
 ```
 
-### Run tests for development in watch mode 
+### Lints and fixes files
 ```
-npm run test:dev
+yarn lint
 ```
+
+### Run your end-to-end tests
+```
+yarn test:e2e
+```
+
+### Run your unit tests
+```
+yarn test:unit
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

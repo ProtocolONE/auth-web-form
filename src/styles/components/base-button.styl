@@ -1,0 +1,22 @@
+add_focus($color)
+  &:focus
+    outline: 2px solid rgba($color, 0.5)
+    opacity: .9
+
+.base-button
+  all: unset
+
+  padding: 15px 100px
+  font-size: 2.5rem
+  font-weight: 600
+  line-height: 3.1rem
+  letter-spacing: 0.004rem
+  text-transform: uppercase
+  cursor: pointer
+
+  border_radius(10px)
+
+  &--primary
+    color: $white
+    background-color: $info
+    add_focus($info)

@@ -1,9 +1,15 @@
 module.exports = {
   presets: [
-    '@vue/app',
+    '@vue/app'
   ],
-  // This somehow fixes jest --coverage brakedown
-  env: {
-    test: {},
-  },
-};
+
+  plugins: [
+    ['transform-imports', {
+      'lodash-es': {
+        // eslint-disable-next-line no-template-curly-in-string
+        'transform': 'lodash-es/${member}',
+        'preventFullImport': true
+      }
+    }]
+  ]
+}

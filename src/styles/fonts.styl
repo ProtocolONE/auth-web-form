@@ -1,0 +1,13 @@
+font_list = ('bold' 600) ('medium' 500) ('regular' 400)
+
+for font_data in font_list
+  $woff2_src = 'fonts/quicksand/quicksand-' + font_data[0] + '-webfont.woff2'
+  $woff_src  = 'fonts/quicksand/quicksand-' + font_data[0] + '-webfont.woff'
+  $weight    = font_data[1]
+
+  @font-face
+    font-family: Quicksand
+    font-style: normal
+    font-weight: $weight
+    src: url($woff2_src) format('woff2'),
+         url($woff_src) format('woff')

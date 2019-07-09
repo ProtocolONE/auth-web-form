@@ -1,0 +1,11 @@
+border_solid($size, $rest...)
+  $position = $rest[0]
+  $color    = $rest[1] or rgba($accent, .4)
+
+  if $position
+    border-{$position}: $size solid $color
+  else
+    border: $size solid $color
+
+border_radius($r)
+  border-radius: $r

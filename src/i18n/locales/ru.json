@@ -1,0 +1,24 @@
+{
+  "sign_in": "Войти",
+  "sign_up": "Зарегистрироваться",
+  "username": "Имя пользователя",
+  "email": "Email",
+  "password": "Пароль",
+  "reset_password": "Сбросить пароль",
+  "remember_me": "Запомнить меня",
+  "i_read_and_accept": "Я прочитал и принимаю",
+  "user_agreement": "Пользовательское Соглашение",
+  "login_without_password": "Войти без пароля",
+  "or": "Или",
+  "more_sign_in_methods": "Показать больше",
+  "less_sign_in_methods": "Скрыть",
+  "terms_of_use": "Условия использования",
+  "privacy_policy": "Политика конфиденциальности",
+  "errors": {
+    "email_required": "Требуется электронная почта",
+    "enter_correct_email": "Введите правильный адрес электронной почты",
+    "user_not_found": "Пользователь не найден",
+    "password_required": "Требуется пароль",
+    "password_validate_message": "Не менее 8 символов в длину. Должны содержать: строчные буквы (a-z), прописные буквы (A-Z), цифры (0-9)"
+  }
+}
