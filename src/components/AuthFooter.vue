@@ -6,8 +6,14 @@
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
-  name: 'AuthFooter'
+  name: 'AuthFooter',
+
+  components: {
+    BaseButton
+  }
 }
 </script>
 

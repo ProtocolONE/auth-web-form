@@ -2,7 +2,7 @@
 <div class="sign text-center">
   <ul class="sign-list">
     <li v-for="social in 5" :key="social" class="sign-list__item">
-      <base-button class="sign-list__link" :to="`#${social}`"/>
+      <base-button class="sign-list__link" :href="`#${social}`"/>
     </li>
   </ul>
 
@@ -10,7 +10,7 @@
     <div v-show="showMore" class="sign-accordion">
       <ul class="sign-list">
         <li v-for="social in 8" :key="social" class="sign-list__item">
-          <base-button class="sign-list__link" :to="`#${social}`"/>
+          <base-button class="sign-list__link" :href="`#${social}`"/>
         </li>
       </ul>
     </div>
@@ -25,8 +25,14 @@
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
   name: 'AuthSignList',
+
+  components: {
+    BaseButton
+  },
 
   data () {
     return {

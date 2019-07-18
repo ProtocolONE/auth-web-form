@@ -17,8 +17,6 @@ export default {
   name: 'BaseButton',
 
   props: {
-    // --- router-link[to]
-    to: [String, Object],
     // --- a[href]
     href: String,
     // --- element text
@@ -38,16 +36,11 @@ export default {
     },
 
     tagName () {
-      if (this.to) return 'router-link'
-      else if (this.href) return 'a'
-      else return 'button'
+      return (this.href) ? 'a' : 'button'
     },
 
     className () {
-      let prefix = 'button'
-      if (this.to || this.href) {
-        prefix = 'link'
-      }
+      let prefix = (this.href) ? 'link' : 'button'
       return [`base-${prefix}`, `base-${prefix}--${this.color}`]
     }
   },

@@ -1,21 +1,28 @@
 const path = require('path')
-const webpack = require('webpack')
+const IS_AUTH = Boolean(process.env.AUTH)
 
 module.exports = {
   lintOnSave: false,
 
+  css: {
+    extract: false,
+    loaderOptions: {
+      stylus: {
+        import: [
+          path.resolve(__dirname, 'src/styl/variables.styl'),
+          path.resolve(__dirname, 'src/styl/mixins.styl')
+        ]
+      }
+    }
+  },
+
+  chainWebpack: cfg => {
+    // if (!IS_PROD && !IS_AUTH) return
+  },
+
   configureWebpack: {
-    plugins: [
-      new webpack.LoaderOptionsPlugin({
-        options: {
-          stylus: {
-            import: [
-              path.resolve(__dirname, 'src/styles/variables.styl'),
-              path.resolve(__dirname, 'src/styles/mixins.styl')
-            ]
-          }
-        }
-      })
-    ]
+    optimization: {
+      splitChunks: false
+    }
   }
 }

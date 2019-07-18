@@ -3,19 +3,19 @@
   <form id="login-form" class="login-form" @submit.prevent="handleSubmit">
     <h2 class="base-title text-center">{{ $t('sign_in') }}</h2>
     <ui-text-field
-        v-model="email"
-        :label="$t('email')"
-        :has-error="errors.email"
-        :error-text="errorMessages.email"
-        type="email"
-        @blur="validateEmail"/>
+      v-model="email"
+      :label="$t('email')"
+      :has-error="errors.email"
+      :error-text="errorMessages.email"
+      type="email"
+      @blur="validateEmail"/>
     <ui-text-field
-        v-model="password"
-        :label="$t('password')"
-        :has-error="errors.password"
-        :error-text="errorMessages.password"
-        type="password"
-        @blur="validatePassword"/>
+      v-model="password"
+      :label="$t('password')"
+      :has-error="errors.password"
+      :error-text="errorMessages.password"
+      type="password"
+      @blur="validatePassword"/>
     <label class="login-form__ck">
       <ui-checkbox v-model="rememberMe"/>
       <span class="ck-label">{{ $t('remember_me') }}</span>
@@ -24,8 +24,8 @@
   </form>
 
   <div class="sign-options">
-    <base-button :to="{ name: 'sign-up' }" :label="$t('sign_up')"/>
-    <base-button :to="{ name: 'reset-password' }" :label="$t('reset_password')"/>
+    <base-button href="#sign-up" :label="$t('sign_up')"/>
+    <base-button href="#reset-password" :label="$t('reset_password')"/>
   </div>
 
   <div class="social-divider">
@@ -39,17 +39,19 @@
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
 import AuthSignList from '@/components/AuthSignList'
 
 import { UiTextField, UiCheckbox } from '@protocol-one/ui-kit'
 import { pickBy, identity, isEmpty } from 'lodash-es'
 
-import patterns from '@/patterns'
+import patterns from '../patterns'
 
 export default {
   name: 'ViewLogin',
 
   components: {
+    BaseButton,
     AuthSignList,
     UiTextField,
     UiCheckbox

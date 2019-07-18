@@ -1,11 +1,11 @@
 <template>
 <div class="auth">
   <auth-header class="auth__header"/>
-  <!-- TODO: add route transition -->
+  <!-- TODO: add page transition -->
   <main class="auth__content">
-    <transition name="router-..." mode="out-in">
+    <transition name="page-..." mode="out-in">
       <keep-alive>
-        <router-view :id="routeName" :key="routeKey"/>
+        <slot/>
       </keep-alive>
     </transition>
   </main>
