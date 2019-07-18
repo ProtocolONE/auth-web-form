@@ -2,7 +2,7 @@
   "name": "@protocol-one/auth-web-form",
   "license": "Apache-2.0",
   "author": "Boris Butenko <iamborisbutenko@gmail.com>",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "publish:npm": "yarn build-bundle && npm publish"
+    "publish:npm": "yarn build:bundle && npm publish"
   },
   "dependencies": {
     "@protocol-one/auth-web-form": "^0.0.8",
