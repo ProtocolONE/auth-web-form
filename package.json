@@ -1,15 +1,19 @@
 {
-  "name": "auth-web-form",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@protocol-one/auth-web-form",
+  "license": "Apache-2.0",
+  "author": "Boris Butenko <iamborisbutenko@gmail.com>",
+  "version": "0.0.9",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "AUTH=true vue-cli-service build --target lib --name auth-web-form 'src/AuthWebForm.vue'",
+    "build": "vue-cli-service build",
+    "build:bundle": "vue-cli-service build --target lib --name auth-web-form 'src/AuthWebForm.vue'",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "publish:npm": "yarn build-bundle && npm publish"
   },
   "dependencies": {
+    "@protocol-one/auth-web-form": "^0.0.8",
     "@protocol-one/ui-kit": "^1.25.2",
     "core-js": "^2.6.5",
     "lodash-es": "^4.17.11",
@@ -36,5 +40,13 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ProtocolONE/auth-web-form.git"
+  },
+  "main": "index.js",
+  "files": [
+    "dist/*"
+  ]
 }

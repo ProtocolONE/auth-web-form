@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import AuthWebForm from '@/AuthWebForm'
-// import AuthWebForm from '../dist/auth-web-form.umd.min'
+// import AuthWebForm from '@/AuthWebForm'
+import AuthWebForm from '@protocol-one/auth-web-form'
 
 export default {
   name: 'AuthExample',

@@ -1,5 +1,5 @@
 <template>
-<auth-layout id="auth-web-form">
+<auth-layout id="auth-web-form" class="auth-web-form">
   <component
       :id="stepId"
       :is="step"
@@ -9,9 +9,11 @@
 
 <script>
 import AuthLayout from '@/layouts/Auth'
-import initI18n from '@/i18n'
+import Login from '@/views/Login'
 
+import initI18n from '@/i18n'
 import storage from '@/storage'
+
 import { uniqueId } from 'lodash-es'
 
 const STEP_STORAGE_NAME = 'step'
@@ -24,7 +26,7 @@ export default {
 
   components: {
     AuthLayout,
-    Login: () => import('@/views/Login')
+    Login
   },
 
   computed: {
@@ -48,31 +50,7 @@ export default {
 <style lang="stylus" src="./styl/index.styl"></style>
 
 <style lang="stylus" scoped>
-flex_centered()
-  display: flex
-  align-items: center
-
-.auth
-  display: grid
-  height: 100%
-  grid-row-gap: 70px
-  grid-template-columns: 1fr
-  grid-template-rows: 150px 1fr 130px
-  grid-template-areas: 'header' 'content' 'footer'
-
-  &__header
-    grid-area: header
-    flex_centered()
-    border_solid(3px, 'bottom')
-
-  &__content
-    display: flex
-    justify-content: center
-    width: 100%
-    grid-area: content
-
-  &__footer
-    grid-area: footer
-    flex_centered()
-    border_solid(3px, 'top')
+.auth-web-form
+  font-family: Quicksand, sans-serif
+  font-weight: 500
 </style>
