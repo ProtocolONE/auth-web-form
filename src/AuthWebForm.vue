@@ -1,5 +1,5 @@
 <template>
-<auth-layout id="auth-web-form" class="auth-web-form">
+<auth-layout id="auth-web-form" class="auth-web-form" :title="title">
   <component
       :id="stepId"
       :is="step"
@@ -27,6 +27,13 @@ export default {
   components: {
     AuthLayout,
     Login
+  },
+
+  props: {
+    title: {
+      type: String,
+      default: 'Protocol One'
+    }
   },
 
   computed: {

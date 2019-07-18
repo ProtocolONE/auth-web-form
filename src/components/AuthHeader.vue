@@ -18,10 +18,7 @@ export default {
   },
 
   props: {
-    title: {
-      type: String,
-      default: 'Protocol One'
-    }
+    title: String
   }
 }
 </script>

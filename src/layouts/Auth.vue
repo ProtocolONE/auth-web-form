@@ -1,6 +1,6 @@
 <template>
 <div class="auth">
-  <auth-header class="auth__header"/>
+  <auth-header class="auth__header" :title="title"/>
   <!-- TODO: add page transition -->
   <main class="auth__content">
     <transition name="page-..." mode="out-in">
@@ -25,6 +25,10 @@ export default {
   components: {
     AuthHeader,
     AuthFooter
+  },
+
+  props: {
+    title: String
   },
 
   computed: {
