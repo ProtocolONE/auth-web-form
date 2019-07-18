@@ -6,7 +6,7 @@ import { locale } from '@/i18n'
 
 describe('AuthExample', function () {
   let wrapper = factory(Vue.extend(AuthExample))
-  let locales = wrapper.vm.$i18n.availableLocales
+  // let locales = wrapper.vm.$i18n.availableLocales
 
   it('Check than default locale is correctly', () => {
     expect(locale).toBe(wrapper.vm.$i18n.locale)

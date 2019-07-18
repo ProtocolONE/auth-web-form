@@ -1,5 +1,5 @@
-import factory from './utils/components-factory'
-import AuthLangSwitcher from '@/components/AuthLangSwitcher'
+// import factory from './utils/components-factory'
+// import AuthLangSwitcher from '@/components/AuthLangSwitcher'
 
 describe('AuthSignList', function () {
   // let wrapper = factory(AuthLangSwitcher)

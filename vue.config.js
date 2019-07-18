@@ -1,5 +1,5 @@
 const path = require('path')
-const IS_AUTH = Boolean(process.env.AUTH)
+// const IS_AUTH = Boolean(process.env.AUTH)
 
 module.exports = {
   lintOnSave: false,
