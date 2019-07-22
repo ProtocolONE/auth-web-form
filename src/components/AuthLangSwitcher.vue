@@ -23,6 +23,10 @@ export default {
 
   components: {
     UiLangButton
+  },
+
+  created () {
+    console.log(this.locales)
   }
 }
 </script>

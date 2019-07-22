@@ -30,7 +30,7 @@ export default {
       locale: this.locale,
       locales: LOCALES_LIST,
       updateStep: this.updateStep,
-      changeLocale: this.changeLocale
+      changeLocale: this.handleChangeLocale
     }
   },
 
