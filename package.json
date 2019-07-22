@@ -2,7 +2,7 @@
   "name": "@protocol-one/auth-web-form",
   "license": "Apache-2.0",
   "author": "Boris Butenko <iamborisbutenko@gmail.com>",
-  "version": "0.0.10",
+  "version": "0.0.20",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -18,7 +18,6 @@
     "core-js": "^2.6.5",
     "lodash-es": "^4.17.11",
     "vue": "^2.6.10",
-    "vue-i18n": "^8.12.0",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },

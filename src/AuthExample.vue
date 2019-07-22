@@ -1,6 +1,6 @@
 <template>
-<div id="auth-example">
-  <auth-web-form title="Cord launcher"/>
+<div id="auth-example" class="auth-example">
+  <auth-web-form title="Example title"/>
 </div>
 </template>
 
@@ -16,3 +16,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.auth-example
+  height: 100%
+</style>

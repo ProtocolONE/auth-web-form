@@ -1,9 +1,10 @@
 <template>
 <div class="text-sm">
   <ul class="list">
-    <li v-for="lang in $i18n.availableLocales" :key="lang" class="list__item">
+    <li v-for="lang in locales" :key="lang" class="list__item">
       <ui-lang-button
-          :class="{ _selected: $i18n.locale === lang }"
+          class="list__link"
+          :class="{ _selected: $authLocale === lang }"
           @click.native="changeLocale(lang)">
         {{ lang }}
       </ui-lang-button>
@@ -18,15 +19,10 @@ import { UiLangButton } from '@protocol-one/ui-kit'
 export default {
   name: 'AuthLangSwitcher',
 
+  inject: ['locales', 'changeLocale'],
+
   components: {
     UiLangButton
-  },
-
-  methods: {
-    changeLocale (locale) {
-      if (this.$i18n.locale === locale) return
-      this.$i18n.locale = locale
-    }
   }
 }
 </script>
@@ -42,6 +38,15 @@ export default {
   &__item
     text-transform: uppercase
 
-    &:not(:last-child)
-      margin-right: 10px
+  &__link
+    border: 0
+
+    &._selected
+      color: $info
+
+      &::after
+        background-color: $info
+
+      &:hover
+        cursor: default
 </style>

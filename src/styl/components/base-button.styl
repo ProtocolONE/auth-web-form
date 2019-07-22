@@ -1,17 +1,25 @@
+add_hover($color)
+  &:hover
+    background-color: rgba($info, 0.95)
+    box-shadow: 0 4px 16px rgba($info, 0.95)
+
 add_focus($color)
   &:focus
-    outline: 2px solid rgba($color, 0.5)
+    outline: none
     opacity: .9
 
-.base-button
-  all: unset
+add_active()
+  &:active
+    box-shadow: none
 
-  padding: 15px 100px
-  font-size: 25px
-  font-weight: 600
+.base-button
+  padding: 15px 0
+  font-size: 24px
+  font-weight: 700
   line-height: 31px
   letter-spacing: 0.4px
   text-transform: uppercase
+  border: none
   cursor: pointer
 
   border_radius(10px)
@@ -19,4 +27,7 @@ add_focus($color)
   &--primary
     color: $white
     background-color: $info
+    add_hover($info)
     add_focus($info)
+    add_active()
+

@@ -1,7 +1,7 @@
 <template>
 <footer class="auth-footer text-sm">
-  <base-button class="auth-footer__btn" href="#terms" :label="$t('terms_of_use')"/>
-  <base-button class="auth-footer__btn" href="#policy" :label="$t('privacy_policy')"/>
+  <base-button class="auth-footer__btn" href="#terms" :label="$authTrans('terms_of_use')"/>
+  <base-button class="auth-footer__btn" href="#policy" :label="$authTrans('privacy_policy')"/>
 </footer>
 </template>
 

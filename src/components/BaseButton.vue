@@ -11,10 +11,15 @@
 </template>
 
 <script>
+import { UiButton } from '@protocol-one/ui-kit'
 import { omit } from 'lodash-es'
 
 export default {
   name: 'BaseButton',
+
+  components: {
+    UiButton
+  },
 
   props: {
     // --- a[href]

@@ -13,12 +13,10 @@ import AuthLangSwitcher from '@/components/AuthLangSwitcher'
 export default {
   name: 'AuthHeader',
 
+  inject: ['title'],
+
   components: {
     AuthLangSwitcher
-  },
-
-  props: {
-    title: String
   }
 }
 </script>

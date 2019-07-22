@@ -1,9 +1,8 @@
 <template>
 <div class="auth">
-  <auth-header class="auth__header" :title="title"/>
-  <!-- TODO: add page transition -->
+  <auth-header class="auth__header"/>
   <main class="auth__content">
-    <transition name="page-..." mode="out-in">
+    <transition name="fade" mode="out-in">
       <keep-alive>
         <slot/>
       </keep-alive>
@@ -17,29 +16,12 @@
 import AuthHeader from '@/components/AuthHeader'
 import AuthFooter from '@/components/AuthFooter'
 
-import { uniqueId } from 'lodash-es'
-
 export default {
   name: 'LayoutAuth',
 
   components: {
     AuthHeader,
     AuthFooter
-  },
-
-  props: {
-    title: String
-  },
-
-  computed: {
-    routeName () {
-      return this.$route.name
-    },
-
-    routeKey () {
-      let id = uniqueId()
-      return `${this.routeName}-${id}`
-    }
   }
 }
 </script>
@@ -52,10 +34,11 @@ flex_centered()
 .auth
   display: grid
   height: 100%
-  grid-row-gap: 70px
+  grid-row-gap: 15px
   grid-template-columns: 1fr
   grid-template-rows: 150px 1fr 130px
   grid-template-areas: 'header' 'content' 'footer'
+  overflow: hidden
 
   &__header
     grid-area: header
@@ -64,9 +47,11 @@ flex_centered()
 
   &__content
     display: flex
+    padding: 55px 0
     justify-content: center
     width: 100%
     grid-area: content
+    overflow: auto
 
   &__footer
     grid-area: footer

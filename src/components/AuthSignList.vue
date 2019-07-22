@@ -1,5 +1,11 @@
 <template>
 <div class="sign text-center">
+  <div v-if="divider" class="sign-divider">
+    <hr class="sign-divider__hr">
+    <span class="sign-divider__label text-lower">{{ dividerLabel || $authTrans('or') }}</span>
+    <hr class="sign-divider__hr">
+  </div>
+
   <ul class="sign-list">
     <li v-for="social in 5" :key="social" class="sign-list__item">
       <base-button class="sign-list__link" :href="`#${social}`"/>
@@ -34,6 +40,14 @@ export default {
     BaseButton
   },
 
+  props: {
+    divider: {
+      type: Boolean,
+      default: true
+    },
+    dividerLabel: String
+  },
+
   data () {
     return {
       showMore: false
@@ -43,8 +57,8 @@ export default {
   computed: {
     accordionLabel () {
       return (this.showMore)
-        ? `- ${this.$t('less_sign_in_methods')}`
-        : `+ ${this.$t('more_sign_in_methods')}`
+        ? `- ${this.$authTrans('less_sign_in_methods')}`
+        : `+ ${this.$authTrans('more_sign_in_methods')}`
     }
   },
 
@@ -82,4 +96,20 @@ export default {
 
 .sign-accordion
   margin-top: 12px
+
+.sign-divider
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin: 30px 0 20px
+
+  &__hr
+    height: 1px
+    margin: 0
+    flex-grow: 1
+    border: 0
+    background-color: rgba($accent, .5)
+
+  &__label
+    margin: 0 15px
 </style>

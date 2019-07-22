@@ -17,7 +17,7 @@ module.exports = {
   },
 
   chainWebpack: cfg => {
-    // if (!IS_PROD && !IS_AUTH) return
+
   },
 
   configureWebpack: {

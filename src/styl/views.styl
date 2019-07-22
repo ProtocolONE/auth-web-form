@@ -1,0 +1,30 @@
+.view
+  &__form
+    display: flex
+    flex-direction: column
+    width: 300px
+
+.form
+  &__ck
+    display: flex
+    align-items: center
+    margin: 24px 0 12px
+    cursor: pointer
+
+  &__btn
+    margin: 24px 0
+
+  &__sign-options
+    display: flex
+    justify-content: space-between
+
+.ck
+  &__label
+    margin-left: 10px
+
+  .input + .label
+    border-width: 1px
+    border_radius(4px)
+
+  &--error .input + .label
+    border-color: $negative
