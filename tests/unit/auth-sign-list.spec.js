@@ -1,5 +1,5 @@
-import factory from './utils/components-factory'
-import isVisible from './utils/is-visible'
+// import factory from './utils/components-factory'
+// import isVisible from './utils/is-visible'
 
 // import AuthSignList from '@/components/AuthSignList'
 
