@@ -5,9 +5,17 @@
       :label="$authTrans('password')"
       :has-error="hasError"
       :error-text="errorText"
-      type="password"
+      :type="passwordType"
       @focus="toggleTooltip(true)"
       @blur="validate"/>
+  <base-button href="#" class="password__toggle" @click.prevent="togglePasswordState">
+    <transition name="fade" mode="out-in">
+      <i v-show="!showPassword" class="password__icon"></i>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <i v-show="showPassword" class="password__icon password__icon--closed"></i>
+    </transition>
+  </base-button>
   <transition v-if="registration" name="fade">
     <div v-show="showTooltip" class="password__tooltip">
       <b class="password__title">{{ tooltip.title }}</b>
@@ -19,6 +27,7 @@
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
 import { UiTextField } from '@protocol-one/ui-kit'
 import patterns from '@/patterns'
 
@@ -26,6 +35,7 @@ export default {
   name: 'AuthPasswordField',
 
   components: {
+    BaseButton,
     UiTextField
   },
 
@@ -41,6 +51,7 @@ export default {
     return {
       form: null,
       hasError: false,
+      showPassword: false,
       showTooltip: false
     }
   },
@@ -53,6 +64,10 @@ export default {
       set (value) {
         this.$emit('input', value)
       }
+    },
+
+    passwordType () {
+      return (this.showPassword) ? 'text' : 'password'
     },
 
     wrongValue () {
@@ -111,6 +126,10 @@ export default {
   },
 
   methods: {
+    togglePasswordState () {
+      this.showPassword = !this.showPassword
+    },
+
     toggleTooltip (value) {
       this.showTooltip = value
     },
@@ -128,6 +147,25 @@ export default {
 .password
   position: relative
   width: 100%
+
+  &__toggle
+    position: absolute
+    top: 32px
+    right: 0
+    width: 16px
+    height: 16px
+
+  &__icon
+    position: absolute
+    top: 0
+    right: 0
+    display: inline-block
+    width: 100%
+    height: 100%
+    background: url(../icons/eye.png) no-repeat center
+
+    &--closed
+      background: url(../icons/eye-closed.png) no-repeat center
 
   &__tooltip
     position: absolute
