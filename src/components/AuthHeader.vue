@@ -26,4 +26,8 @@ export default {
   display: flex
   align-items: center
   justify-content: space-between
+
+  .auth-web-form--desktop &
+    .base-title
+      font-size: 12px
 </style>

@@ -8,7 +8,7 @@
       :type="passwordType"
       @focus="toggleTooltip(true)"
       @blur="validate"/>
-  <base-button href="#" class="password__toggle" @click.prevent="togglePasswordState">
+  <base-button v-if="registration" href="#" class="password__toggle" @click.prevent="togglePasswordState">
     <transition name="fade" mode="out-in">
       <i v-show="!showPassword" class="password__icon"></i>
     </transition>
