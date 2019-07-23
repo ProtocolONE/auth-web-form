@@ -1,14 +1,24 @@
-.text-field .input:focus ~ .label, .input:not(:focus):not(._empty) ~ .label,
-.text-field .error
-  font-size: 12px !important
+.text-field
+  .input ~ .label
+    color: $secondary
 
-.text-field .error
-  position: static
-  margin-top: 5px
-  margin-bottom: -24px
-  padding: 5px
-  color: $white !important
-  line-height: 1.4em
-  background-color: $negative
-  border_solid(1px, '', $negative)
-  border_radius(3px)
+  .input:focus
+    border-color: $positive
+    ~ .label
+      color: $secondary
+
+  .input:focus ~ .label,
+  .input:not(:focus):not(._empty) ~ .label,
+  .error
+    font-size: 12px !important
+
+  .error
+    position: static
+    margin-top: 5px
+    margin-bottom: -24px
+    padding: 5px
+    color: $white !important
+    line-height: 1.4em
+    background-color: $negative
+    border_solid(1px, '', $negative)
+    border_radius(3px)
