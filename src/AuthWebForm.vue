@@ -1,5 +1,5 @@
 <template>
-<auth-layout id="auth-web-form" class="auth-web-form">
+<auth-layout id="auth-web-form" :class="['auth-web-form', `auth-web-form--${$authLocale}`]">
   <component :id="step" :is="step" :key="step"/>
 </auth-layout>
 </template>
