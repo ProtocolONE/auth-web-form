@@ -34,7 +34,6 @@ flex_centered()
 .auth
   display: grid
   height: 100%
-  grid-row-gap: 15px
   grid-template-columns: 1fr
   grid-template-rows: 150px 1fr 130px
   grid-template-areas: 'header' 'content' 'footer'
@@ -61,14 +60,20 @@ flex_centered()
     overflow: auto
 
   &.auth-web-form--mobile
-    grid-template-rows: 60px 1fr 60px
+    display: flex
+    flex-direction: column
+    min-height: 60vh
+    max-height: 100%
 
   .auth-web-form--mobile &
     &__header,
     &__footer
+      height: 60px
       border: none
 
     &__footer
+      justify-content: space-between
+      margin-top: auto
       background-color: rgba($black, 0.08)
 
     &__content

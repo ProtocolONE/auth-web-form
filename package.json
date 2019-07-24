@@ -2,7 +2,7 @@
   "name": "@protocol-one/auth-web-form",
   "license": "Apache-2.0",
   "author": "Boris Butenko <iamborisbutenko@gmail.com>",
-  "version": "0.0.27",
+  "version": "0.0.32",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

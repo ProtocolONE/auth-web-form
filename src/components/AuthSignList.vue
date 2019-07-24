@@ -7,7 +7,7 @@
   </div>
 
   <ul class="sign-list">
-    <li v-for="social in 5" :key="social" class="sign-list__item">
+    <li v-for="social in dummyCount" :key="social" class="sign-list__item">
       <base-button class="sign-list__link" :href="`#${social}`"/>
     </li>
   </ul>
@@ -57,6 +57,13 @@ export default {
   },
 
   computed: {
+    dummyCount () {
+      if (this.screen.resolution === 'mobile') {
+        return 4
+      }
+      return 5
+    },
+
     accordionLabel () {
       return (this.showMore)
         ? `- ${this.$authTrans('less_sign_in_methods')}`
@@ -73,16 +80,19 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.sign
+  display: flex
+  flex-direction: column
+
 .sign-list
   display: grid
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+  grid-template-columns: 50px 50px 50px 50px 50px
   grid-gap: 12px
-  margin: 0
+  margin: 0 auto
   padding: 0
   list-style-type: none
 
   &__item
-    width: 50px
     height: 50px
     background-color: $warning
     border_radius(10px)
@@ -92,12 +102,15 @@ export default {
     width: 100%
     height: 100%
 
+  .auth-web-form--mobile &
+    grid-template-columns: 50px 50px 50px 50px
+
 .sign-toggle
   display: inline-block
   margin: 20px 0
 
 .sign-accordion
-  margin-top: 12px
+  margin: 12px auto 0
 
 .sign-divider
   display: flex
