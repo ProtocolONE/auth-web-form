@@ -100,6 +100,9 @@ export default {
       if (this.mobile || this.screen.width <= 600) {
         return 'mobile'
       }
+      else if (this.screen.width <= 1024) {
+        return 'tablet'
+      }
       return 'desktop'
     }
   },

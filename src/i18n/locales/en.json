@@ -27,6 +27,6 @@
     "enter_correct_email": "Enter correct email",
     "you_should_accept_user_agreement": "You should accept User Agreement",
     "password_required": "Password required",
-    "password_validate_message": "At least 8 characters in length. Should contain: lower case letters (a-z), upper case letters (A-Z), numbers (0-9)"
+    "password_validate_message": "At least 8 characters in length. Should contain: lower case letters (a-z), upper case letters (A-Z), numbers (0-9). Without spaces."
   }
 }

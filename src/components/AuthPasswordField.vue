@@ -177,6 +177,13 @@ export default {
     box-shadow: 0 4px 20px rgba($black, 0.1);
     border_radius(12px)
 
+    .auth-web-form--tablet &,
+    .auth-web-form--mobile &
+      top: auto
+      right: auto
+      bottom: 100%
+      left: 0
+
   &__title
     font-weight: 500
 
