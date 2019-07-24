@@ -1,7 +1,7 @@
 <template>
 <section class="view view--registration">
+  <h2 class="base-title text-center mt-none">{{ $authTrans('sign_up') }}</h2>
   <form id="registration-form" class="view__form form" @submit.prevent="handleSubmit">
-    <h2 class="base-title text-center mt-none">{{ $authTrans('sign_up') }}</h2>
     <ui-text-field
         v-model="username"
         :label="$authTrans('username')"

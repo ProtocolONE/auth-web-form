@@ -35,8 +35,26 @@ export default {
   name: 'AuthWebForm',
 
   provide () {
+    let screen = {}
+
+    Object.defineProperties(screen, {
+      resolution: {
+        enumerable: true,
+        get: () => this.screenResolution
+      },
+      width: {
+        enumerable: true,
+        get: () => this.screen.width
+      },
+      height: {
+        enumerable: true,
+        get: () => this.screen.height
+      }
+    })
+
     return {
-      screen: this.screen,
+      screen,
+      closable: this.closable,
       title: this.title,
       locale: this.locale,
       locales: LOCALES_LIST,
@@ -61,6 +79,10 @@ export default {
       default: storage.get(LOCALE_STORAGE_NAME) || locale
     },
     mobile: {
+      type: Boolean,
+      default: false
+    },
+    closable: {
       type: Boolean,
       default: false
     }
@@ -91,10 +113,12 @@ export default {
 
   created () {
     window.addEventListener('resize', this.checkScreenSize, false)
+    window.addEventListener('orientationchange', this.checkScreenSize, false)
   },
 
   destroyed () {
     window.removeEventListener('resize', this.checkScreenSize, false)
+    window.removeEventListener('orientationchange', this.checkScreenSize, false)
   },
 
   methods: {
@@ -116,17 +140,26 @@ export default {
   }
 }
 </script>
-../
+
 <style lang="stylus" src="@/styl/index.styl"></style>
 
 <style lang="stylus" scoped>
 .auth-web-form
   max-height: 100vh
-  padding: 0 15px
   background-color: $white
   font-family: 'Quicksand', sans-serif
   font-weight: 500
 
   &--mobile
     border_radius(12px)
+
+  ::-webkit-scrollbar
+    width: 0.45em
+
+  ::-webkit-scrollbar-thumb
+    background-color: $secondary
+    outline: 1px solid $accent
+
+  ::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba($secondary, 0.6)
 </style>

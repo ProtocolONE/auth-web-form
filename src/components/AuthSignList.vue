@@ -36,6 +36,8 @@ import BaseButton from '@/components/BaseButton'
 export default {
   name: 'AuthSignList',
 
+  inject: ['screen'],
+
   components: {
     BaseButton
   },

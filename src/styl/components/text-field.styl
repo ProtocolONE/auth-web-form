@@ -1,11 +1,17 @@
 .text-field
-  .input ~ .label
-    color: $secondary
 
-  .input:focus
-    border-color: $positive
+  .input
+    font-size: 15px
+
     ~ .label
+      font-size: 15px
       color: $secondary
+
+    &:focus
+      border-color: $positive
+
+      ~ .label
+        color: $secondary
 
   .input:focus ~ .label,
   .input:not(:focus):not(._empty) ~ .label,

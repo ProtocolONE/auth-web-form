@@ -40,21 +40,38 @@ flex_centered()
   grid-template-areas: 'header' 'content' 'footer'
   overflow: hidden
 
+  &__header,
+  &__footer
+    flex_centered()
+    padding: 0 20px
+
   &__header
     grid-area: header
-    flex_centered()
     border_solid(3px, 'bottom')
-
-  &__content
-    display: flex
-    padding: 55px 0
-    justify-content: center
-    width: 100%
-    grid-area: content
-    overflow: auto
 
   &__footer
     grid-area: footer
-    flex_centered()
     border_solid(3px, 'top')
+
+  &__content
+    display: flex
+    justify-content: center
+    grid-area: content
+    padding: 55px 20px
+    overflow: auto
+
+  &.auth-web-form--mobile
+    grid-template-rows: 60px 1fr 60px
+
+  .auth-web-form--mobile &
+    &__header,
+    &__footer
+      border: none
+
+    &__footer
+      background-color: rgba($black, 0.08)
+
+    &__content
+      padding-top: 0
+      padding-bottom: 0
 </style>

@@ -1,7 +1,7 @@
 <template>
 <section class="view view--login">
+  <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
   <form id="login-form" class="view__form form" @submit.prevent="handleSubmit">
-    <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
     <ui-text-field
         v-model="email"
         :label="$authTrans('email')"
