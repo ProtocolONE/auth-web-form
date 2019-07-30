@@ -2,16 +2,21 @@
 <section class="view view--login">
   <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
   <form id="login-form" class="view__form form" @submit.prevent="handleSubmit">
-    <ui-text-field
-      v-model="email"
-      :label="$authTrans('email')"
-      :has-error="errors.email"
-      :error-text="errorMessages.email"
-      type="email"
-      @blur="validateEmail"/>
+    {{ email }}
+    <input v-model="email" type="text">
+
+    <base-input v-model="email"/>
+
+<!--    <ui-text-field-->
+<!--        v-model="email"-->
+<!--        :label="$authTrans('email')"-->
+<!--        :has-error="errors.email"-->
+<!--        :error-text="errorMessages.email"-->
+<!--        type="email"-->
+<!--        @blur="validateEmail"/>-->
     <password-field
-      v-model="password"
-      @validate="validatePassword"/>
+        v-model="password"
+        @validate="validatePassword"/>
     <label class="form__ck ck">
       <ui-checkbox v-model="remember"/>
       <span class="ck__label">{{ $authTrans('remember_me') }}</span>
@@ -29,6 +34,7 @@
 </template>
 
 <script>
+import BaseInput from '@/components/BaseInput'
 import BaseButton from '@/components/BaseButton'
 import PasswordField from '@/components/PasswordField'
 import SignList from '@/components/SignList'
@@ -42,6 +48,7 @@ export default {
   name: 'ViewLogin',
 
   components: {
+    BaseInput,
     BaseButton,
     PasswordField,
     SignList,
@@ -91,6 +98,10 @@ export default {
   },
 
   methods: {
+    handleChange (name) {
+      console.log(name)
+    },
+
     validateEmail () {
       this.errors.email = !this.email || this.wrongEmail
     },
@@ -105,6 +116,8 @@ export default {
     },
 
     handleSubmit () {
+      console.log(this.formData)
+
       this.validateEmail()
       this.validatePassword()
 

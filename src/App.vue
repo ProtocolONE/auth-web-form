@@ -42,6 +42,8 @@ const URLS = {
   login: `${window.AUTH_API_URL}/oauth2/login`
 }
 
+console.log('init!')
+
 export default {
   name: 'BaseApp',
 

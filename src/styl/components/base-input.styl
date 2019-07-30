@@ -1,0 +1,63 @@
+$field_height = 32px
+$field_padding = 24px
+
+transform_text()
+  width: 50%
+  transform: translateY(-24px) scale(0.875, 0.875)
+
+.input
+  position: relative
+  display: inline-block
+  width: 100%
+  margin: 0
+  padding: $field_padding 0
+
+  &__label
+    position: absolute
+    top: $field_padding
+    left: 0
+    width: 100%
+    overflow: hidden
+    transform-origin: left
+    font-size: 0.75em
+    color: $secondary
+    line-height: $field_height
+    text-overflow: ellipsis
+    white-space: nowrap
+    transition: transform 0.2s linear, color 0.2s linear, width 0.2s linear
+
+  &__error
+    position: absolute
+    display: block
+    top: calc(100% - 20px)
+    color: $negative
+
+  &--error
+    border-color: $negative
+
+    .input-field:focus ~ .input__label
+      color: $negative
+
+  &:not(&--empty):not(.input-field:focus) ~ .input__label
+    color: $accent
+    transform_text()
+
+.input-field
+  width: 100%
+  height: $field_height
+  background-color: $white
+  border-width: 0
+  border-bottom-width: 1px
+  border-color: $accent
+  outline: none
+  color: $primary
+  line-height: $field_height
+  transition: border-color 0.2s linear
+
+  &:focus
+    border-color: $positive
+
+    ~ .input__label
+      color: $positive
+      pointer-events: auto
+      transform_text()
