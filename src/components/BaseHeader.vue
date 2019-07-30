@@ -19,7 +19,7 @@ import LangSwitcher from '@/components/LangSwitcher'
 export default {
   name: 'BaseHeader',
 
-  inject: ['screen', 'closable', 'title'],
+  inject: ['screen', 'title'],
 
   components: {
     BaseButton,
