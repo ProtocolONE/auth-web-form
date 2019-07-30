@@ -90,7 +90,7 @@ export default {
     locale: {
       type: String,
       default: storage.get(LOCALE_STORAGE_NAME) || locale
-    },
+    }
   },
 
   data () {
@@ -167,20 +167,21 @@ export default {
       })
     },
 
-    async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password, remember }) {
+    async authoriseWithLogin ({ commit, rootState, rootGetters }, { username, password, remember }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
           connection: 'password',
           email: username,
           password,
-          remember: (remember === '1'),
-        });
-        commit('authError', '');
-        window.location.href = data.url;
-      } catch (error) {
+          remember: (remember === '1')
+        })
+        commit('authError', '')
+        window.location.href = data.url
+      }
+      catch (error) {
         if (error.response) {
-          commit('authError', error.response.data.error_message);
+          commit('authError', error.response.data.error_message)
         }
       }
     }

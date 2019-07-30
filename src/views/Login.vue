@@ -39,7 +39,7 @@ import BaseButton from '@/components/BaseButton'
 import PasswordField from '@/components/PasswordField'
 import SignList from '@/components/SignList'
 
-import { UiTextField, UiCheckbox } from '@protocol-one/ui-kit'
+import { UiCheckbox } from '@protocol-one/ui-kit'
 
 import patterns from '@/utils/patterns'
 import { pickBy, identity, isEmpty } from 'lodash-es'
@@ -52,7 +52,6 @@ export default {
     BaseButton,
     PasswordField,
     SignList,
-    UiTextField,
     UiCheckbox
   },
 
