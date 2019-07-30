@@ -1,5 +1,5 @@
 const path = require('path')
-// const IS_AUTH = Boolean(process.env.AUTH)
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   lintOnSave: false,
@@ -16,13 +16,12 @@ module.exports = {
     }
   },
 
-  chainWebpack: cfg => {
-
-  },
-
   configureWebpack: {
     optimization: {
       splitChunks: false
-    }
+    },
+    plugins: [
+      new Dotenv()
+    ]
   }
 }

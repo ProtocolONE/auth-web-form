@@ -6,7 +6,10 @@
       `auth-web-form--${$authLocale}`,
       `auth-web-form--${screenResolution}`
     ]">
-  <component :id="step" :is="step" :key="step"/>
+  <component
+      :id="step"
+      :is="step"
+      :key="step"/>
 </auth-layout>
 </template>
 
@@ -14,6 +17,8 @@
 import AuthLayout from '@/layouts/Auth'
 import Login from '@/views/Login'
 import Registration from '@/views/Registration'
+
+import Auth from '@/auth'
 
 import storage from '@/storage'
 import eventBus from '@/event-bus'
@@ -54,6 +59,7 @@ export default {
 
     return {
       screen,
+      auth: null,
       closable: this.closable,
       title: this.title,
       locale: this.locale,
@@ -117,6 +123,14 @@ export default {
   created () {
     window.addEventListener('resize', this.checkScreenSize, false)
     window.addEventListener('orientationchange', this.checkScreenSize, false)
+
+    this.auth = new Auth({
+      clientID: '5d3a26b697b0b2007a11df76',
+      scope: 'openid,offline',
+      urls: {
+        redirect: 'http://localhost:3000/callback'
+      }
+    })
   },
 
   destroyed () {

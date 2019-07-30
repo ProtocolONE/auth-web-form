@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import { get } from 'lodash-es'
 
 import ru from '@/i18n/locales/ru'
 import en from '@/i18n/locales/en'
 
-import eventBus from '@/utils/event-bus'
+import eventBus from '@/event-bus'
+
+import { get } from 'lodash-es'
 
 const LOCALES = { en, ru }
 const EVENT_NAME = 'auth:change-locale'

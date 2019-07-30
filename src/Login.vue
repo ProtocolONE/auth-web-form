@@ -1,60 +1,64 @@
 <template>
-<section class="view view--login">
-  <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
-  <form id="login-form" class="view__form form" @submit.prevent="handleSubmit">
-    <ui-text-field
+<base-layout>
+  <section class="view view--login">
+    <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
+    <form id="login-form" class="view__form form" @submit.prevent="handleSubmit">
+      <ui-text-field
         v-model="email"
         :label="$authTrans('email')"
         :has-error="errors.email"
         :error-text="errorMessages.email"
         type="email"
         @blur="validateEmail"/>
-    <auth-password-field
+      <password-field
         v-model="password"
         @validate="validatePassword"/>
-    <label class="form__ck ck">
-      <ui-checkbox v-model="rememberMe"/>
-      <span class="ck__label">{{ $authTrans('remember_me') }}</span>
-    </label>
-    <base-button class="form__btn" :label="$authTrans('sign_in')" type="submit"/>
-  </form>
+      <label class="form__ck ck">
+        <ui-checkbox v-model="remember"/>
+        <span class="ck__label">{{ $authTrans('remember_me') }}</span>
+      </label>
+      <base-button class="form__btn" :label="$authTrans('sign_in')" type="submit"/>
+    </form>
 
-  <div class="form__sign-options">
-    <base-button href="#sign-up" :label="$authTrans('sign_up')" @click.prevent="updateStep('registration')"/>
-    <base-button href="#reset-password" :label="$authTrans('reset_password')"/>
-  </div>
+    <div class="form__sign-options">
+      <base-button href="#sign-up" :label="$authTrans('sign_up')"/>
+      <base-button href="#reset-password" :label="$authTrans('reset_password')"/>
+    </div>
 
-  <auth-sign-list/>
-</section>
+    <sign-list/>
+  </section>
+</base-layout>
 </template>
 
 <script>
+import BaseLayout from '@/components/BaseLayout'
 import BaseButton from '@/components/BaseButton'
-import AuthPasswordField from '@/components/AuthPasswordField'
-import AuthSignList from '@/components/AuthSignList'
+import PasswordField from '@/components/PasswordField'
+import SignList from '@/components/SignList'
+
 import { UiTextField, UiCheckbox } from '@protocol-one/ui-kit'
 
-import patterns from '@/patterns'
+import patterns from '@/utils/patterns'
 import { pickBy, identity, isEmpty } from 'lodash-es'
 
 export default {
   name: 'ViewLogin',
 
-  inject: ['updateStep'],
-
   components: {
+    BaseLayout,
     BaseButton,
-    AuthPasswordField,
-    AuthSignList,
+    PasswordField,
+    SignList,
     UiTextField,
     UiCheckbox
   },
 
   data () {
     return {
+      loading: true,
       email: '',
       password: '',
-      rememberMe: true,
+      remember: true,
       errors: {
         email: false,
         password: false
@@ -86,9 +90,15 @@ export default {
       return {
         email: this.email,
         password: this.password,
-        rememberMe: this.rememberMe
+        remember: this.remember
       }
     }
+  },
+
+  mounted () {
+    setTimeout(() => {
+      this.loading = false
+    }, 500)
   },
 
   methods: {
@@ -113,8 +123,7 @@ export default {
       let hasErrors = !isEmpty(pickedErrors)
 
       if (!hasErrors) {
-        console.log('login!')
-        console.log(this.formData)
+        // TODO: login
       }
     }
   }

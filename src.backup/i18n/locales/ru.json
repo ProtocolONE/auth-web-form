@@ -1,0 +1,32 @@
+{
+  "sign_in": "Войти",
+  "sign_up": "Зарегистрироваться",
+  "username": "Имя пользователя",
+  "email": "Электронная почта",
+  "password": "Пароль",
+  "reset_password": "Сбросить пароль",
+  "remember_me": "Запомнить меня",
+  "i_read_and_accept": "Я прочитал и принимаю",
+  "user_agreement": "Пользовательское Соглашение",
+  "login_without_password": "Войти без пароля",
+  "or": "Или",
+  "more_sign_in_methods": "Показать больше",
+  "less_sign_in_methods": "Скрыть",
+  "terms_of_use": "Условия использования",
+  "privacy_policy": "Политика конфиденциальности",
+  "enter_password": "Введите пароль",
+  "password_is_too_short": "Пароль слишком короткий",
+  "password_is_too_short_message": "Используйте не менее 9 символов",
+  "unreliable_password": "Ненадежный пароль",
+  "unreliable_password_message": "Используйте заглавные и строчные буквы, десятичные цифры",
+  "secure_password": "Безопасный пароль",
+  "errors": {
+    "username_required": "Требуется имя пользователя",
+    "username_validate_message": "Не менее 3 символов в длину и не более 16. Может содержать: строчные буквы (a-z), цифры (0-9), дефисы (-), подчеркивания (_)",
+    "email_required": "Требуется электронная почта",
+    "enter_correct_email": "Введите правильный адрес электронной почты",
+    "you_should_accept_user_agreement": "Вы должны принять пользовательское соглашение",
+    "password_required": "Требуется пароль",
+    "password_validate_message": "Не менее 8 символов в длину. Должны содержать: строчные буквы (a-z), цифры (0-9). Без пробелов."
+  }
+}

@@ -1,0 +1,20 @@
+/* --- fade --- */
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 0.2s linear
+
+.fade-enter,
+.fade-leave-active
+  opacity: 0
+
+/* --- accordion --- */
+.accordion-enter-active,
+.accordion-leave-active
+  height: 100px
+  overflow: hidden
+  transition: height 0.2s linear, opacity 0.2s linear
+
+.accordion-enter,
+.accordion-leave-to
+  height: 0
+  opacity: 0
