@@ -39,7 +39,7 @@ const LOCALE_STORAGE_NAME = 'locale'
 const LOCALES_LIST = keys(locales)
 
 const URLS = {
-  login: `${process.env.AUTH_WEB_SDK_ISSUER}/oauth2/login`
+  login: `${window.AUTH_API_URL}/oauth2/login`
 }
 
 export default {

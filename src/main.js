@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import App from '@/App'
+import Example from '@/Example'
 
 Vue.config.productionTip = false
 
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(Example)
 })
