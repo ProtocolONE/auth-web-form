@@ -2,9 +2,9 @@
 <div class="password">
   <ui-text-field
       v-model="model"
-      :label="$authTrans('password')"
-      :has-error="hasError"
-      :error-text="errorText"
+      :label="$t('password')"
+      :has-error="serverErrors.password || hasError"
+      :error-text="serverErrors.password || errorText"
       :type="passwordType"
       @focus="toggleTooltip(true)"
       @blur="validate"/>
@@ -29,6 +29,7 @@
 <script>
 import BaseButton from '@/components/BaseButton'
 import { UiTextField } from '@protocol-one/ui-kit'
+import { mapState } from 'vuex'
 
 import patterns from '@/utils/patterns'
 
@@ -58,6 +59,8 @@ export default {
   },
 
   computed: {
+    ...mapState(['serverErrors']),
+
     model: {
       get () {
         return this.value
@@ -80,34 +83,34 @@ export default {
 
     errorText () {
       if (!this.value || !this.registration) {
-        return this.$authTrans('errors.password_required')
+        return this.$t('errors.password_required')
       }
-      return this.$authTrans('errors.password_validate_message')
+      return this.$t('errors.password_validate_message')
     },
 
     tooltip () {
       if (!this.value) {
         return {
-          title: this.$authTrans('enter_password'),
+          title: this.$t('enter_password'),
           progressClass: 'password__progress--hidden'
         }
       }
       else if (this.value.length < 9) {
         return {
-          title: this.$authTrans('password_is_too_short'),
-          text: this.$authTrans('password_is_too_short_message'),
+          title: this.$t('password_is_too_short'),
+          text: this.$t('password_is_too_short_message'),
           progressClass: 'password__progress--short'
         }
       }
       else if (this.wrongValue) {
         return {
-          title: this.$authTrans('unreliable_password'),
-          text: this.$authTrans('unreliable_password_message'),
+          title: this.$t('unreliable_password'),
+          text: this.$t('unreliable_password_message'),
           progressClass: 'password__progress--unreliable'
         }
       }
       return {
-        title: this.$authTrans('secure_password'),
+        title: this.$t('secure_password'),
         progressClass: 'password__progress--secure'
       }
     }

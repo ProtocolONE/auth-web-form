@@ -1,38 +1,38 @@
 <template>
 <section class="view view--registration">
-  <h2 class="base-title text-center mt-none">{{ $authTrans('sign_up') }}</h2>
+  <h2 class="base-title text-center mt-none">{{ $t('sign_up') }}</h2>
   <form id="registration-form" class="view__form form" @submit.prevent="handleSubmit">
     <ui-text-field
-      v-model="username"
-      :label="$authTrans('username')"
-      :has-error="errors.username"
-      :error-text="errorMessages.username"
-      @blur="validateUsername"/>
+        v-model="username"
+        :label="$t('username')"
+        :has-error="serverErrors.username || errors.username"
+        :error-text="serverErrors.username || errorMessages.username"
+        @blur="validateUsername"/>
     <ui-text-field
-      v-model="email"
-      :label="$authTrans('email')"
-      :has-error="errors.email"
-      :error-text="errorMessages.email"
-      type="email"
-      @blur="validateEmail"/>
+        v-model="email"
+        :label="$t('email')"
+        :has-error="serverErrors.email || errors.email"
+        :error-text="serverErrors.email || errorMessages.email"
+        type="email"
+        @blur="validateEmail"/>
     <password-field
-      v-model="password"
-      registration
-      @validate="validatePassword"/>
+        v-model="password"
+        registration
+        @validate="validatePassword"/>
     <label class="form__ck ck" :class="{ 'ck--error': errors.accept }">
       <ui-checkbox v-model="acceptUserAgreement" @change="validateAcceptUserAgreement"/>
       <span class="ck__label">
-      {{ $authTrans('i_read_and_accept') }}
-      <base-button href="#user-agreement" :label="$authTrans('user_agreement')"/>
-    </span>
+        {{ $t('i_read_and_accept') }}
+        <base-button href="#user-agreement" :label="$t('user_agreement')"/>
+      </span>
     </label>
     <base-error v-show="errors.accept" :label="errorMessages.accept"/>
-    <base-button class="form__btn" :label="$authTrans('sign_up')" type="submit"/>
+    <base-button class="form__btn" :label="$t('sign_up')" type="submit"/>
   </form>
 
   <div class="form__sign-options">
-    <base-button href="#sign-up" :label="$authTrans('sign_in')" @click.prevent="$emit('step', 'login')"/>
-    <base-button href="#login-without-password" :label="$authTrans('login_without_password')"/>
+    <base-button href="#sign-up" :label="$t('sign_in')" @click.prevent="$emit('view', 'login')"/>
+    <base-button href="#login-without-password" :label="$t('login_without_password')"/>
   </div>
 
   <sign-list/>
@@ -48,6 +48,7 @@ import SignList from '@/components/SignList'
 import { UiTextField, UiCheckbox } from '@protocol-one/ui-kit'
 
 import patterns from '@/utils/patterns'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { pickBy, identity, isEmpty } from 'lodash-es'
 
 export default {
@@ -78,11 +79,13 @@ export default {
   },
 
   computed: {
+    ...mapState(['serverErrors']),
+
     errorMessages () {
       return {
         username: this.usernameErrorMessage,
         email: this.emailErrorMessage,
-        accept: this.$authTrans('errors.you_should_accept_user_agreement')
+        accept: this.$t('errors.you_should_accept_user_agreement')
       }
     },
 
@@ -103,16 +106,16 @@ export default {
 
     usernameErrorMessage () {
       if (!this.username) {
-        return this.$authTrans('errors.username_required')
+        return this.$t('errors.username_required')
       }
-      return this.$authTrans('errors.username_validate_message')
+      return this.$t('errors.username_validate_message')
     },
 
     emailErrorMessage () {
       if (!this.email) {
-        return this.$authTrans('errors.email_required')
+        return this.$t('errors.email_required')
       }
-      return this.$authTrans('errors.enter_correct_email')
+      return this.$t('errors.enter_correct_email')
     },
 
     formData () {
@@ -126,6 +129,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['updateServerErrors']),
+    ...mapActions(['registration']),
+
     validateUsername () {
       this.errors.username = !this.username || this.wrongUsername
     },
@@ -148,6 +154,8 @@ export default {
     },
 
     handleSubmit () {
+      this.updateServerErrors()
+
       this.validateUsername()
       this.validateEmail()
       this.validatePassword()
@@ -157,8 +165,7 @@ export default {
       let hasErrors = !isEmpty(pickedErrors)
 
       if (!hasErrors) {
-        console.log('registration!')
-        console.log(this.formData)
+        this.registration(this.formData)
       }
     }
   }

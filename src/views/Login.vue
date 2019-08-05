@@ -1,57 +1,50 @@
 <template>
 <section class="view view--login">
-  <h2 class="base-title text-center mt-none">{{ $authTrans('sign_in') }}</h2>
+  <h2 class="base-title text-center mt-none">{{ $t('sign_in') }}</h2>
   <form id="login-form" class="view__form form" @submit.prevent="handleSubmit">
-    {{ email }}
-    <input v-model="email" type="text">
-
-    <base-input v-model="email"/>
-
-<!--    <ui-text-field-->
-<!--        v-model="email"-->
-<!--        :label="$authTrans('email')"-->
-<!--        :has-error="errors.email"-->
-<!--        :error-text="errorMessages.email"-->
-<!--        type="email"-->
-<!--        @blur="validateEmail"/>-->
+    <ui-text-field
+        v-model="email"
+        :label="$t('email')"
+        :has-error="serverErrors.email || errors.email"
+        :error-text="serverErrors.email || errorMessages.email"
+        type="email"
+        @blur="validateEmail"/>
     <password-field
         v-model="password"
         @validate="validatePassword"/>
     <label class="form__ck ck">
       <ui-checkbox v-model="remember"/>
-      <span class="ck__label">{{ $authTrans('remember_me') }}</span>
+      <span class="ck__label">{{ $t('remember_me') }}</span>
     </label>
-    <base-button class="form__btn" :label="$authTrans('sign_in')" type="submit"/>
+    <base-button class="form__btn" :label="$t('sign_in')" type="submit"/>
   </form>
-
   <div class="form__sign-options">
-    <base-button href="#sign-up" :label="$authTrans('sign_up')" @click.prevent="$emit('step', 'registration')"/>
-    <base-button href="#reset-password" :label="$authTrans('reset_password')"/>
+    <base-button href="#sign-up" :label="$t('sign_up')" @click.prevent="$emit('view', 'registration')"/>
+    <base-button href="#reset-password" :label="$t('reset_password')"/>
   </div>
-
   <sign-list/>
 </section>
 </template>
 
 <script>
-import BaseInput from '@/components/BaseInput'
 import BaseButton from '@/components/BaseButton'
 import PasswordField from '@/components/PasswordField'
 import SignList from '@/components/SignList'
 
-import { UiCheckbox } from '@protocol-one/ui-kit'
-
 import patterns from '@/utils/patterns'
-import { pickBy, identity, isEmpty } from 'lodash-es'
+import { mapState, mapMutations, mapActions } from 'vuex'
+
+import { UiTextField, UiCheckbox } from '@protocol-one/ui-kit'
+import { forEach, pickBy, identity, isEmpty } from 'lodash-es'
 
 export default {
   name: 'ViewLogin',
 
   components: {
-    BaseInput,
     BaseButton,
     PasswordField,
     SignList,
+    UiTextField,
     UiCheckbox
   },
 
@@ -68,10 +61,12 @@ export default {
   },
 
   computed: {
+    ...mapState(['serverErrors']),
+
     errorMessages () {
       return {
         email: this.emailErrorMessage,
-        password: this.$authTrans('errors.password_required')
+        password: this.$t('errors.password_required')
       }
     },
 
@@ -82,9 +77,9 @@ export default {
 
     emailErrorMessage () {
       if (!this.email) {
-        return this.$authTrans('errors.email_required')
+        return this.$t('errors.email_required')
       }
-      return this.$authTrans('errors.enter_correct_email')
+      return this.$t('errors.enter_correct_email')
     },
 
     formData () {
@@ -97,8 +92,13 @@ export default {
   },
 
   methods: {
-    handleChange (name) {
-      console.log(name)
+    ...mapMutations(['updateServerErrors']),
+    ...mapActions(['login']),
+
+    clearServerErrorMessages () {
+      forEach(this.serverErrorMessages, (_, key) => {
+        delete this.serverErrorMessages[key]
+      })
     },
 
     validateEmail () {
@@ -115,7 +115,7 @@ export default {
     },
 
     handleSubmit () {
-      console.log(this.formData)
+      this.updateServerErrors()
 
       this.validateEmail()
       this.validatePassword()
@@ -124,10 +124,7 @@ export default {
       let hasErrors = !isEmpty(pickedErrors)
 
       if (!hasErrors) {
-        this.$emit('auth', {
-          type: 'login',
-          data: this.formData
-        })
+        this.login(this.formData)
       }
     }
   }

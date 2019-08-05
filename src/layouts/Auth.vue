@@ -1,45 +1,61 @@
 <template>
-<div class="auth">
-  <base-header class="auth__header"/>
+<div :class="['auth', `auth--${$i18n.locale}`, `auth--${screenResolution}`]">
+  <auth-header class="auth__header"/>
   <main class="auth__content">
+    <base-error v-if="serverErrors.common" class="view view--error" :label="serverErrors.common"/>
     <transition name="fade" mode="out-in">
       <keep-alive>
         <slot/>
       </keep-alive>
     </transition>
   </main>
-  <base-footer class="auth__footer"/>
+  <auth-footer class="auth__footer"/>
 </div>
 </template>
 
 <script>
-import BaseHeader from '@/components/BaseHeader'
-import BaseFooter from '@/components/BaseFooter'
+import BaseError from '@/components/BaseError'
+
+import AuthHeader from '@/components/AuthHeader'
+import AuthFooter from '@/components/AuthFooter'
+
+import { mapState } from 'vuex'
 
 export default {
-  name: 'Layout',
+  name: 'AuthLayout',
+
+  props: {
+    screenResolution: String
+  },
 
   components: {
-    BaseHeader,
-    BaseFooter
-  }
+    BaseError,
+    AuthHeader,
+    AuthFooter
+  },
+
+  computed: mapState(['serverErrors'])
 }
 </script>
 
 <style lang="stylus" scoped>
 .auth
   display: grid
-  height: 100%
   grid-template-columns: 1fr
   grid-template-rows: 150px 1fr 130px
   grid-template-areas: 'header' 'content' 'footer'
+  height: 100%
+  max-height: 100vh
   overflow: hidden
+  background-color: $white
+  font-family: 'Quicksand', sans-serif
+  font-weight: 500
 
   &__header,
   &__footer
     display: flex
     align-items: center
-    padding: 0 20px
+    padding: 0 40px
 
   &__header
     grid-area: header
@@ -51,9 +67,11 @@ export default {
 
   &__content
     display: flex
+    flex-direction: column
+    align-items: center
     justify-content: center
     grid-area: content
-    padding: 55px 20px
+    padding: 55px 40px
     overflow: auto
 
   &.auth--mobile
@@ -61,6 +79,7 @@ export default {
     flex-direction: column
     min-height: 60vh
     max-height: 100%
+    border_radius(12px)
 
   .auth--mobile &
     &__header,
@@ -76,4 +95,14 @@ export default {
     &__content
       padding-top: 0
       padding-bottom: 0
+
+  ::-webkit-scrollbar
+    width: 0.45em
+
+  ::-webkit-scrollbar-thumb
+    background-color: $secondary
+    outline: 1px solid $accent
+
+  ::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba($secondary, 0.6)
 </style>

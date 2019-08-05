@@ -1,51 +1,25 @@
 <template>
-<auth
-  id="auth-web-form"
-  :class="[
-    `auth--${$authLocale}`,
-    `auth--${screenResolution}`]
-  ">
-  <component
-      :id="step"
-      :is="step"
-      :key="step"
-      @step="updateStep"
-      @auth="handleAuth"/>
+<auth id="auth-web-form" :screen-resolution="screenResolution">
+  <component :is="view" :key="view" @view="updateView"/>
 </auth>
 </template>
 
 <script>
 import Auth from '@/layouts/Auth'
 
-import Loading from '@/views/Loading'
 import Login from '@/views/Login'
 import Registration from '@/views/Registration'
+import Consent from '@/views/Consent'
 
-import axios from 'axios'
-import { keys, pick, merge } from 'lodash-es'
-import { locale, locales, eventName } from '@/i18n'
+import postMessage from '@/utils/post-message'
 
-import storage from '@/utils/storage'
-import eventBus from '@/utils/event-bus'
+import { mapState, mapMutations } from 'vuex'
 
-function getScreenSize () {
-  return pick(window.screen, ['width', 'height'])
-}
-
-const STEP_STORAGE_NAME = 'step'
-const STEPS = ['loading', 'login', 'registration', 'successful']
-
-const LOCALE_STORAGE_NAME = 'locale'
-const LOCALES_LIST = keys(locales)
-
-const URLS = {
-  login: `${window.AUTH_API_URL}/oauth2/login`
-}
-
-console.log('init!')
+// TODO: remove qs
+import { stringify } from 'qs'
 
 export default {
-  name: 'BaseApp',
+  name: 'AuthWebForm',
 
   provide () {
     let screen = {}
@@ -65,42 +39,25 @@ export default {
       }
     })
 
-    return {
-      screen,
-      authData: window.AUTH_FORM_DATA,
-      title: this.title,
-      locale: this.locale,
-      locales: LOCALES_LIST,
-      changeLocale: this.handleChangeLocale
-    }
+    return { screen }
   },
 
   components: {
     Auth,
-    Loading,
     Login,
-    Registration
-  },
-
-  props: {
-    title: {
-      type: String,
-      default: 'Protocol One'
-    },
-    locale: {
-      type: String,
-      default: storage.get(LOCALE_STORAGE_NAME) || locale
-    }
+    Registration,
+    Consent
   },
 
   data () {
     return {
-      screen: getScreenSize(),
-      step: storage.get(STEP_STORAGE_NAME) || STEPS[0]
+      screen: {}
     }
   },
 
   computed: {
+    ...mapState(['view']),
+
     screenResolution () {
       if (this.screen.width <= 600) {
         return 'mobile'
@@ -112,102 +69,40 @@ export default {
     }
   },
 
-  watch: {
-    locale: {
-      immediate: true,
-      handler: 'handleChangeLocale'
-    }
-  },
-
   created () {
+    postMessage('created')
     window.addEventListener('resize', this.checkScreenSize, false)
     window.addEventListener('orientationchange', this.checkScreenSize, false)
   },
 
   mounted () {
-    if (this.step === STEPS[0]) {
-      setTimeout(() => this.updateStep(STEPS[1]), 500)
+    postMessage('mounted')
+    this.checkScreenSize()
+    let data = {
+      client_id: '5d3a26b697b0b2007a11df76',
+      state: window.btoa('5d3a26b697b0b2007a11df76'),
+      redirect_uri: 'http://localhost:3000/callback',
+      scope: 'openid,offline'
     }
+    console.log(`http://localhost/login/form?${stringify(data)}`)
   },
 
   destroyed () {
+    postMessage('destroyed')
     window.removeEventListener('resize', this.checkScreenSize, false)
     window.removeEventListener('orientationchange', this.checkScreenSize, false)
   },
 
   methods: {
+    ...mapMutations(['updateView']),
+
     checkScreenSize () {
-      this.screen = getScreenSize()
-    },
-
-    updateStep (step) {
-      this.step = step
-      storage.set(STEP_STORAGE_NAME, step)
-    },
-
-    handleChangeLocale (locale) {
-      if (!LOCALES_LIST.includes(locale)) return
-      if (this.$authLocale === locale) return
-      storage.set(LOCALE_STORAGE_NAME, locale)
-      eventBus.$emit(eventName, locale)
-    },
-
-    handleAuth ({ type, data }) {
-      this.updateStep(STEPS[0])
-      this[type](URLS[type], data)
-    },
-
-    login (url, data) {
-      data = merge(data, {
-        connection: 'password',
-        challenge: this.authData.challenge
-      })
-      axios.post(url, data).then(({ data }) => {
-        window.location.href = data.url
-      })
-    },
-
-    async authoriseWithLogin ({ commit, rootState, rootGetters }, { username, password, remember }) {
-      try {
-        const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
-          challenge: rootState.challenge,
-          connection: 'password',
-          email: username,
-          password,
-          remember: (remember === '1')
-        })
-        commit('authError', '')
-        window.location.href = data.url
-      }
-      catch (error) {
-        if (error.response) {
-          commit('authError', error.response.data.error_message)
-        }
-      }
+      let { width, height } = window.getComputedStyle(this.$el)
+      this.screen = { width: parseInt(width), height: parseInt(height) }
+      postMessage('resize', { ...this.screen, screenResolution: this.screenResolution })
     }
   }
 }
 </script>
 
 <style lang="stylus" src="@/styl/index.styl"></style>
-
-<style lang="stylus" scoped>
-  .auth-web-form
-    max-height: 100vh
-    background-color: $white
-    font-family: 'Quicksand', sans-serif
-    font-weight: 500
-
-    &--mobile
-      border_radius(12px)
-
-    ::-webkit-scrollbar
-      width: 0.45em
-
-    ::-webkit-scrollbar-thumb
-      background-color: $secondary
-      outline: 1px solid $accent
-
-    ::-webkit-scrollbar-track
-      -webkit-box-shadow: inset 0 0 6px rgba($secondary, 0.6)
-</style>

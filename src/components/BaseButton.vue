@@ -1,9 +1,9 @@
 <template>
 <component
-    v-bind="props"
-    :is="tagName"
-    :class="className"
-    :aria-label="label">
+  v-bind="props"
+  :is="tagName"
+  :class="className"
+  :aria-label="label">
   <slot>
     {{ label }}
   </slot>
@@ -41,7 +41,7 @@ export default {
     },
 
     tagName () {
-      return (this.href) ? 'a' : 'button'
+      return (this.href) ? 'a' : 'ui-button'
     },
 
     className () {

@@ -1,33 +1,24 @@
 import Vue from 'vue'
-import { get } from 'lodash-es'
+import VueI18n from 'vue-i18n'
 
 import ru from '@/i18n/locales/ru'
 import en from '@/i18n/locales/en'
 
-import eventBus from '@/utils/event-bus'
-
 const LOCALES = { en, ru }
-const EVENT_NAME = 'auth:change-locale'
+const DEFAULT_LOCALE = 'en'
 
-let defaultLocale = 'en'
-let currentLocale = defaultLocale
-
+let currentLocale = DEFAULT_LOCALE
 if (navigator && navigator.language) {
   currentLocale = navigator.language.slice(0, 2)
 }
 
-Vue.prototype.$authLocale = currentLocale
-Vue.prototype.$authTrans = function (key) {
-  let path = `${this.$authLocale}.${key}`
-  return get(LOCALES, path, 'no-trans')
-}
-
-Vue.observable(Vue.prototype)
-
-eventBus.$on(EVENT_NAME, locale => {
-  Vue.prototype.$authLocale = locale
-})
+Vue.use(VueI18n)
 
 export const locale = currentLocale
 export const locales = LOCALES
-export const eventName = EVENT_NAME
+
+export default new VueI18n({
+  fallbackLocale: DEFAULT_LOCALE,
+  locale: currentLocale,
+  messages: LOCALES
+})

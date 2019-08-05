@@ -1,0 +1,51 @@
+.view
+  width: 100%
+  max-width: 320px
+
+  &__form
+    display: flex
+    flex-direction: column
+
+.form
+  margin: auto
+
+  &__ck
+    display: flex
+    align-items: center
+    margin: 24px 0 12px
+    cursor: pointer
+
+  &__btn
+    margin: 24px 0
+
+  &__sign-options
+    display: flex
+    justify-content: space-between
+
+    .auth--mobile.auth--ru &
+      flex-direction: column
+      align-items: center
+
+      .base-link:not(:last-child)
+        margin-bottom: 5px
+
+.ck
+  &__label
+    margin-left: 10px
+
+  .input + .label
+    border-width: 1px
+    border_radius(4px)
+
+    svg > path
+      stroke: $white
+
+  .input:hover + .label
+    border-color: $positive
+
+  .input:checked + .label
+    border-color: $positive !important
+    background-color: $positive !important
+
+  &--error .input + .label
+    border-color: $negative

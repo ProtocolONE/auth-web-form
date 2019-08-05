@@ -1,0 +1,32 @@
+{
+  "sign_in": "Sign in",
+  "sign_up": "Sign up",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "reset_password": "Reset password",
+  "remember_me": "Remember me",
+  "i_read_and_accept": "I read and accept",
+  "user_agreement": "User Agreement",
+  "login_without_password": "Login without password",
+  "or": "Or",
+  "more_sign_in_methods": "More sign in methods",
+  "less_sign_in_methods": "Less sign in methods",
+  "terms_of_use": "Terms of Use",
+  "privacy_policy": "Privacy Policy",
+  "enter_password": "Enter password",
+  "password_is_too_short": "Password is too short",
+  "password_is_too_short_message": "Use at least 9 symbols",
+  "unreliable_password": "Unreliable password",
+  "unreliable_password_message": "Use upper case and lower case letters, decimal digits",
+  "secure_password": "Secure password",
+  "errors": {
+    "username_required": "Username required",
+    "username_validate_message": "At least 3 characters in length and not more than 16. May contain: lower case letters (a-z), numbers (0-9), hyphens (-), underscores (_)",
+    "email_required": "Email required",
+    "enter_correct_email": "Enter correct email",
+    "you_should_accept_user_agreement": "You should accept User Agreement",
+    "password_required": "Password required",
+    "password_validate_message": "At least 8 characters in length. Should contain: lower case letters (a-z), upper case letters (A-Z), numbers (0-9). Without spaces."
+  }
+}

@@ -1,10 +1,10 @@
 <template>
 <div class="text-sm">
   <ul class="list">
-    <li v-for="lang in locales" :key="lang" class="list__item">
+    <li v-for="lang in $i18n.availableLocales" :key="lang" class="list__item">
       <ui-lang-button
           class="list__link"
-          :class="{ _selected: $authLocale === lang }"
+          :class="{ _selected: $i18n.locale === lang }"
           @click.native="changeLocale(lang)">
         {{ lang }}
       </ui-lang-button>
@@ -19,10 +19,15 @@ import { UiLangButton } from '@protocol-one/ui-kit'
 export default {
   name: 'LangSwitcher',
 
-  inject: ['locales', 'changeLocale'],
-
   components: {
     UiLangButton
+  },
+
+  methods: {
+    changeLocale (locale) {
+      if (this.$i18n.locale === locale) return
+      this.$i18n.locale = locale
+    }
   }
 }
 </script>

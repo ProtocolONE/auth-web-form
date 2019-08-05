@@ -75,4 +75,10 @@ class Auth1 extends EventEmitter {
 //
 // console.log(window.$P1_AUTH_WEB_SDK, window.$P1_AUTH_WEB_SDK.authURL)
 
-export default Auth1
+export default new Auth1({
+  clientID: '5d3a26b697b0b2007a11df76',
+  scope: 'openid,offline',
+  urls: {
+    redirect: 'http://localhost:3000/callback'
+  }
+})

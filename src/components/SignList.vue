@@ -1,12 +1,13 @@
 <template>
-<div class="sign text-center">
+<div v-if="socials.length" class="sign text-center">
   <div v-if="divider" class="sign-divider">
     <hr class="sign-divider__hr">
-    <span class="sign-divider__label text-lower">{{ dividerLabel || $authTrans('or') }}</span>
+    <span class="sign-divider__label text-lower">{{ dividerLabel || $t('or') }}</span>
     <hr class="sign-divider__hr">
   </div>
 
   <ul class="sign-list">
+    <!-- TODO: socials -->
     <li v-for="social in dummyCount" :key="social" class="sign-list__item">
       <base-button class="sign-list__link" :href="`#${social}`"/>
     </li>
@@ -32,6 +33,7 @@
 
 <script>
 import BaseButton from '@/components/BaseButton'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SignList',
@@ -57,17 +59,16 @@ export default {
   },
 
   computed: {
+    ...mapState(['socials']),
+
     dummyCount () {
-      if (this.screen.resolution === 'mobile') {
-        return 4
-      }
-      return 5
+      return (this.screen.resolution === 'mobile') ? 4 : 5
     },
 
     accordionLabel () {
       return (this.showMore)
-        ? `- ${this.$authTrans('less_sign_in_methods')}`
-        : `+ ${this.$authTrans('more_sign_in_methods')}`
+        ? `- ${this.$t('less_sign_in_methods')}`
+        : `+ ${this.$t('more_sign_in_methods')}`
     }
   },
 

@@ -13,17 +13,17 @@ add_active()
     box-shadow: none
 
 .base-button
-  padding: 15px 0
-  font-size: 1.5em
+  height: auto !important
+  padding: 15px 0 !important
+  font-size: 1.5em !important
   font-weight: 700
   font-family: inherit
-  line-height: 31px
+  line-height: 31px !important
   letter-spacing: 0.4px
   text-transform: uppercase
   border: none
-  cursor: pointer
-
-  border_radius(10px)
+  cursor: pointer !important
+  border-radius: 10px !important
 
   &--primary
     color: $white
@@ -34,8 +34,8 @@ add_active()
 
   // --- ru locale
   .auth--ru &
-    font-size: 1.4em
+    font-size: 1.4em !important
 
   .auth--mobile &
-    font-size: 1.2em
+    font-size: 1.2em !important
 

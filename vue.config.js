@@ -2,8 +2,6 @@ const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  lintOnSave: false,
-
   css: {
     extract: false,
     loaderOptions: {
@@ -17,6 +15,9 @@ module.exports = {
   },
 
   configureWebpack: {
+    output: {
+      filename: 'auth-web-form.js'
+    },
     optimization: {
       splitChunks: false
     },

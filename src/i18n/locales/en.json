@@ -1,6 +1,7 @@
 {
   "sign_in": "Sign in",
   "sign_up": "Sign up",
+  "please_select_scopes": "Please select scopes",
   "username": "Username",
   "email": "Email",
   "password": "Password",
@@ -20,6 +21,7 @@
   "unreliable_password": "Unreliable password",
   "unreliable_password_message": "Use upper case and lower case letters, decimal digits",
   "secure_password": "Secure password",
+  "accept": "Accept",
   "errors": {
     "username_required": "Username required",
     "username_validate_message": "At least 3 characters in length and not more than 16. May contain: lower case letters (a-z), numbers (0-9), hyphens (-), underscores (_)",
