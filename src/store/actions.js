@@ -5,16 +5,6 @@ axios.defaults.withCredentials = true
 axios.defaults.xsrfCookieName = '_csrf'
 axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
 
-/**
- * Handle successful ajax
- *
- * @param messageName {string} - postMessage name
- * @param data {Object} - axios response data
- */
-function handlesSuccessful (messageName, data) {
-
-}
-
 export default {
   /**
    * Handle errors ajax
