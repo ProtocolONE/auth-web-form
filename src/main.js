@@ -71,6 +71,7 @@ async function mountApp(formData = {}, options = {}) {
   if (window.AUTH_CHANGE_PASSWORD !== undefined) {
     mode = 'changePassword';
   }
+  console.log(11111, 'beforeInitStore')
   await store.dispatch('initState', {
     formData,
     options: {
@@ -97,12 +98,15 @@ receiveMessages(
   },
   {
     REQUEST_INIT_FORM(data = {}) {
+      console.log(11111, 'REQUEST_INIT_FORM')
       const { formData, options } = data;
       if (window.AUTH_LOGOUT !== undefined) {
+        console.log(11111, 'AUTH_LOGOUT', window.AUTH_LOGOUT)
         postMessage('LOGOUT_PROCESSED', window.AUTH_LOGOUT);
         return;
       }
       if (window.AUTH_CALLBACK_PAYLOAD !== undefined) {
+        console.log(11111, 'AUTH_CALLBACK_PAYLOAD', window.AUTH_CALLBACK_PAYLOAD)
         postMessage('TOKEN_RECEIVED', window.AUTH_CALLBACK_PAYLOAD);
         return;
       }
@@ -126,6 +130,7 @@ receiveMessages(
 postMessage('INITED');
 
 selfInitTimeout = setTimeout(() => {
+  console.log(11111, 'selfInit')
   mountApp(
     window.AUTH_FORM_DATA,
     {
