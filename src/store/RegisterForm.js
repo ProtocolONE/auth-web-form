@@ -17,11 +17,11 @@ export default {
   },
 
   actions: {
-    async registerWithEmail({ commit, rootState, rootGetters }, { username, password, remember }) {
+    async registerWithEmail({ commit, rootState, rootGetters }, { email, password, remember }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
-          email: username,
+          email,
           password,
           remember: (remember === '1'),
         });

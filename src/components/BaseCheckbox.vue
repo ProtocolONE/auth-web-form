@@ -52,30 +52,28 @@ export default {
 </script>
 
 <template>
-  <div class="base-text-field">
-
-    <input
-      class="base-checkbox-field"
-      v-bind="$attrs"
-      v-model="innerValue"
-      :type="type"
-      @change="onChange"
-      @focus="$emit('focus', $event), hasFocus = true"
-      @blur="$emit('blur', $event), hasFocus = false"/>
-
-  </div>
+<div class="base-text-field">
+  <input
+    class="base-checkbox-field"
+    v-bind="$attrs"
+    v-model="innerValue"
+    :type="type"
+    @change="onChange"
+    @focus="$emit('focus', $event), hasFocus = true"
+    @blur="$emit('blur', $event), hasFocus = false"/>
+</div>
 </template>
 
-<style lang="scss">
-  .base-checkbox-field {
-    width: 100%;
-    background: $ui-color-white;
-    height: 22px;
-    color: $ui-color-grey13;
-    font-size: 15px;
-    line-height: 18px;
-    padding: 0 12px;
-    border: 1px solid $ui-color-grey72;
-    transition: border-color 0.1s ease;
-  }
+<style lang="scss" scoped>
+.base-checkbox-field {
+  width: 100%;
+  background: $ui-color-white;
+  height: 22px;
+  color: $ui-color-grey13;
+  font-size: 15px;
+  line-height: 18px;
+  padding: 0 12px;
+  border: 1px solid $ui-color-grey72;
+  transition: border-color 0.1s ease;
+}
 </style>

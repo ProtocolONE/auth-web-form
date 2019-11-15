@@ -1,8 +1,8 @@
 import axios from 'axios';
+import qs from 'qs';
 import { includes } from 'lodash-es';
 import assert from 'simple-assert';
 import { receiveMessages } from '@/postMessage';
-import qs from 'qs';
 
 const ALLOWED_STAGES = ['initial', 'requestLinking', 'success'];
 

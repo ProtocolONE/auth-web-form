@@ -41,7 +41,6 @@ export default {
       password,
       repeatPassword,
     }) {
-      console.log(repeatPassword);
       try {
         await axios.post(rootGetters.urls.apiChangePasswordVerify, {
           client_id: rootState.clientId,

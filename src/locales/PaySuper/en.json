@@ -1,0 +1,11 @@
+{
+  "errorMessages": {
+    "required": "Empty field",
+    "between": "Enter value from %min% to %max%",
+    "email": "Incorrect email format",
+    "minLength": "Must be at least %min% symbols long",
+    "wrongFormatType": "Wrong value format type",
+    "hasDigits": "Must contain numbers",
+    "hasUppercase": "Must contain uppercase"
+  }
+}

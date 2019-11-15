@@ -25,30 +25,13 @@ export default {
   },
 
   watch: {
-    email() {
-      this.$emit('requestAppResize');
-    },
-    password() {
-      this.$emit('requestAppResize');
-    },
-    repeatPassword() {
-      this.$emit('requestAppResize');
-    },
-    token() {
-      this.$emit('requestAppResize');
-    },
-    changeError() {
-      this.$emit('requestAppResize');
-    },
     isTokenSent() {
       this.isChangeStartVisible = false;
       this.isChangeVerifyVisible = true;
-      this.$emit('requestAppResize');
     },
     isTokenVerified() {
       this.isChangeVerifyVisible = false;
       this.isChangeCompletedVisible = true;
-      this.$emit('requestAppResize');
     },
   },
 
@@ -56,7 +39,6 @@ export default {
     ...mapActions('ChangePassword', ['changePasswordStart', 'changePasswordVerify']),
 
     async submitChangePasswordStart() {
-      this.$emit('requestAppResize');
       this.$emit('loadingStart');
 
       await this.changePasswordStart({
@@ -65,7 +47,6 @@ export default {
       this.$emit('loadingEnd');
     },
     async submitChangePasswordVerify() {
-      this.$emit('requestAppResize');
       this.$emit('loadingStart');
 
       await this.changePasswordVerify({
@@ -89,11 +70,11 @@ export default {
             v-model="email"
             :placeholder="$t('fieldUsernameLabel')"
             :hasError="$isFieldInvalid('username')"
-            :errors="$getFieldErrorMessages('username')"
+            :errors="$getFieldErrorText('username')"
           />
         </div>
         <div class="register-form__row">
-          <base-error-text v-if="changeError">Ошибка {{changeError}}</base-error-text>
+          <BaseErrorText v-if="changeError">Ошибка {{changeError}}</BaseErrorText>
         </div>
         <div class="register-form__controls">
           <base-button type="submit">
@@ -109,7 +90,7 @@ export default {
             v-model="token"
             :placeholder="$t('fieldTokenLabel')"
             :hasError="$isFieldInvalid('token')"
-            :errors="$getFieldErrorMessages('token')"
+            :errors="$getFieldErrorText('token')"
           />
         </div>
         <div class="register-form__row">
@@ -118,7 +99,7 @@ export default {
             v-model="password"
             :placeholder="$t('fieldPasswordLabel')"
             :hasError="$isFieldInvalid('password')"
-            :errors="$getFieldErrorMessages('password')"
+            :errors="$getFieldErrorText('password')"
           />
         </div>
         <div class="register-form__row">
@@ -127,11 +108,11 @@ export default {
             v-model="repeatPassword"
             :placeholder="$t('fieldRepeatPasswordLabel')"
             :hasError="$isFieldInvalid('repeatPassword')"
-            :errors="$getFieldErrorMessages('repeatPassword')"
+            :errors="$getFieldErrorText('repeatPassword')"
           />
         </div>
         <div class="register-form__row">
-          <base-error-text v-if="changeError">Ошибка {{changeError}}</base-error-text>
+          <BaseErrorText v-if="changeError">Ошибка {{changeError}}</BaseErrorText>
         </div>
         <div class="register-form__controls">
           <base-button type="submit">
@@ -146,41 +127,41 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
-  .register-form {
-    padding: 20px;
-    position: relative;
+<style lang="scss" scoped>
+.register-form {
+  padding: 20px;
+  position: relative;
 
-    form {
-      margin: 0;
-    }
-
-    &__row {
-      margin-bottom: 12px;
-    }
-
-    &__controls {
-    }
+  form {
+    margin: 0;
   }
+
+  &__row {
+    margin-bottom: 12px;
+  }
+
+  &__controls {
+  }
+}
 </style>
 
 <i18n>
-  {
+{
   "ru": {
-  "fieldUsernameLabel": "Email",
-  "fieldPasswordLabel": "Пароль",
-  "fieldRepeatPasswordLabel": "Пароль ещё раз",
-  "fieldTokenLabel": "Код",
-  "submitSendButtonText": "Отправить код",
-  "submitVerifyButtonText": "Изменить пароль"
+    "fieldUsernameLabel": "Email",
+    "fieldPasswordLabel": "Пароль",
+    "fieldRepeatPasswordLabel": "Пароль ещё раз",
+    "fieldTokenLabel": "Код",
+    "submitSendButtonText": "Отправить код",
+    "submitVerifyButtonText": "Изменить пароль"
   },
   "en": {
-  "fieldUsernameLabel": "Email",
-  "fieldPasswordLabel": "Password",
-  "fieldRepeatPasswordLabel": "Repeat password",
-  "fieldTokenLabel": "Code",
-  "submitSendButtonText": "Send code",
-  "submitVerifyButtonText": "Change password"
+    "fieldUsernameLabel": "Email",
+    "fieldPasswordLabel": "Password",
+    "fieldRepeatPasswordLabel": "Repeat password",
+    "fieldTokenLabel": "Code",
+    "submitSendButtonText": "Send code",
+    "submitVerifyButtonText": "Change password"
   }
-  }
+}
 </i18n>

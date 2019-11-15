@@ -5,7 +5,6 @@ import axios from 'axios';
 import qs from 'qs';
 import AuthForm from './AuthForm';
 import RegisterForm from './RegisterForm';
-import AutoLoginForm from './AutoLoginForm';
 import Userinfo from './Userinfo';
 import SocialAuth from './SocialAuth';
 import ChangePassword from './ChangePassword';
@@ -125,7 +124,6 @@ export default new Vuex.Store({
   modules: {
     AuthForm,
     RegisterForm,
-    AutoLoginForm,
     Userinfo,
     SocialAuth,
     ChangePassword,

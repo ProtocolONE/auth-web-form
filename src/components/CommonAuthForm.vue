@@ -7,7 +7,7 @@ export default {
 
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       remember: '',
     };
@@ -20,7 +20,7 @@ export default {
   },
 
   watch: {
-    username() {
+    email() {
       this.$emit('requestAppResize');
     },
     password() {
@@ -35,7 +35,7 @@ export default {
   },
 
   validations: {
-    username: {
+    email: {
       required,
       email,
     },
@@ -58,7 +58,7 @@ export default {
 
       this.$emit('loadingStart');
       await this.authoriseWithLogin({
-        username: this.username,
+        email: this.email,
         password: this.password,
         remember: this.remember,
       });
@@ -70,14 +70,14 @@ export default {
 
 <template>
   <div class="auth-form">
-    <base-header level="3">Авторизируйтесь</base-header>
+    <BaseHeader level="3">Авторизируйтесь</BaseHeader>
     <form @submit.prevent="submitAuthForm">
       <div class="auth-form__row">
         <BaseTextField
-          v-model="username"
+          v-model="email"
           :placeholder="$t('fieldUsernameLabel')"
-          :hasError="$isFieldInvalid('username')"
-          :errors="$getFieldErrorMessages('username')"
+          :hasError="$isFieldInvalid('email')"
+          :errors="$getFieldErrorMessages('email')"
         />
       </div>
       <div class="auth-form__row">
@@ -96,49 +96,49 @@ export default {
         />
       </div>
       <div class="auth-form__row">
-        <base-error-text v-if="authError">Ошибка авторизации {{authError}}</base-error-text>
+        <BaseErrorText v-if="authError">Ошибка авторизации {{authError}}</BaseErrorText>
       </div>
       <div class="auth-form__controls">
-        <base-button type="submit">
+        <BaseButton type="submit">
           {{ $t('submitButtonText') }}
-        </base-button>
+        </BaseButton>
       </div>
 
     </form>
   </div>
 </template>
 
-<style lang="scss">
-  .auth-form {
-    padding: 20px;
-    position: relative;
+<style lang="scss" scoped>
+.auth-form {
+  padding: 20px;
+  position: relative;
 
-    form {
-      margin: 0;
-    }
-
-    &__row {
-      margin-bottom: 12px;
-    }
-
-    &__controls {
-    }
+  form {
+    margin: 0;
   }
+
+  &__row {
+    margin-bottom: 12px;
+  }
+
+  &__controls {
+  }
+}
 </style>
 
 <i18n>
-  {
+{
   "ru": {
-  "fieldUsernameLabel": "Имя пользователя",
-  "fieldPasswordLabel": "Пароль",
-  "fieldRememberLabel": "Запомнить меня",
-  "submitButtonText": "Войти"
+    "fieldUsernameLabel": "Имя пользователя",
+    "fieldPasswordLabel": "Пароль",
+    "fieldRememberLabel": "Запомнить меня",
+    "submitButtonText": "Войти"
   },
   "en": {
-  "fieldUsernameLabel": "Username",
-  "fieldPasswordLabel": "Password",
-  "fieldRememberLabel": "Remember me",
-  "submitButtonText": "Sign in"
+    "fieldUsernameLabel": "Username",
+    "fieldPasswordLabel": "Password",
+    "fieldRememberLabel": "Remember me",
+    "submitButtonText": "Sign in"
   }
-  }
+}
 </i18n>
