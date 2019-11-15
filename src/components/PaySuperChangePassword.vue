@@ -88,6 +88,11 @@ export default {
       });
       this.$emit('loadingEnd');
     },
+
+    goBack() {
+      this.step = 'start';
+      this.$emit('goAuth');
+    },
   },
 };
 </script>
@@ -111,8 +116,8 @@ export default {
       />
       <UiErrorText v-if="changeError">{{changeError}}</UiErrorText>
       <div class="register-form__controls">
-        <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goAuth')">
-          Back
+        <UiButton color="transparent-blue" :isTransparent="true" @click="goBack">
+          Log in
         </UiButton>
         <UiButton type="submit" :disabled="!email">
           Send code
@@ -145,6 +150,9 @@ export default {
       />
       <UiErrorText v-if="changeError">{{changeError}}</UiErrorText>
       <div class="register-form__controls">
+        <UiButton color="transparent-blue" :isTransparent="true" @click="goBack">
+          Log in
+        </UiButton>
         <UiButton type="submit">
           {{ $t('submitVerifyButtonText') }}
         </UiButton>
@@ -160,7 +168,7 @@ export default {
       </template>
     </UiPageHeader>
     <div class="register-form__controls _center">
-      <UiButton @click="$emit('goAuth')">
+      <UiButton @click="goBack">
         Log in
       </UiButton>
     </div>
