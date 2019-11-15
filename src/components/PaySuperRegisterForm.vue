@@ -76,6 +76,7 @@ export default {
   <form @submit.prevent="submitRegisterForm">
     <UiTextField
       v-model="email"
+      name="email"
       :label="$t('fieldUsernameLabel')"
       :hasError="$isFieldInvalid('email')"
       :errorText="$getFieldErrorText('email')"
@@ -83,6 +84,7 @@ export default {
     />
     <UiTextField
       type="password"
+      name="password"
       v-model="password"
       :label="$t('fieldPasswordLabel')"
       :hasError="$isFieldInvalid('password')"

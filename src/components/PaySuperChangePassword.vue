@@ -137,6 +137,7 @@ export default {
     <form @submit.prevent="submitChangePasswordVerify">
       <UiTextField
         v-model="token"
+        name="token"
         :label="$t('fieldTokenLabel')"
         :hasError="$isFieldInvalid('token')"
         :errorText="$getFieldErrorText('token')"
@@ -144,6 +145,7 @@ export default {
       />
       <UiTextField
         type="password"
+        name="password"
         v-model="password"
         :label="$t('fieldPasswordLabel')"
         :hasError="$isFieldInvalid('password')"

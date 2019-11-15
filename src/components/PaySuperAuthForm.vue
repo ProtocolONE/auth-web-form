@@ -63,13 +63,15 @@ export default {
     <UiTextField
       v-model="email"
       label="Email"
+      name="email"
       :hasError="$isFieldInvalid('email')"
       :errorText="$getFieldErrorText('email')"
     />
     <UiTextField
       type="password"
-      v-model="password"
       label="Password"
+      name="password"
+      v-model="password"
       :hasError="$isFieldInvalid('password')"
       :errorText="$getFieldErrorText('password')"
     />
