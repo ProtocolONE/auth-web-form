@@ -79,6 +79,7 @@ export default {
       :label="$t('fieldUsernameLabel')"
       :hasError="$isFieldInvalid('email')"
       :errorText="$getFieldErrorText('email')"
+      autocomplete="new-password"
     />
     <UiTextField
       type="password"
@@ -86,6 +87,7 @@ export default {
       :label="$t('fieldPasswordLabel')"
       :hasError="$isFieldInvalid('password')"
       :errorText="$getFieldErrorText('password')"
+      autocomplete="new-password"
     />
     <div class="info">
       <IconInfo />

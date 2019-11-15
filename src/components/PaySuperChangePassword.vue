@@ -140,6 +140,7 @@ export default {
         :label="$t('fieldTokenLabel')"
         :hasError="$isFieldInvalid('token')"
         :errorText="$getFieldErrorText('token')"
+        autocomplete="new-password"
       />
       <UiTextField
         type="password"
@@ -147,6 +148,7 @@ export default {
         :label="$t('fieldPasswordLabel')"
         :hasError="$isFieldInvalid('password')"
         :errorText="$getFieldErrorText('password')"
+        autocomplete="new-password"
       />
       <UiErrorText v-if="changeError">{{changeError}}</UiErrorText>
       <div class="register-form__controls">
