@@ -15,7 +15,7 @@ export default {
       email: '',
       token: '',
       password: '',
-      step: 'change',
+      step: 'start',
     };
   },
 
