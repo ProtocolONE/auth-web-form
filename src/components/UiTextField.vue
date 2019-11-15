@@ -199,7 +199,7 @@ $left-indent: 12px;
   }
 
   &._password {
-    padding-right: 24px;
+    padding-right: 34px;
   }
 }
 .additional,
@@ -224,7 +224,7 @@ $left-indent: 12px;
 }
 .password-toggler {
   position: absolute;
-  right: 0;
+  right: 6px;
   top: 30px;
   z-index: 1;
   cursor: pointer;
