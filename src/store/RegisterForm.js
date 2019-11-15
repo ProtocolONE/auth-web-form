@@ -33,5 +33,9 @@ export default {
         }
       }
     },
+
+    clearRegisterError({ commit }) {
+      commit('registerError', '');
+    },
   },
 };

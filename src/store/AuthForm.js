@@ -46,5 +46,9 @@ export default {
         }
       }
     },
+
+    clearAuthError({ commit }) {
+      commit('authError', '');
+    },
   },
 };

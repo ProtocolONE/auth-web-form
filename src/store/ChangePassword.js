@@ -56,5 +56,8 @@ export default {
         }
       }
     },
+    clearChangePasswordError({ commit }) {
+      commit('changeError', '');
+    },
   },
 };

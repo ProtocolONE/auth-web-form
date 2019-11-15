@@ -52,6 +52,9 @@ export default {
   },
 
   methods: {
+    ...mapActions('AuthForm', ['clearAuthError']),
+    ...mapActions('RegisterForm', ['clearRegisterError']),
+    ...mapActions('ChangePassword', ['clearChangePasswordError']),
     ...mapActions([
       'setToken', 'setLoading', 'reportResize', 'logout',
     ]),
@@ -65,14 +68,17 @@ export default {
     },
 
     goAuth() {
+      this.clearAuthError();
       this.mainView = 'PaySuperAuthForm';
     },
 
     goRegister() {
+      this.clearRegisterError();
       this.mainView = 'PaySuperRegisterForm';
     },
 
     goChangePassword() {
+      this.clearChangePasswordError();
       this.mainView = 'PaySuperChangePassword';
     },
   },
