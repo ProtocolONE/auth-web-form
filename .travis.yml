@@ -2,14 +2,6 @@ language: node_js
 node_js:
 - "11.10.1"
 sudo: true
-env:
-  global:
-  #s3_host
-  - secure: 1iQmnDQlJPy87MwCXmBGih7ED9Wp+soYF6slHIjb5XAwV24kyf3tg2MstHoOfuIHItBQAjdJwalgtTKd3hRQzGtdTayGRdN+2RgdW5eMQ2/KgbwvHIfZew8wWNF7VbnvbO/pxngtPt9H+lZLBYK92IwTx8kO5zJQVdNt7OIxewyasT2LcE0T8VKlL/HoPq4rYZqiwIgz9Ne/QyH8nWq0t6tFpWJ/ogUxlpD8lY2faOdwL7j/bLDV23fpeKbxFj/HkYOjrIzJYL1UqHv0OaK9l6L1sgg9/le1w93iG/cPENRYaZKXoKgfD5lRqXImleKAxzYfYuaAUK92QoVFhUNy/f2pyL88/We1FvdNSkyoCqkspd3+XBxgmAcAmO26lIbL/AKQnoI627tqeyaXD7dbwENwglsENB7C6FjJe3Hyv6dX0mt+2xPlgvD5QsemSayYA7g4X4xUau4oKksGvadl06pzGAfVV9rZjH6lIDhCQF5Yb+4/Bx4eXkr4/8Uwh+PRz65H9mq2wYDg+DT4623luhSHZMAYXPxL28onXuHiX4NRGEiVJ4e/G/scDH4ZH80THsTesKLoJybXk9MrP3iRYm07y7X14EmAs+KiaNh2qRlPQNtn9rQqmQF1QkLp/cmkAf2hKEXU8SB2n7CDmXju3pGmtLlWBZlkYcV0Js4YbKA=
-  #s3_access_key
-  - secure: oG4GI99I4geo7EErpOnRnJcBQHQ6FI3SEsEu0KdSnBdFA6BaZryOrzeHWQwSzXr3o+EQpnmF7MK709/TwTKYt+r3R/TRxLs1qo+ApQCutxftnzuWCL7H0Tv+2U9UVqvm6BoXfexkk9yYhLypAnJhsG1tE1P2oVU9Nyi+nvSy+Fa6NSScyLWjjeHz/gkwGrVG47J5dgDMZCXUPbYuhoQK+ySPTiaUkEfhHUdE65bnkEBkeOIUDHBP5MpQvtn+5FnY68LHy7RIOXwxS4b5fSQN4C6m2DEgB1FgCLIyyBPdKwD9xIZnqKrV8Q3erwmwhDtNe659K4koIlKXV4y9f8uRXKjZl3VfrQUs9RoZJrgOuG1K9tKkGK8gDPCCZipJ0ItbCONTQsu7RvzQuSATF/GrbPq3zOSNP4pG1rV8R76wXvjaMPrx3idvSq1RPPanOwZxJU/vQO4YsOzBZA+4gPIoKBl5VhJ5tqoj/+M1hmecFGH1+clLNauCpKoS+Kxb4Mox03JlJ01LGVu/UzeEPkIFfIf7HYm6edUx7L93Gn3gofZcwcpOiqlzIxVKZnr46vZAk+E/qaV1w7+10jYurmaQ14Su3EcmJBO0YnPiGLWS2Rr6gprvmo8AECGPEahxYQHQcAEdBOBnCVftwPHPEkCvExYC1+RdwE9kdUOAl4CeUgk=
-  #s3_secret_key
-  - secure: 9HkpK9nWa1GalomR75k6O52ntO17XEPZ1joAmOpwn/4miDd6xYPB5c0q/vYpmkFZytf/rZ7tjPgPxwo/0zVbHxle5SoR4BOokJRg9N5ent7MW6ecaOE9irWay4ZpGMd0npvMAAsQ3+HxsIvW/9Q+r5IYi+uBKfUP6BrzrAF3zuejkjbdFQ6HWZt337opi9Uv3xHSjyu0wggbR0Dp62InWBWpBT0yl4bsrLxzdEjlp49PUHDqM1gHjmmQddTYwP2Ijg7xPaCeLNE0uNecvy3yKoU05ZHCnJBgKqQe3/1Kyx6KPKGtJPjql/fbWdE3ChkAj2OsufwwnmX5lkq321FbkE81Tl5+oxsRnw+rYirOS8j0+eBM6qMxC0iyBiIAn7Vpf2QHPZQ5ZOXYyZwyH2hQTSH6z8xwIgSzXHEXAeK/ZkaGzxd7uUNl/jjZfh+a+5wkbwu0l4l3awj1gEqcb3yracq90ySq1tNWVwq3dEq3TET4yhI2GsWNtwQzDv9TTaC206l8bB6xHyl0KR6aGG0/ATRVG9PgXwI3weza0782kPDeA7bR0jEvGRKzHdSMjWlvXKCDoCPSf0oQ7jPZAlxWaR9Rtyt++tpaCMVJC0gxRURtglxvqncmhtsELv5HgyBME9vIMHVFZsJb6xjwCNxqaixu62ahVMbIqbLIjlBH2BU=
 before_script: curl https://rclone.org/install.sh | sudo bash
 jobs:
   include:
@@ -20,7 +12,7 @@ jobs:
     - npm run lint
     - npm run test
     - npm run build
-    - rclone -vv copy dist :s3://auth/form/dev/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
+    - rclone copy dist :s3://auth/form/dev/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
   - name: dev
     if: "(branch = develop)"
     script:
