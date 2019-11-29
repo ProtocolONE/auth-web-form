@@ -84,8 +84,9 @@ async function mountApp(formData = {}, options = {}) {
   const language = getLanguage();
 
   if (includes([
-    '5c77953f51c0950001436152', // paysuper test app
-    '5dcaf274acda5200db813482', // dev-app
+    '5d81e74895f3f60001874ab1', // production app
+    '5c77953f51c0950001436152', // test app
+    '5dcaf274acda5200db813482', // local/dev app
   ], formData.clientId)) {
     Vue.prototype.$view = 'PaySuper';
   } else {
