@@ -5,11 +5,5 @@
     "email": "Enter correct email",
     "minLength": "The value is too short",
     "wrongFormatType": "Wrong value format type"
-  },
-  "orderID": "Order #",
-  "account": "Account",
-  "product": "Product",
-  "commission": "Commission",
-  "vat": "VAT",
-  "summ": "Summ"
+  }
 }

@@ -10,10 +10,14 @@ function $getFieldErrorMessages(fieldPath) {
 
   return Object.keys(field.$params).filter(name => !field[name])
     .map((name) => {
-      const message = this.$t(`errorMessages.${name}`);
+      const message = this.$t(`${this.$view}.errorMessages.${name}`);
       const params = field.$params[name];
       return message.replace(/%(.+?)%/g, (a, variable) => params[variable]);
     });
+}
+
+function $getFieldErrorText(fieldPath) {
+  return $getFieldErrorMessages.call(this, fieldPath).join('; ');
 }
 
 function $isFieldInvalid(fieldPath) {
@@ -26,5 +30,6 @@ function $isFieldInvalid(fieldPath) {
 
 extend(Vue.prototype, {
   $getFieldErrorMessages,
+  $getFieldErrorText,
   $isFieldInvalid,
 });

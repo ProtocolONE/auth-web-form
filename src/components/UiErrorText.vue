@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BaseErrorText',
+  name: 'UiErrorText',
 
   props: {
     value: {
@@ -21,17 +21,17 @@ export default {
 </script>
 
 <template>
-<div class="base-error-text">
+<div class="ui-error-text">
   <div v-for="(message, index) in messages" :key="index">{{message}}</div>
   <slot></slot>
 </div>
 </template>
 
 <style lang="scss" scoped>
-.base-error-text {
+.ui-error-text {
   font-size: 12px;
   line-height: 13px;
-  color: $ui-color-red;
-  margin-top: 5px;
+  color: #ff6f6f;
+  margin-left: 12px;
 }
 </style>

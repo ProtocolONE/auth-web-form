@@ -4,6 +4,7 @@
 
 // import * as Sentry from '@sentry/browser';
 import Vue from 'vue';
+import { includes } from 'lodash-es';
 import assert from 'assert';
 import './plugins/vuelidate';
 import axios from 'axios';
@@ -17,7 +18,6 @@ import './vueExtentions';
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = '_csrf';
 axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
-
 
 // if (process.env.NODE_ENV === 'production') {
 //   Sentry.init({
@@ -82,6 +82,16 @@ async function mountApp(formData = {}, options = {}) {
   });
 
   const language = getLanguage();
+
+  if (includes([
+    '5c77953f51c0950001436152', // paysuper test app
+    '5dcaf274acda5200db813482', // dev-app
+  ], formData.clientId)) {
+    Vue.prototype.$view = 'PaySuper';
+  } else {
+    Vue.prototype.$view = 'Common';
+  }
+
   const VueApp = Vue.extend(App);
   new VueApp({
     store,

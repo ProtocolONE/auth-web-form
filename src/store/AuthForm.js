@@ -14,12 +14,12 @@ export default {
   },
 
   actions: {
-    async authoriseWithLogin({ commit, rootState, rootGetters }, { username, password, remember }) {
+    async authoriseWithLogin({ commit, rootState, rootGetters }, { email, password, remember }) {
       try {
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
           connection: 'password',
-          email: username,
+          email,
           password,
           remember: (remember === '1'),
         });
@@ -30,6 +30,25 @@ export default {
           commit('authError', error.response.data.error_message);
         }
       }
+    },
+
+    async autoLogin({ commit, rootState, rootGetters }, { previousLogin }) {
+      try {
+        const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
+          challenge: rootState.challenge,
+          previousLogin,
+        });
+        commit('authError', '');
+        window.location.href = data.url;
+      } catch (error) {
+        if (error.response) {
+          commit('authError', error.response.data.error_message);
+        }
+      }
+    },
+
+    clearAuthError({ commit }) {
+      commit('authError', '');
     },
   },
 };

@@ -9,9 +9,11 @@ export default {
   },
 
   computed: {
+    ...mapState([
+      'previousLogin',
+    ]),
     ...mapState('AuthForm', [
       'authError',
-      'previousLogin',
     ]),
   },
 
@@ -33,7 +35,7 @@ export default {
       }
 
       this.$emit('loadingStart');
-      await this.autoLogin({});
+      await this.autoLogin({ previousLogin: this.previousLogin });
       this.$emit('loadingEnd');
     },
   },
@@ -42,47 +44,47 @@ export default {
 
 <template>
   <div class="auth-form">
-    <base-header level="3">Войти используя аккаунт</base-header>
+    <BaseHeader level="3">Войти используя аккаунт</BaseHeader>
     <p>{{previousLogin}}</p>
     <form @submit.prevent="submitAutoLoginForm">
       <div class="auth-form__row">
-        <base-error-text v-if="authError">Ошибка авторизации {{authError}}</base-error-text>
+        <BaseErrorText v-if="authError">Ошибка авторизации {{authError}}</BaseErrorText>
       </div>
       <div class="auth-form__controls">
-        <base-button type="submit">
+        <BaseButton type="submit">
           {{ $t('submitButtonText') }}
-        </base-button>
+        </BaseButton>
       </div>
 
     </form>
   </div>
 </template>
 
-<style lang="scss">
-  .auth-form {
-    padding: 20px;
-    position: relative;
+<style lang="scss" scoped>
+.auth-form {
+  padding: 20px;
+  position: relative;
 
-    form {
-      margin: 0;
-    }
-
-    &__row {
-      margin-bottom: 12px;
-    }
-
-    &__controls {
-    }
+  form {
+    margin: 0;
   }
+
+  &__row {
+    margin-bottom: 12px;
+  }
+
+  &__controls {
+  }
+}
 </style>
 
 <i18n>
-  {
+{
   "ru": {
-  "submitButtonText": "Войти"
+    "submitButtonText": "Войти"
   },
   "en": {
-  "submitButtonText": "Sign in"
+    "submitButtonText": "Sign in"
   }
-  }
+}
 </i18n>

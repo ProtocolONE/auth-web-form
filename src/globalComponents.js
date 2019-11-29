@@ -10,7 +10,7 @@ const requireComponent = require.context(
   // Look in subdirectories
   true,
   // Only include .vue files
-  /(Base|Icon)[\w-]+\.vue$/,
+  /(Icon|Ui|Base)[\w-]+\.vue$/,
 );
 
 // For each matching file name...
