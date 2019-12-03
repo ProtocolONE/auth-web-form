@@ -35,7 +35,7 @@ export default {
       required,
       minLength: minLength(6),
       hasDigits: value => /[0-9]/.test(value),
-      hasUppercase: value => /[A-Z]/.test(value),
+      hasUppercase: value => value.toLowerCase() !== value,
     },
     eula: {
       checked: value => value === true,
@@ -95,13 +95,13 @@ export default {
       <IconInfo />
       <p class="info__text">
         The password must contain at least 6 characters,
-        including latin letters and at least one digit.
+        including latin letters and at least one digit and one uppercase letter.
       </p>
     </div>
     <div>
       <UiCheckbox v-model="eula">
-        I read and accept
-        <a href="https://pay.super.com/policy/eula" target="_blank">Agreement</a>
+        I have read and accepted
+        <a href="https://pay.super.com/policy/eula" target="_blank">User Agreement</a>
       </UiCheckbox>
     </div>
     <UiErrorText v-if="registerError" v-text="registerError" />
