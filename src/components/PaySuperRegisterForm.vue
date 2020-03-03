@@ -70,7 +70,7 @@ export default {
   <UiPageHeader>
     <template slot="title">Sign Up</template>
     <template slot="description">
-      Hi, we are glad you decided to join us.
+      Hi, we are glad you were able to join us.
     </template>
   </UiPageHeader>
   <form @submit.prevent="submitRegisterForm">
