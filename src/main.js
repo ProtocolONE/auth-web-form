@@ -85,6 +85,7 @@ async function mountApp(formData = {}, options = {}) {
 
   if (includes([
     '5d81e74895f3f60001874ab1', // production app
+    '5d2efdbb0f98f200016ee285', // stg app
     '5c77953f51c0950001436152', // test app
     '5dcaf274acda5200db813482', // local/dev app
   ], formData.clientId)) {
