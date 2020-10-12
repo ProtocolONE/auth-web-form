@@ -35,7 +35,7 @@ export default {
 .header {
   color: #000000;
   transition: color 0.2s ease-out;
-  font-family: Quicksand;
+  font-family: Quicksand, Verdana, Tahoma, sans-serif;
   margin: 0;
   display: flex;
   font-weight: normal;

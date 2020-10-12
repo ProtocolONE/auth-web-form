@@ -7,5 +7,47 @@
     "wrongFormatType": "Неверный формат значения",
     "hasDigits": "Должно содержать цифры",
     "hasUppercase": "Должно содержать верхний регистр"
+  },
+  "PaySuperAuthForm": {
+    "title": "Войти",
+    "subtitle": "Рады видеть вас вновь",
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Пароль",
+    "resetPassword": "Сбросить пароль",
+    "signInButton": "Регистрация",
+    "logInButton": "Войти"
+  },
+  "PaySuperAuthLoginForm": {
+    "title": "Войти",
+    "subtitle": "Рады видеть вас вновь",
+    "previousAccount": "Последний вход от",
+    "useAnotherAccount": "Использовать другой аккаунт",
+    "logInButton": "Войти"
+  },
+  "PaySuperChangePassword": {
+    "title": "Сброс Пароля",
+    "subtitle": "Мы вышлем вам электронное письмо с кодом сброса.",
+    "emailFieldLabel": "Email",
+    "logInButton": "Войти",
+    "sendCodeButton": "Отправить код",
+    "newPasswordTitle": "Новый пароль",
+    "newPasswordSubtitle": "Пароль должен содержать как минимум <b>6 символов, включая<br/> латинские буквы и хотя бы оду цифру</b>.",
+    "fieldPasswordLabel": "Новый Пароль",
+    "fieldTokenLabel": "Код",
+    "submitVerifyButtonText": "Установить пароль",
+    "completeTitle": "Пароль изменён",
+    "completeSubtitle": "Теперь вы можете войти с новым паролем."
+  },
+  "PaySuperRegisterForm": {
+    "title": "Регистрация",
+    "subtitle": "Привет, мы рады, что вы с нами.",
+    "fieldUsernameLabel": "Email",
+    "fieldPasswordLabel": "Пароль",
+    "info": "Пароль должен содержать как минимум 6 символов, включая латинские буквы и хотя бы оду цифру.",
+    "eulaAccepted": "Я прочитал и согласился",
+    "userAgreement": "Пользовательское соглашение",
+    "eulaError": "Вы должны принять соглашение",
+    "logInButton": "Войти",
+    "signUpButton": "Зарегистрироваться"
   }
 }

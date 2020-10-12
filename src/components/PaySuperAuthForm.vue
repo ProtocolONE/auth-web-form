@@ -54,39 +54,41 @@ export default {
 <template>
 <div class="auth-form">
   <UiPageHeader>
-    <template slot="title">Log In</template>
+    <template slot="title">
+      {{ $t('PaySuper.PaySuperAuthForm.title') }}
+    </template>
     <template slot="description">
-      We are glad to see you again.
+      {{ $t('PaySuper.PaySuperAuthForm.subtitle') }}
     </template>
   </UiPageHeader>
   <form @submit.prevent="submitAuthForm">
     <UiTextField
       v-model="email"
-      label="Email"
       name="email"
+      :label="$t('PaySuper.PaySuperAuthForm.emailFieldLabel')"
       :hasError="$isFieldInvalid('email')"
       :errorText="$getFieldErrorText('email')"
     />
     <UiTextField
       type="password"
-      label="Password"
       name="password"
       v-model="password"
+      :label="$t('PaySuper.PaySuperAuthForm.passwordFieldLabel')"
       :hasError="$isFieldInvalid('password')"
       :errorText="$getFieldErrorText('password')"
     />
     <div class="links">
       <a href="#" @click.prevent="$emit('goChangePassword')">
-        Reset password
+        {{ $t('PaySuper.PaySuperAuthForm.resetPassword') }}
       </a>
     </div>
     <UiErrorText v-if="authError">{{authError}}</UiErrorText>
     <div class="auth-form__controls">
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goRegister')">
-        {{ $t('goRegisterButton') }}
+        {{ $t('PaySuper.PaySuperAuthForm.signInButton') }}
       </UiButton>
       <UiButton type="submit">
-        {{ $t('submitButtonText') }}
+        {{ $t('PaySuper.PaySuperAuthForm.logInButton') }}
       </UiButton>
     </div>
   </form>
@@ -109,22 +111,3 @@ export default {
   padding-left: 12px;
 }
 </style>
-
-<i18n>
-{
-  "ru": {
-    "fieldUsernameLabel": "Имя пользователя",
-    "fieldPasswordLabel": "Пароль",
-    "fieldRememberLabel": "Запомнить меня",
-    "submitButtonText": "Войти",
-    "goRegisterButton": "Регистрация"
-  },
-  "en": {
-    "fieldUsernameLabel": "Username",
-    "fieldPasswordLabel": "Password",
-    "fieldRememberLabel": "Remember me",
-    "submitButtonText": "Log In",
-    "goRegisterButton": "Sign up"
-  }
-}
-</i18n>
