@@ -101,26 +101,30 @@ export default {
 <div class="register-form">
   <template v-if="step === 'start'">
     <UiPageHeader>
-      <template slot="title">Password Reset</template>
+      <template slot="title">
+        {{ $t('PaySuper.PaySuperChangePassword.title') }}
+      </template>
       <template slot="description">
-        We will send you an email with reset code.
+        {{ $t('PaySuper.PaySuperChangePassword.subtitle') }}
       </template>
     </UiPageHeader>
 
     <form @submit.prevent="submitChangePasswordStart">
       <UiTextField
         v-model="email"
-        label="Email"
+        :label="$t('PaySuper.PaySuperChangePassword.emailFieldLabel')"
         :hasError="$isFieldInvalid('email')"
         :errorText="$getFieldErrorText('email')"
       />
-      <UiErrorText v-if="changeError">{{changeError}}</UiErrorText>
+      <UiErrorText v-if="changeError">
+        {{ changeError }}
+      </UiErrorText>
       <div class="register-form__controls">
         <UiButton color="transparent-blue" :isTransparent="true" @click="goBack">
-          Log in
+          {{ $t('PaySuper.PaySuperChangePassword.logInButton') }}
         </UiButton>
         <UiButton type="submit" :disabled="!email">
-          Send code
+          {{ $t('PaySuper.PaySuperChangePassword.sendCodeButton') }}
         </UiButton>
       </div>
     </form>
@@ -128,17 +132,20 @@ export default {
 
   <template v-if="step === 'change'">
     <UiPageHeader>
-      <template slot="title">New Password</template>
-      <template slot="description">
-        The password must contain at least <b>6 characters,
-        including<br/> latin letters and at least one digit</b>.
+      <template slot="title">
+        {{ $t('PaySuper.PaySuperChangePassword.newPasswordTitle') }}
       </template>
+      <div
+        slot="description"
+        v-html="$t('PaySuper.PaySuperChangePassword.newPasswordSubtitle')"
+      >
+      </div>
     </UiPageHeader>
     <form @submit.prevent="submitChangePasswordVerify">
       <UiTextField
         v-model="token"
         name="token"
-        :label="$t('fieldTokenLabel')"
+        :label="$t('PaySuper.PaySuperChangePassword.fieldTokenLabel')"
         :hasError="$isFieldInvalid('token')"
         :errorText="$getFieldErrorText('token')"
         autocomplete="new-password"
@@ -147,18 +154,20 @@ export default {
         type="password"
         name="password"
         v-model="password"
-        :label="$t('fieldPasswordLabel')"
+        :label="$t('PaySuper.PaySuperChangePassword.fieldPasswordLabel')"
         :hasError="$isFieldInvalid('password')"
         :errorText="$getFieldErrorText('password')"
         autocomplete="new-password"
       />
-      <UiErrorText v-if="changeError">{{changeError}}</UiErrorText>
+      <UiErrorText v-if="changeError">
+        {{ changeError }}
+      </UiErrorText>
       <div class="register-form__controls">
         <UiButton color="transparent-blue" :isTransparent="true" @click="goBack">
-          Log in
+          {{ $t('PaySuper.PaySuperChangePassword.logInButton') }}
         </UiButton>
         <UiButton type="submit">
-          {{ $t('submitVerifyButtonText') }}
+          {{ $t('PaySuper.PaySuperChangePassword.submitVerifyButtonText') }}
         </UiButton>
       </div>
     </form>
@@ -166,14 +175,16 @@ export default {
   <template v-if="step === 'complete'">
     <UiPageHeader>
       <PictureExcellentWork slot="picture" />
-      <template slot="title">Password has been reset</template>
+      <template slot="title">
+        {{ $t('PaySuper.PaySuperChangePassword.completeTitle') }}
+      </template>
       <template slot="description">
-        You may log in now with your new password.
+        {{ $t('PaySuper.PaySuperChangePassword.completeSubtitle') }}
       </template>
     </UiPageHeader>
     <div class="register-form__controls _center">
       <UiButton @click="goBack">
-        Log in
+        {{ $t('PaySuper.PaySuperChangePassword.logInButton') }}
       </UiButton>
     </div>
   </template>
@@ -195,24 +206,3 @@ export default {
   }
 }
 </style>
-
-<i18n>
-{
-  "ru": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "Новый Пароль",
-    "fieldRepeatPasswordLabel": "Пароль ещё раз",
-    "fieldTokenLabel": "Код",
-    "submitSendButtonText": "Отправить код",
-    "submitVerifyButtonText": "Установить пароль"
-  },
-  "en": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "New Password",
-    "fieldRepeatPasswordLabel": "Repeat password",
-    "fieldTokenLabel": "Code",
-    "submitSendButtonText": "Send code",
-    "submitVerifyButtonText": "Set Password"
-  }
-}
-</i18n>
