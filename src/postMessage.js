@@ -3,6 +3,7 @@ import { invert } from 'lodash-es';
 
 export const sendingMessagesNames = {
   INITED: 'inited',
+  CREATED: 'created',
   LOADED: 'loaded',
   FORM_RESIZE: 'formResize',
   TOKEN_RECEIVED: 'tokenReceived',
