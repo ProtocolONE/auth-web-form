@@ -37,7 +37,7 @@ export default {
 /** @TODO - move to gui for typographics */
 $input-background-color: #fff;
 $primary-input-color: #000000;
-$secondary-input-color: #5e6366;
+$secondary-input-color: #737373;
 
 $primary-input-size: 16px;
 $secondary-input-size: 12px;
@@ -66,7 +66,7 @@ $left-indent: 12px;
   width: 100%;
 
   /deep/ a {
-    color: #3d7bf5;
+    color: #485cc7;
     text-decoration: none;
   }
 

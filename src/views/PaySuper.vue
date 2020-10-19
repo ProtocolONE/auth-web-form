@@ -103,12 +103,12 @@ export default {
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500|Roboto:400,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Kanit:wght@400;500&display=swap");
 
 .view-paysuper {
   a {
     text-decoration: none;
-    color: #3d7bf5;
+    color: #485cc7;
     transition: color 0.2s ease-out;
 
     &:hover {
@@ -117,7 +117,7 @@ export default {
     }
   }
   input {
-    font-family: "Roboto", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #000;
@@ -150,7 +150,7 @@ export default {
   width: 448px;
   margin: 0 auto;
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #000000;

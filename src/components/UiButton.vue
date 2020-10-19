@@ -4,7 +4,7 @@ import { includes } from 'lodash-es';
 export default {
   props: {
     color: {
-      default: 'blue',
+      default: 'green',
       type: String,
       validator(value) {
         return includes([
@@ -109,11 +109,11 @@ export default {
 
 <style scoped lang="scss">
 /** @TODO - move to gui consts, fix color and typographics consts */
-$blue-button-color: #3d7bf5;
+$blue-button-color: #485cc7;
 $yellow-button-color: #f3aa18;
 $orange-button-color: #ff6f6f;
 $purple-button-color: #8077e7;
-$green-button-color: #2fa84f;
+$green-button-color: #85f53b;
 $button-font-color: #fff;
 $gray-button-color: #919699;
 $light-gray-button-color: #f7f9fa;
@@ -121,15 +121,15 @@ $light-gray-font-color: #333;
 $light-gray-font-weight: normal;
 $light-gray-transparent-font-color: #333;
 $light-gray-transparent-border-color: #e3e5e6;
-$light-gray-transparent-hover-font-color: #3d7bf5;
-$light-gray-transparent-hover-box-color: rgba(#3d7bf5, 0.08);
+$light-gray-transparent-hover-font-color: #485cc7;
+$light-gray-transparent-hover-box-color: rgba(#485cc7, 0.08);
 $red-button-color: #ea3d2f;
 $transparent-gray-font-color: #78909c;
 $transparent-gray-transparent-font-color: #78909c;
 $transparent-gray-transparent-hover-box-color: #f7f9fa;
-$transparent-blue-font-color: #3d7bf5;
-$transparent-blue-transparent-font-color: #3d7bf5;
-$transparent-blue-transparent-hover-box-color: #3d7bf5;
+$transparent-blue-font-color: #485cc7;
+$transparent-blue-transparent-font-color: #485cc7;
+$transparent-blue-transparent-hover-box-color: #485cc7;
 $disabled-button-color: #f1f3f4;
 $disabled-font-color: #919699;
 
@@ -145,13 +145,13 @@ $primary-button-size: 14px;
   $transparentHoverBoxColor: transparent
 ) {
   background-color: $background;
-  border-radius: 4px;
+  border-radius: 2px;
   border-width: 0;
   color: $color;
   cursor: pointer;
   display: inline-block;
   font-size: $primary-button-size;
-  font-family: Roboto;
+  font-family: "Inter", sans-serif;
   font-weight: $fontWeight;
   line-height: 24px;
   max-width: 100%;
@@ -235,7 +235,9 @@ $primary-button-size: 14px;
 .ui-base-button {
   text-transform: uppercase;
   min-width: 128px;
-
+  &._green {
+    @include base-button($green-button-color, #000);
+  }
   &._blue {
     @include base-button($blue-button-color);
   }
@@ -247,9 +249,6 @@ $primary-button-size: 14px;
   }
   &._purple {
     @include base-button($purple-button-color);
-  }
-  &._green {
-    @include base-button($green-button-color);
   }
   &._gray {
     @include base-button($gray-button-color);

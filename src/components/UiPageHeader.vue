@@ -35,7 +35,7 @@ export default {
 .header {
   color: #000000;
   transition: color 0.2s ease-out;
-  font-family: Quicksand, Verdana, Tahoma, sans-serif;
+  font-family: "Kanit", Verdana, Tahoma, sans-serif;
   margin: 0;
   display: flex;
   font-weight: normal;
@@ -47,7 +47,7 @@ export default {
   text-align: center;
 }
 .text {
-  color: #5e6366;
+  color: #737373;
   text-align: center;
 }
 </style>
