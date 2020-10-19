@@ -113,7 +113,7 @@ $blue-button-color: #485cc7;
 $yellow-button-color: #f3aa18;
 $orange-button-color: #ff6f6f;
 $purple-button-color: #8077e7;
-$green-button-color: #85f53b;
+$green-button-color: #c9f73a;
 $button-font-color: #fff;
 $gray-button-color: #919699;
 $light-gray-button-color: #f7f9fa;
