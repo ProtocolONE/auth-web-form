@@ -14,7 +14,7 @@
     "emailFieldLabel": "Email",
     "passwordFieldLabel": "Password",
     "resetPassword": "Reset password",
-    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
     "logInButton": "Log In"
   },
   "PaySuperAuthLoginForm": {

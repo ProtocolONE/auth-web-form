@@ -85,7 +85,7 @@ export default {
     <UiErrorText v-if="authError">{{authError}}</UiErrorText>
     <div class="auth-form__controls">
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goRegister')">
-        {{ $t('PaySuper.PaySuperAuthForm.signInButton') }}
+        {{ $t('PaySuper.PaySuperAuthForm.signUpButton') }}
       </UiButton>
       <UiButton type="submit">
         {{ $t('PaySuper.PaySuperAuthForm.logInButton') }}
