@@ -108,6 +108,5 @@ export default {
 
 .links {
   margin-top: 8px;
-  padding-left: 12px;
 }
 </style>

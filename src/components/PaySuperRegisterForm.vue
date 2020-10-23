@@ -107,8 +107,16 @@ export default {
         </a>
       </UiCheckbox>
     </div>
-    <UiErrorText v-if="registerError" v-text="registerError" />
-    <UiErrorText v-if="eulaErrorText" v-text="eulaErrorText" />
+    <UiErrorText
+      class="error"
+      v-if="registerError"
+      v-text="registerError"
+    />
+    <UiErrorText
+      class="error"
+      v-if="eulaErrorText"
+      v-text="eulaErrorText"
+    />
     <div class="register-form__controls">
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goAuth')">
         {{ $t('PaySuper.PaySuperRegisterForm.logInButton') }}
@@ -140,11 +148,15 @@ export default {
 
   & > svg {
     position: absolute;
-    left: 12px;
-    top: 1px;
+    left: 0px;
+    top: 2px;
   }
   &__text {
-    margin-left: 38px;
+    margin-left: 22px;
   }
+}
+
+.error {
+  margin-top: 3px;
 }
 </style>

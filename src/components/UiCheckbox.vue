@@ -86,7 +86,6 @@ $disabled-checkbox-color: #e1e1e1;
 .ui-checkbox {
   display: block;
   position: relative;
-  padding-left: 12px;
 }
 
 .wrapper {

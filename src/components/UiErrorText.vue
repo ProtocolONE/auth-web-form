@@ -32,6 +32,5 @@ export default {
   font-size: 12px;
   line-height: 13px;
   color: #ff6f6f;
-  margin-left: 12px;
 }
 </style>
