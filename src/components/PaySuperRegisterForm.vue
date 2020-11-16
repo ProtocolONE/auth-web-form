@@ -3,7 +3,7 @@ import { mapState, mapActions } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'RegisterForm',
+  name: 'PaySuperRegisterForm',
 
   data() {
     return {
@@ -20,7 +20,7 @@ export default {
 
     eulaErrorText() {
       if (this.$v.eula.$error) {
-        return 'You must accept the agreement';
+        return this.$t('PaySuper.PaySuperRegisterForm.eulaError');
       }
       return '';
     },
@@ -68,16 +68,18 @@ export default {
 <template>
 <div class="register-form">
   <UiPageHeader>
-    <template slot="title">Sign Up</template>
+    <template slot="title">
+      {{ $t('PaySuper.PaySuperRegisterForm.title') }}
+    </template>
     <template slot="description">
-      Hi, we are glad you decided to join us.
+      {{ $t('PaySuper.PaySuperRegisterForm.subtitle') }}
     </template>
   </UiPageHeader>
   <form @submit.prevent="submitRegisterForm">
     <UiTextField
       v-model="email"
       name="email"
-      :label="$t('fieldUsernameLabel')"
+      :label="$t('PaySuper.PaySuperRegisterForm.fieldUsernameLabel')"
       :hasError="$isFieldInvalid('email')"
       :errorText="$getFieldErrorText('email')"
       autocomplete="new-password"
@@ -86,7 +88,7 @@ export default {
       type="password"
       name="password"
       v-model="password"
-      :label="$t('fieldPasswordLabel')"
+      :label="$t('PaySuper.PaySuperRegisterForm.fieldPasswordLabel')"
       :hasError="$isFieldInvalid('password')"
       :errorText="$getFieldErrorText('password')"
       autocomplete="new-password"
@@ -94,24 +96,33 @@ export default {
     <div class="info">
       <IconInfo />
       <p class="info__text">
-        The password must contain at least 6 characters,
-        including latin letters and at least one digit and one uppercase letter.
+        {{ $t('PaySuper.PaySuperRegisterForm.info') }}
       </p>
     </div>
     <div>
       <UiCheckbox v-model="eula">
-        I have read and accepted
-        <a href="https://pay.super.com/policy/eula" target="_blank">User Agreement</a>
+        {{ $t('PaySuper.PaySuperRegisterForm.eulaAccepted') }}
+        <a href="https://pay.super.com/policy/eula" target="_blank">
+          {{ $t('PaySuper.PaySuperRegisterForm.userAgreement') }}
+        </a>
       </UiCheckbox>
     </div>
-    <UiErrorText v-if="registerError" v-text="registerError" />
-    <UiErrorText v-if="eulaErrorText" v-text="eulaErrorText" />
+    <UiErrorText
+      class="error"
+      v-if="registerError"
+      v-text="registerError"
+    />
+    <UiErrorText
+      class="error"
+      v-if="eulaErrorText"
+      v-text="eulaErrorText"
+    />
     <div class="register-form__controls">
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goAuth')">
-        {{ $t('goAuthButton') }}
+        {{ $t('PaySuper.PaySuperRegisterForm.logInButton') }}
       </UiButton>
       <UiButton type="submit">
-        {{ $t('submitButtonText') }}
+        {{ $t('PaySuper.PaySuperRegisterForm.signUpButton') }}
       </UiButton>
     </div>
 
@@ -137,30 +148,15 @@ export default {
 
   & > svg {
     position: absolute;
-    left: 12px;
-    top: 1px;
+    left: 0px;
+    top: 2px;
   }
   &__text {
-    margin-left: 38px;
+    margin-left: 22px;
   }
+}
+
+.error {
+  margin-top: 3px;
 }
 </style>
-
-<i18n>
-{
-  "ru": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "Пароль",
-    "fieldRepeatPasswordLabel": "Пароль ещё раз",
-    "submitButtonText": "Зарегистрироваться",
-    "goAuthButton": "Войти"
-  },
-  "en": {
-    "fieldUsernameLabel": "Email",
-    "fieldPasswordLabel": "Password",
-    "fieldRepeatPasswordLabel": "Repeat password",
-    "submitButtonText": "Sign up",
-    "goAuthButton": "Log in"
-  }
-}
-</i18n>

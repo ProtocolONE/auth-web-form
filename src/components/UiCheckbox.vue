@@ -61,15 +61,15 @@ export default {
       <div :class="checkboxClasses">
         <svg
           class="svg-not-checked"
-          width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- eslint-disable-next-line -->
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 2V16H2V2H16ZM16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0Z" fill="#78909C"/>
+          width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.846069" y="0.5" width="23" height="23" rx="1.5" fill="white" stroke="black"/>
         </svg>
         <svg
           class="svg-checked"
-          width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- eslint-disable-next-line -->
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM7 14L2 9L3.4 7.6L7 11.2L14.6 3.6L16 5L7 14Z" fill="#3D7BF5"/>
+          width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.346069" width="24" height="24" rx="2" fill="#C9F73A"/>
+        <path d="M20.3461 6L9.34607 17L4.34607 12"
+          stroke="black" stroke-width="2" stroke-linejoin="round"/>
         </svg>
       </div>
     </div>
@@ -86,7 +86,6 @@ $disabled-checkbox-color: #e1e1e1;
 .ui-checkbox {
   display: block;
   position: relative;
-  padding-left: 12px;
 }
 
 .wrapper {
@@ -96,7 +95,6 @@ $disabled-checkbox-color: #e1e1e1;
 }
 
 .checkbox {
-  margin-top: 2px;
 }
 
 .svg-checked {
@@ -104,7 +102,7 @@ $disabled-checkbox-color: #e1e1e1;
 }
 
 .text:not(:empty) {
-  margin-left: 12px;
+  margin-left: 14px;
   font-size: 14px;
   line-height: 20px;
   color: #000000;

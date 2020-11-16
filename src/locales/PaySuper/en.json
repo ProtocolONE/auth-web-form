@@ -7,5 +7,47 @@
     "wrongFormatType": "Wrong value format type",
     "hasDigits": "Must contain numbers",
     "hasUppercase": "Must contain uppercase"
+  },
+  "PaySuperAuthForm": {
+    "title": "Log In",
+    "subtitle": "We are glad to see you again",
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Password",
+    "resetPassword": "Reset password",
+    "signUpButton": "Sign up",
+    "logInButton": "Log In"
+  },
+  "PaySuperAuthLoginForm": {
+    "title": "Log In",
+    "subtitle": "We are glad to see you again",
+    "previousAccount": "Previous account",
+    "useAnotherAccount": "Use another account",
+    "logInButton": "Log In"
+  },
+  "PaySuperChangePassword": {
+    "title": "Password Reset",
+    "subtitle": "We will send you an email with reset code.",
+    "emailFieldLabel": "Email",
+    "logInButton": "Log In",
+    "sendCodeButton": "Send Code",
+    "newPasswordTitle": "New Password",
+    "newPasswordSubtitle": "The password must contain at least <b>6 characters, including<br/> latin letters and at least one digit</b>.",
+    "fieldPasswordLabel": "New Password",
+    "fieldTokenLabel": "Code",
+    "submitVerifyButtonText": "Set Password",
+    "completeTitle": "Password has been reset",
+    "completeSubtitle": "You may log in now with your new password."
+  },
+  "PaySuperRegisterForm": {
+    "title": "Sign Up",
+    "subtitle": "Hi, we are glad you were able to join us.",
+    "fieldUsernameLabel": "Email",
+    "fieldPasswordLabel": "Password",
+    "info": "The password must contain at least 6 characters, including latin letters and at least one digit and one uppercase letter.",
+    "eulaAccepted": "I have read and accepted",
+    "userAgreement": "User Agreement",
+    "eulaError": "You must accept the agreement",
+    "logInButton": "Log In",
+    "signUpButton": "Sign up"
   }
 }

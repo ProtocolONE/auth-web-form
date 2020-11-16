@@ -29,6 +29,7 @@ axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
 Vue.config.productionTip = false;
 
 const isPageInsideIframe = window.location !== window.parent.location;
+let vueApp;
 
 /**
  * Cuts out language 2-letters code from navigator.language
@@ -91,11 +92,11 @@ async function mountApp(formData = {}, options = {}) {
   ], formData.clientId)) {
     Vue.prototype.$view = 'PaySuper';
   } else {
-    Vue.prototype.$view = 'Common';
+    Vue.prototype.$view = 'PaySuper';
   }
 
   const VueApp = Vue.extend(App);
-  new VueApp({
+  vueApp = new VueApp({
     store,
     i18n: i18n(options.language || language),
   }).$mount('#auth-form');
@@ -106,6 +107,7 @@ receiveMessages(
   'P1_AUTH_WEB_SDK',
   {
     REQUEST_INIT_FORM: 'requestInitForm',
+    SET_LOCALE: 'setLocale',
   },
   {
     REQUEST_INIT_FORM(data = {}) {
@@ -132,6 +134,11 @@ receiveMessages(
       }
 
       clearTimeout(selfInitTimeout);
+    },
+    SET_LOCALE(data = {}) {
+      if (vueApp) {
+        vueApp.$i18n.locale = data.locale;
+      }
     },
   },
 );

@@ -1,6 +1,7 @@
 <script>
 import Common from '@/views/Common.vue';
 import PaySuper from '@/views/PaySuper.vue';
+import { postMessage } from '@/postMessage';
 
 export default {
   name: 'App',
@@ -8,6 +9,10 @@ export default {
   components: {
     Common,
     PaySuper,
+  },
+
+  created() {
+    postMessage('CREATED');
   },
 };
 </script>

@@ -38,23 +38,25 @@ export default {
 <template>
 <div class="auto-login-form">
   <UiPageHeader>
-    <template slot="title">Log In</template>
+    <template slot="title">
+      {{ $t('PaySuper.PaySuperAuthLoginForm.title') }}
+    </template>
     <template slot="description">
-      We are glad to see you again
+      {{ $t('PaySuper.PaySuperAuthLoginForm.subtitle') }}
     </template>
   </UiPageHeader>
   <UiTextFieldReadonly
-    label="Previous account"
+    :label="$t('PaySuper.PaySuperAuthLoginForm.previousAccount')"
     :value="previousLogin"
   />
 
   <form @submit.prevent="submitAutoLoginForm">
     <div class="auto-login-form__controls">
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goAuth')">
-        Use another account
+        {{ $t('PaySuper.PaySuperAuthLoginForm.useAnotherAccount') }}
       </UiButton>
       <UiButton type="submit">
-        {{ $t('submitButtonText') }}
+        {{ $t('PaySuper.PaySuperAuthLoginForm.logInButton') }}
       </UiButton>
     </div>
   </form>
@@ -73,14 +75,3 @@ export default {
   }
 }
 </style>
-
-<i18n>
-{
-  "ru": {
-    "submitButtonText": "Войти"
-  },
-  "en": {
-    "submitButtonText": "Log in"
-  }
-}
-</i18n>
