@@ -31,7 +31,7 @@
     "logInButton": "Войти",
     "sendCodeButton": "Отправить код",
     "newPasswordTitle": "Новый пароль",
-    "newPasswordSubtitle": "Пароль должен содержать как минимум <b>6 символов, включая<br/> латинские буквы и хотя бы оду цифру</b>.",
+    "newPasswordSubtitle": "Пароль должен содержать как минимум <b>6 символов, включая<br/> латинские буквы и хотя бы одну цифру</b>.",
     "fieldPasswordLabel": "Новый Пароль",
     "fieldTokenLabel": "Код",
     "submitVerifyButtonText": "Установить пароль",
