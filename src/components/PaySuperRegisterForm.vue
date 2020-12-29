@@ -143,8 +143,7 @@ export default {
 
 .info {
   position: relative;
-  margin-top: 8px;
-  margin-bottom: 22px;
+  margin: 22px 0;
 
   & > svg {
     position: absolute;
