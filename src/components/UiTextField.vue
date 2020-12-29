@@ -228,7 +228,7 @@ $left-indent: 17px;
   top: 0;
 }
 .error {
-  bottom: -2px;
+  top: 60px;
   color: $error-input-color;
   display: block;
   font-size: $secondary-input-size;
