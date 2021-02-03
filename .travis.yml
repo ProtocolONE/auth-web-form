@@ -6,21 +6,23 @@ before_script: curl https://rclone.org/install.sh | sudo bash
 jobs:
   include:
   - name: dev
-    if: "(branch = master) or (tag =~ ^v)"
-    script:
-    - set -e
-    - npm run lint
-    - npm run test
-    - npm run build
-    - rclone copy dist :s3://auth/form/dev/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
-  - name: dev
     if: "(branch = develop)"
     script:
     - set -e
     - npm run lint
     - npm run test
     - npm run build
-    - rclone copy dist :s3://auth/form/develop/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
+    #- rclone copy dist :s3://auth/form/develop/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
+    - rclone copy dist :s3://cdn-auth-super-com/authform/dev/ --s3-access-key-id=$AWS_CDN_ACCESS_KEY_ID --s3-secret-access-key=$AWS_CDN_ACCESS_SECRET_KEY --s3-region=eu-west-1
+  - name: stg
+    if: "(branch =~ ^release)"
+    script:
+    - set -e
+    - npm run lint
+    - npm run test
+    - npm run build
+    - rclone copy dist :s3://cdn-auth-super-com/authform/stage/ --s3-access-key-id=$AWS_CDN_ACCESS_KEY_ID --s3-secret-access-key=$AWS_CDN_ACCESS_SECRET_KEY --s3-region=eu-west-1
+    #- rclone copy dist :s3://auth/form/dev/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
   - name: release
     if: "(tag =~ ^v)"
     script:
@@ -28,8 +30,8 @@ jobs:
     - npm run lint
     - npm run test
     - npm run build
-    - rclone copy dist :s3://auth/form/latest/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
-    - rclone copy dist :s3://auth/form/$TRAVIS_TAG/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
+    #- rclone copy dist :s3://auth/form/latest/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
+    #- rclone copy dist :s3://auth/form/$TRAVIS_TAG/ --s3-access-key-id=$MINIO_S3_ACCESS_KEY --s3-secret-access-key=$MINIO_S3_SECRET_KEY --s3-endpoint=$MINIO_S3_HOST
     - rclone copy dist :s3://cdn-auth-super-com/authform/latest/ --s3-access-key-id=$AWS_CDN_ACCESS_KEY_ID --s3-secret-access-key=$AWS_CDN_ACCESS_SECRET_KEY --s3-region=eu-west-1
     - rclone copy dist :s3://cdn-auth-super-com/authform/$TRAVIS_TAG/ --s3-access-key-id=$AWS_CDN_ACCESS_KEY_ID --s3-secret-access-key=$AWS_CDN_ACCESS_SECRET_KEY --s3-region=eu-west-1
 notifications:
