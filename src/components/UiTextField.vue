@@ -4,7 +4,6 @@ export default {
     prop: 'value',
     event: 'input',
   },
-
   props: {
     additionalInfo: {
       default: '',
@@ -74,7 +73,6 @@ export default {
       this.inputValue = val;
     },
   },
-
   methods: {
     handleInput() {
       const prevValue = this.value || '';
@@ -83,7 +81,6 @@ export default {
         this.$emit('input', value);
       }
     },
-
     togglePasswordInputType() {
       this.innerType = this.innerType === 'text' ? 'password' : 'text';
     },
