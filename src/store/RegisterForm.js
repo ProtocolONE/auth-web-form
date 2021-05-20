@@ -26,7 +26,6 @@ export default {
           remember: (remember === '1'),
         });
         commit('registerError', '');
-        window.location.href = data.url;
       } catch (error) {
         if (error.response) {
           commit('registerError', error.response.data.error_message);

@@ -24,7 +24,6 @@ export default {
           remember: (remember === '1'),
         });
         commit('authError', '');
-        window.location.href = data.url;
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
