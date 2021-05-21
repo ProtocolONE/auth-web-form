@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '11'
 
+      - name: npm install
+        run: npm install
+
       - name: tests
         run: |
           npm run lint
@@ -44,6 +47,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '11'
+
+      - name: npm install
+        run: npm install
 
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
@@ -73,6 +79,9 @@ jobs:
         with:
           node-version: '11'
 
+      - name: npm install
+        run: npm install
+
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
 
@@ -100,6 +109,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '11'
+
+      - name: npm install
+        run: npm install
 
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
