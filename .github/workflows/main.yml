@@ -20,8 +20,15 @@ jobs:
         with:
           node-version: '11'
 
-      - name: npm install
-        run: npm install
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('yarn.lock') }}
+          restore-keys: npm-
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
 
       - name: tests
         run: |
@@ -48,8 +55,15 @@ jobs:
         with:
           node-version: '11'
 
-      - name: npm install
-        run: npm install
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('yarn.lock') }}
+          restore-keys: npm-
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
 
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
@@ -79,8 +93,15 @@ jobs:
         with:
           node-version: '11'
 
-      - name: npm install
-        run: npm install
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('yarn.lock') }}
+          restore-keys: npm-
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
 
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
@@ -110,8 +131,16 @@ jobs:
         with:
           node-version: '11'
 
-      - name: npm install
-        run: npm install
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('yarn.lock') }}
+          restore-keys: npm-
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
+
 
       - name: install rclone
         run: curl https://rclone.org/install.sh | sudo bash
