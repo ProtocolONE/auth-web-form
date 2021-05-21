@@ -19,13 +19,14 @@ export default {
   actions: {
     async registerWithEmail({ commit, rootState, rootGetters }, { email, password, remember }) {
       try {
-        await axios.post(rootGetters.urls.apiRegisterUrl, {
+        const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
           email,
           password,
           remember: (remember === '1'),
         });
         commit('registerError', '');
+        window.location.href = data.url;
       } catch (error) {
         if (error.response) {
           commit('registerError', error.response.data.error_message);
