@@ -71,7 +71,7 @@ export default {
 <template>
   <div class="auth-form">
     <BaseHeader level="3">Авторизируйтесь</BaseHeader>
-    <form @submit.prevent="submitAuthForm">
+    <div>
       <div class="auth-form__row">
         <BaseTextField
           v-model="email"
@@ -99,12 +99,11 @@ export default {
         <BaseErrorText v-if="authError">Ошибка авторизации {{authError}}</BaseErrorText>
       </div>
       <div class="auth-form__controls">
-        <BaseButton type="submit">
+        <BaseButton @click="submitAuthForm">
           {{ $t('submitButtonText') }}
         </BaseButton>
       </div>
-
-    </form>
+    </div>
   </div>
 </template>
 
