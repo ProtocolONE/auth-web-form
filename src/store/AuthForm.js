@@ -1,4 +1,9 @@
 import axios from 'axios';
+import { throttle } from 'lodash-es';
+
+function redirectToLogin(url) {
+  window.location.replace(url);
+}
 
 export default {
   namespaced: true,
@@ -16,6 +21,7 @@ export default {
   actions: {
     async authoriseWithLogin({ commit, rootState, rootGetters }, { email, password, remember }) {
       try {
+        commit('authError', '');
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
           connection: 'password',
@@ -23,8 +29,8 @@ export default {
           password,
           remember: (remember === '1'),
         });
-        commit('authError', '');
-        window.location.replace(data.url);
+        const throttled = throttle(redirectToLogin(data.url), 100);
+        throttled();
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
@@ -34,12 +40,13 @@ export default {
 
     async autoLogin({ commit, rootState, rootGetters }, { previousLogin }) {
       try {
+        commit('authError', '');
         const { data } = await axios.post(rootGetters.urls.apiLoginUrl, {
           challenge: rootState.challenge,
           previousLogin,
         });
-        commit('authError', '');
-        window.location.replace(data.url);
+        const throttled = throttle(redirectToLogin(data.url), 100);
+        throttled();
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
