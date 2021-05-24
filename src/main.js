@@ -29,8 +29,6 @@ axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
 Vue.config.productionTip = false;
 
 const isPageInsideIframe = window.location !== window.parent.location;
-const queryParams = (new URL(window.location)).searchParams;
-const hasSafariHackPage = queryParams.get('safari_cookie_fix');
 let vueApp;
 
 /**
@@ -86,9 +84,7 @@ async function mountApp(formData = {}, options = {}) {
 
   const language = getLanguage();
 
-  if (hasSafariHackPage) {
-    Vue.prototype.$view = 'SafariHackPage';
-  } else if (includes([
+  if (includes([
     '5d81e74895f3f60001874ab1', // production app
     '5d2efdbb0f98f200016ee285', // stg app
     '5c77953f51c0950001436152', // test app
