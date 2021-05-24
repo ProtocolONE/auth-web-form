@@ -1,4 +1,9 @@
 import axios from 'axios';
+import { throttle } from 'lodash-es';
+
+function redirectToLogin(url) {
+  window.location.replace(url);
+}
 
 export default {
   namespaced: true,
@@ -19,14 +24,15 @@ export default {
   actions: {
     async registerWithEmail({ commit, rootState, rootGetters }, { email, password, remember }) {
       try {
+        commit('registerError', '');
         const { data } = await axios.post(rootGetters.urls.apiRegisterUrl, {
           challenge: rootState.challenge,
           email,
           password,
           remember: (remember === '1'),
         });
-        commit('registerError', '');
-        window.location.href = data.url;
+        const throttled = throttle(redirectToLogin(data.url), 100);
+        throttled();
       } catch (error) {
         if (error.response) {
           commit('registerError', error.response.data.error_message);
