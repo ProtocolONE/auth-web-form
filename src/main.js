@@ -28,9 +28,9 @@ axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
 
 Vue.config.productionTip = false;
 
-const queryParams = (new URL(window.location)).searchParams;
 const isPageInsideIframe = window.location !== window.parent.location;
-const hasSafariHackPage = isPageInsideIframe && queryParams.get('safari_cookie_fix');
+const queryParams = (new URL(window.location)).searchParams;
+const hasSafariHackPage = queryParams.get('safari_cookie_fix');
 let vueApp;
 
 /**
