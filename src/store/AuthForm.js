@@ -24,7 +24,7 @@ export default {
           remember: (remember === '1'),
         });
         commit('authError', '');
-        window.location.href = data.url;
+        window.location.replace(data.url);
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
@@ -39,7 +39,7 @@ export default {
           previousLogin,
         });
         commit('authError', '');
-        window.location.href = data.url;
+        window.location.replace(data.url);
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);

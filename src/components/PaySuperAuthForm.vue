@@ -61,7 +61,7 @@ export default {
       {{ $t('PaySuper.PaySuperAuthForm.subtitle') }}
     </template>
   </UiPageHeader>
-  <form @submit.prevent="submitAuthForm">
+  <div>
     <UiTextField
       v-model="email"
       name="email"
@@ -87,11 +87,11 @@ export default {
       <UiButton color="transparent-blue" :isTransparent="true" @click="$emit('goRegister')">
         {{ $t('PaySuper.PaySuperAuthForm.signUpButton') }}
       </UiButton>
-      <UiButton type="submit">
+      <UiButton @click="submitAuthForm">
         {{ $t('PaySuper.PaySuperAuthForm.logInButton') }}
       </UiButton>
     </div>
-  </form>
+  </div>
 </div>
 </template>
 
