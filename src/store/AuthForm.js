@@ -28,6 +28,8 @@ export default {
           email,
           password,
           remember: (remember === '1'),
+        }, {
+          headers: { 'If-Unmodified-Since': (new Date()).toUTCString() },
         });
         const throttled = throttle(redirectToLogin(data.url), 100);
         throttled();
