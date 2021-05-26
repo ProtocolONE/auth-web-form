@@ -54,11 +54,14 @@ export default {
 
       this.$emit('loadingStart');
 
-      await this.registerWithEmail({
+      const url = await this.registerWithEmail({
         email: this.email,
         password: this.password,
         remember: true,
       });
+      if (url) {
+        this.$router.push(url);
+      }
       this.$emit('loadingEnd');
     },
   },

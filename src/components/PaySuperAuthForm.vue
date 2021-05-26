@@ -40,11 +40,14 @@ export default {
       }
 
       this.$emit('loadingStart');
-      await this.authoriseWithLogin({
+      const url = await this.authoriseWithLogin({
         email: this.email,
         password: this.password,
         remember: true,
       });
+      if (url) {
+        this.$router.push(url);
+      }
       this.$emit('loadingEnd');
     },
   },

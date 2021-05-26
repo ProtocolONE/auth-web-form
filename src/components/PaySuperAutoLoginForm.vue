@@ -28,7 +28,10 @@ export default {
       }
 
       this.$emit('loadingStart');
-      await this.autoLogin({ previousLogin: this.previousLogin });
+      const url = await this.autoLogin({ previousLogin: this.previousLogin });
+      if (url) {
+        this.$router.push(url);
+      }
       this.$emit('loadingEnd');
     },
   },

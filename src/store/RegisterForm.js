@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { throttle } from 'lodash-es';
+// import { throttle } from 'lodash-es';
 
-function redirectToLogin(url) {
-  window.location.replace(url);
-}
+// function redirectToLogin(url) {
+//   window.location.replace(url);
+// }
 
 export default {
   namespaced: true,
@@ -31,12 +31,14 @@ export default {
           password,
           remember: (remember === '1'),
         });
-        const throttled = throttle(redirectToLogin(data.url), 100);
-        throttled();
+        return data.url;
+        // const throttled = throttle(redirectToLogin(data.url), 100);
+        // throttled();
       } catch (error) {
         if (error.response) {
           commit('registerError', error.response.data.error_message);
         }
+        return '';
       }
     },
 
