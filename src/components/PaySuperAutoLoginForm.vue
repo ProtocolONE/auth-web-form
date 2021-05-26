@@ -30,7 +30,7 @@ export default {
       this.$emit('loadingStart');
       const url = await this.autoLogin({ previousLogin: this.previousLogin });
       if (url) {
-        this.$router.push(url);
+        window.location.replace(url);
       }
       this.$emit('loadingEnd');
     },
