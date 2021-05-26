@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { throttle } from 'lodash-es';
+// import { throttle } from 'lodash-es';
 
-function redirectToLogin(url) {
-  window.location.replace(url);
-}
+// function redirectToLogin(url) {
+//   window.location.replace(url);
+// }
 
 export default {
   namespaced: true,
@@ -28,15 +28,15 @@ export default {
           email,
           password,
           remember: (remember === '1'),
-        }, {
-          headers: { 'If-Unmodified-Since': (new Date()).toUTCString() },
         });
-        const throttled = throttle(redirectToLogin(data.url), 100);
-        throttled();
+        return data.url;
+        // const throttled = throttle(redirectToLogin(data.url), 100);
+        // throttled();
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
         }
+        return '';
       }
     },
 
@@ -47,12 +47,14 @@ export default {
           challenge: rootState.challenge,
           previousLogin,
         });
-        const throttled = throttle(redirectToLogin(data.url), 100);
-        throttled();
+        return data.url;
+        // const throttled = throttle(redirectToLogin(data.url), 100);
+        // throttled();
       } catch (error) {
         if (error.response) {
           commit('authError', error.response.data.error_message);
         }
+        return '';
       }
     },
 
