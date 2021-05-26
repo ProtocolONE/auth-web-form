@@ -60,7 +60,7 @@ export default {
         remember: true,
       });
       if (url) {
-        this.$router.push(url);
+        window.location.replace(url);
       }
       this.$emit('loadingEnd');
     },
