@@ -105,7 +105,7 @@ export default {
     <div>
       <UiCheckbox v-model="eula">
         {{ $t('PaySuper.PaySuperRegisterForm.eulaAccepted') }}
-        <a href="https://pay.super.com/policy/eula" target="_blank">
+        <a href="https://cdn.gameservices.unlimint.com/site/eula.html" target="_blank">
           {{ $t('PaySuper.PaySuperRegisterForm.userAgreement') }}
         </a>
       </UiCheckbox>
